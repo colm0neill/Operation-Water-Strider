@@ -10,7 +10,7 @@ var heightImg = window.innerHeight;
 console.log("Image Width is:"+widthImg+" Image Height is:"+ heightImg);
 
 
-	bk.style.height = heightImg;
+	
 	
 	
 	
