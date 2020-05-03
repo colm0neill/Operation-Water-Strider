@@ -10,7 +10,7 @@ body{
 
 #bodyContainer{
 	width: inherit;
-	margin:5% 7% 5% 7%;
+	margin:7vh 5vw 7vh 5vw;
 	color:black;
 	background-color:rgba(255,255,255,.65);
 	border-radius: 40px;
@@ -33,15 +33,15 @@ body{
 /* ----------------------ROW ONE START---------------------*/
 
 div.one{
-	height:120px;
+	height:16.2vh;
 }
-div.column.oneA, div.column.oneC{
+.oneA, .oneC{
   width: 32.5%;
   height:100%;
 
 }
 
-div.column.oneB{
+.oneB{
   width: 35%; 
   height:100%;
 }
@@ -59,8 +59,7 @@ div.column.oneB{
 }
 
 #greeting{
-	margin:45px 0 0 10vh;
-	
+	margin:45px 0 0 50px;
 	display:inline-block;
 	overflow:auto;
 	
@@ -69,18 +68,18 @@ div.column.oneB{
 h1{
 	font-weight:bold;
 	letter-spacing:10px;
-	margin-left:10vh;
+	margin-left:50px;
 	margin-bottom:0;
 	margin-top:0;
 }
 h3{
 	letter-spacing:3px;
-	margin-left:10vh;
+	margin-left:50px;
 	margin-bottom:0;
 	margin-top:0;
 }
 #navlist{
-	margin-right:10vh;
+	margin-right:50px;
 	padding:0 0 10px 0;
 }
 
@@ -128,7 +127,7 @@ h3{
 
 div.two{
 	width:inherit;
-	height:20vw;
+	height:42vh;
 }
 
 div.twoA{
@@ -137,7 +136,7 @@ div.twoA{
 }
 
 #boxContainer{
-	padding-left:10vh;
+	padding-left:50px;
 	width:100%;
 	height:45%;
 }
@@ -179,7 +178,7 @@ div.shortB2, div.shortB3, div.shortB4{
 }
 #toolBox{
 	margin-top:0px;	
-	padding-left:10vh;
+	padding-left:50px;
 	width:100%;
 	height:55%;
 	
@@ -236,13 +235,13 @@ div#toolBox h4{
 	
 }
 
-.twoB p:nth-child(3)  { left: 0%; position: relative; }
+.twoB p:nth-child(3)  { left: 0%; position: relative; margin-left:15px;}
 .twoB p:nth-child(4)  { left: 14.28%; position: relative; }
 .twoB p:nth-child(5)  { left: 28.57%; position: relative; }
 .twoB p:nth-child(6)  { left: 42.84%; position: relative; }
 .twoB p:nth-child(7)  { left: 57.12%; position: relative; }
 .twoB p:nth-child(8)  { left: 71.4%; position: relative; }
-.twoB p:nth-child(9)  { left: 85.68%; position: relative; }
+.twoB p:nth-child(9)  { left: 85.68%; position: relative;  margin-right:15px;}
 
 
 .twoC{
@@ -269,10 +268,11 @@ div#toolBox h4{
   }
 .hourPre{
 	background: url('Images/ows-sprite72.png') -0px -58px;
+	margin-left:20px;
 }
 
 .dayTime{
-	width:calc(100% - 126px);
+	width:calc(100% - 166px);
 	text-align: center;
 	display:inline-block;
 	margin:0;
@@ -281,6 +281,7 @@ div#toolBox h4{
 	letter-spacing:12px;
 }
 .hourNxt{
+	margin-right:20px;
 	background: url('Images/ows-sprite72.png') -60px -58px;
 	float:right;
 	display:inline-block;
@@ -291,7 +292,7 @@ div#toolBox h4{
 	*/margin:0 15px 0px 15px;
 	width:calc(100% - 30px);
 	height:75%;
-	background-color:rgba(217,217,217,.4);
+	
 }
 
 /* ----------------------ROW TWO END-----------------------*/
@@ -300,19 +301,19 @@ div#toolBox h4{
 
 
 .three{
-	height:180px;
+	height:24.8vh;
 	padding-bottom:30px;
 }
 
 #info1{
-	margin-left:10vh;
+	margin-left:40px;
 	margin-top:30px;
 	height:auto;
 	margin-bottom:15px;
 	padding:10px;
 }
 #info2{
-	margin-left:10vh;
+	margin-left:25px;
 	margin-top:30px;
 	height:auto;
 	margin-bottom:15px;
@@ -425,4 +426,39 @@ div.bannerBox{
     height: 44%;
     overflow: hidden;
 	margin:10px 30px 0 5px;
+}
+
+
+@media only screen and (max-width: 1010px) {
+  {
+  #bodyContainer{
+  margin:5vh 5vw 5vh 5vw;
+  }
+  
+  .one{
+  	width:90vw;
+  }
+  
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  
+  #bodyContainer{
+  margin:5vh 5vw 5vh 5vw;
+  }
+  
+ .oneA,.oneC{
+  width:40%;
+  }
+  .oneB{
+  width:10%;
+  }
+  .row.one{
+  	width:90vw;
+  	float:left;
+  }
+  .row.two{float:none!important;}
+  
+  
 }

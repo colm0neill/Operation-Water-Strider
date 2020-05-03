@@ -30,7 +30,7 @@ ctx.scale(1,1);
 var w = c.width;
 var h = c.height;
 
-var dataPointsX = w/8;
+var dataPointsX = w/6.5;
 var array = [100 , 10, 20, 40, 60, 80, 100, 30];
 var largest= 0;
 var dataPointsY = [];
@@ -53,8 +53,8 @@ var dataPointsY = [];
 		if((i != 0 )||(i !=9)){
 			ctx.beginPath();
 			ctx.translate(.5,.5);
-			ctx.moveTo((dataPointsX*i)+132,dataPointsY[i]);
-			ctx.lineTo((dataPointsX*(i+1)+132),dataPointsY[i+1]);
+			ctx.moveTo((dataPointsX*i)+20,dataPointsY[i]);
+			ctx.lineTo((dataPointsX*(i+1)+20),dataPointsY[i+1]);
 			ctx.lineCap = "round";
 			ctx.lineWidth = 10;
 			ctx.closePath();
@@ -64,7 +64,7 @@ var dataPointsY = [];
 			ctxCir.beginPath();
 			//ctxCir.style = '#fff';
 			ctxCir.linewidth= 1;
-			ctxCir.arc((dataPointsX*i)+132,dataPointsY[i],10,0*Math.PI,1.5*Math.PI);
+			ctxCir.arc((dataPointsX*i)+20,dataPointsY[i],10,0*Math.PI,1.5*Math.PI);
 			ctx.closePath();
 			ctxCir.stroke();
 			
