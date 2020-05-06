@@ -5,6 +5,7 @@ html{
 
 body{
 	background-color:#D9D9D9;
+	background:linear-gradient(0deg, rgba(217,217,217,1) 0%, rgba(217,217,217,1) 56%, rgba(255,255,255,1) 100%);
 	font-family:helvetica;
 	height:100%;
 	margin:0;
@@ -12,7 +13,7 @@ body{
 
 #bodyContainer{
 	width: inherit;
-	margin:14vh 10vw 14vh 10vw;
+	margin:14vh 9vw 14vh 9vw;
 	background-color:rgba(255,255,255,.65);
 	border-radius: 40px;
 }
@@ -41,7 +42,7 @@ body{
 /* ----------------------ROW ONE START---------------------*/
 
 .one{
-	height:13vh;
+	height:7vw;
 	padding:0 4vw 0 4vw;
 }
 .oneA, .oneC{
@@ -59,41 +60,54 @@ body{
 
 #greeting{
 	
-	display:inline-block;	
+	margin-top:25px;
 }
 
 .oneA h1{
-	letter-spacing:10px;
+	font-size: 2.2vw;
+	letter-spacing:.8vw;
 	margin:0;
 }
 .oneA h3{
-	letter-spacing:3px;
-	margin:0;
+	font-size: 1.3vw;
+	letter-spacing: .3vw;
+    margin: 0;
 }
 #navlist{
 	padding:20px 0 10px 0;
 }
 
 #navlist li{
-	height:60px;
+    height: 4.2vw;
 	list-style:none;
 	background-repeat: no-repeat
 }
 
 #appointments,#calendar, #home, #notes{
-	width: 60px;
+	width: 4.2vw;
 	background-repeat:no-repeat;
+	
 }
 
 #appointments {
-  margin-right:10vh;
   left: 0px;
-  background: url('Images/ows-sprite72.png') 0 0;
+  background: url('Images/ows-sprite72.png') 0vw 0vw;
+  background-size: 68vw 40vw;
 }
   
 #calendar {
-  left: 80px;
-  background: url('Images/ows-sprite72.png') -60px 0; 
+  background: url(Images/ows-sprite72.png) -4.2vw 0;
+  background-size: 67vw 40vw;
+}
+
+#home {
+  background: url('Images/ows-sprite72.png') -0vw -8.3vw; 
+  background-size: 68vw 40vw;
+}
+
+#notes {
+  background: url('Images/ows-sprite72.png') -8.3vw 0;
+  background-size: 68vw 40vw;
 }
 
 #navlist a .square li:hover{
@@ -104,23 +118,16 @@ filter: brightness(0) invert(1);
 	float:right;
 	margin-left:20px;
 	position:relative;
-	width:60px;
-	height:60px;
+	width:4.2vw;
+	height:4.2vw;
 	border-radius:10px;
 	background-color:white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .square:hover{
 	background-color:black;
-}
-
-#home {
-  left: 80px;
-  background: url('Images/ows-sprite72.png') -0px -120px; 
-}
-
-#notes {
-  left: 160px;
-  background: url('Images/ows-sprite72.png') -120px 0;
 }
 
 /* ----------------------ROW ONE END-----------------------*/
@@ -144,44 +151,45 @@ filter: brightness(0) invert(1);
 }
 
 div.box1, div.box2{
-	width:11vw;
-	height:11vw;
-	border-radius:10px;
+	width:10.5vw;
+	height:10.5vw;
+	border-radius:2vw;
 	background-color:#B20A21;
 	float:left;
 }
 .box1, .box2{
-	margin:0 .5vw .5vw 0;
+	margin:0 1vw 1vw 0;
 }
 
 
 div.longB1{
-	top: -100%;
+	top: -135%;
     position: relative;
-    width: 5.25vw;
-    height: 11vw;
-    margin-right: .5vw;
-    border-radius: 10px;
+    width: 4.25vw;
+    height: 11.5vw;
+    margin-right: 1.5vw;
+    border-radius: 1vw;
     background-color: #000;
+	
 }
 
 div.shortB2, div.shortB3, div.shortB4{
-	width: 5.25vw;
-    height: 5.25vw;
-    margin-right: .5vw;
-    border-radius: 10px;
+	width: 4.75vw;
+    height: 4.75vw;
+    margin-right: 1vw;
+    border-radius: 1vw;
     background-color: #B20A21;
 }
 #toolBox{
 	
     width:100%;
-    height: 25%;
+    height: 29%;
 	
 }
 #toolBox2{
 	
     width:100%;
-    height: 25%;
+    height: 21%;
 	
 }
 
@@ -196,14 +204,14 @@ div.shortB2, div.shortB3, div.shortB4{
 #toolBox h2{
 	font-size:2vw;
 	letter-spacing:10px;
-	margin:0 0 0 5.75vw;
+	margin:0 0 0 6.25vw;
 
 	
 	
 }
 div#toolBox h4{
 	font-size:1vw;
-	margin:0 0 0 5.75vw;	
+	margin:0 0 0 6.25vw;	
 	letter-spacing:10px;
 	
 }
@@ -216,9 +224,17 @@ div#toolBox h4{
 	width:33.33%;
 	height:100%;
 }
+.totalsL{
+	height:5%;
+	margin: 31% 15px 0 15px;
+	font-size: 1vw;
+    font-weight: bold;
+    letter-spacing: .5vw;
+    color: #000;
+}
 #totals{
-	height: 16%;
-    margin: 34% 15px 0 15px;
+	height: 14%;
+    
     font-size: 3vw;
     font-weight: bold;
     letter-spacing: .5vw;
@@ -268,7 +284,7 @@ div#toolBox h4{
 	height:5vw;
 	
 	/*border:1px solid black;
-	*/padding:15px 0px 0 15px;
+	*/padding:7.8vw 0px 0 15px;
 }
 .hourPre,.hourNxt{
 	width: 40px;
@@ -307,7 +323,7 @@ div#toolBox h4{
 	/*border: 1px solid black;
 	*/margin:0 0px 0px 15px;
 	width:calc(100% - 15px);
-	height:17vw;
+	height:10.2vw;
 	
 }
 
@@ -356,7 +372,7 @@ div#info2:hover{
   left: 0px;
   height:3vw;
   width: 3vw;
-  border-radius:10px;
+  border-radius:.8vw;
   background-color:rgba(178,10,33,1);
   display: flex;
   justify-content: center;
@@ -364,10 +380,10 @@ div#info2:hover{
  
 }
 .spriteF{
-	width:18px;
-	height:23px;
-	background: url('Images/ows-sprite72.png') -199px -17px;
-	background-size: (600/1.4)+em;
+	width: 1.4vw;
+    height: 1.7vw;
+	background: url(Images/ows-sprite72.png) -224.5vw -1.3vw;
+    background-size: 70vw 41vw;
 }
 
 div.heading{
@@ -418,8 +434,7 @@ div.threeC{
 	height:8vw;
 	margin-right:8%;
 	border-radius:10px;
-	background: url('Images/ows-sprite72.png') -305px -9px,
-    rgba(178,10,33,1);
+	background-color:rgba(178,10,33,1);
 	background-repeat:no-repeat;
 }
   
@@ -432,21 +447,30 @@ div.box2C{
 }
 
 #textB3{
-	margin:45px 15px 15px 15px;
+	margin:5px 15px 15px 15px;
 	overflow: hidden;
 	height:46%;
 }
 
 div.bannerBox{
-	background: url('Images/ows-sprite72.png') -315px -21px,
-    rgba(178,10,33,1);
+	background-color: rgba(178,10,33,1);
 	width:65%;
-	height:20px;
+	height:1.6vw;
 	margin:15px 0 0 15px;
 	border-radius: 5px;
 	position:relative;
 	
 }
+.spriteFs{
+	width: 1.4vw;
+    height: 1.7vw;
+    background: url(Images/ows-sprite72.png) -228.9vw -1.3vw;
+    background-size: 70vw 41vw;
+}
+.box1C div.spriteFs{
+	margin:.9vw;
+}
+
 #textB4{
     height: 46%;
     overflow: hidden;
@@ -470,24 +494,10 @@ div.bannerBox{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media only screen and (max-width: 1010px) {
 	body{
-	background-color:#595959;
+	background-color:#a9a9a9;
+	background: linear-gradient(0deg, rgba(86,200,255,1) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
 	font-family:helvetica;
 	margin:0;
 	}
@@ -496,16 +506,15 @@ div.bannerBox{
   margin:5vh 5vw 5vh 5vw;
   }
   
-  .one{
-  	width:90vw;
-  }
+  
   
   
 }
 
 @media only screen and (max-width: 640px) {
   body{
-	background-color:#a9a9a9;
+	background-color:#595959;
+	background: linear-gradient(0deg, rgba(0,158,253,1) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
 	font-family:helvetica;
 	margin:0;
 }

@@ -20,7 +20,7 @@ function clock(){
   var doW = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
   if(n<10){  n= "0"+n;  }
   document.getElementById("dayTime").innerHTML = doW[dd]+"<br>"+h+":"+n;
-  var t = setTimeout(clock, 500);
+  var t = setTimeout(clock, 1000);
 }
 	
 	
