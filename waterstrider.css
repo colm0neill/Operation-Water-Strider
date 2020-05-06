@@ -1,7 +1,12 @@
+html{
+    min-height:100%;/* make sure it is at least as tall as the viewport */
+    position:relative;
+}
+
 body{
 	background-color:#D9D9D9;
 	font-family:helvetica;
-	
+	height:100%;
 	margin:0;
 }
 
@@ -37,6 +42,7 @@ body{
 
 .one{
 	height:13vh;
+	padding:0 4vw 0 4vw;
 }
 .oneA, .oneC{
   width: 45%;
@@ -52,27 +58,24 @@ body{
 }
 
 #greeting{
-	margin:25px 0 0 50px;
+	
 	display:inline-block;	
 }
 
 .oneA h1{
 	letter-spacing:10px;
-	margin:0 0 0 50px;
+	margin:0;
 }
 .oneA h3{
 	letter-spacing:3px;
-	margin:0 0 0 50px;
+	margin:0;
 }
 #navlist{
-	margin-right:50px;
-	padding:0 0 10px 0;
+	padding:20px 0 10px 0;
 }
 
 #navlist li{
 	height:60px;
-	margin:25px 0 0 30px;
-	float:right;
 	list-style:none;
 	background-repeat: no-repeat
 }
@@ -93,11 +96,22 @@ body{
   background: url('Images/ows-sprite72.png') -60px 0; 
 }
 
-#navlist a li:hover{
-filter: brightness(100) invert(1);
-
+#navlist a .square li:hover{
+filter: brightness(0) invert(1);
 }
 
+.square{
+	float:right;
+	margin-left:20px;
+	position:relative;
+	width:60px;
+	height:60px;
+	border-radius:10px;
+	background-color:white;
+}
+.square:hover{
+	background-color:black;
+}
 
 #home {
   left: 80px;
@@ -126,7 +140,7 @@ filter: brightness(100) invert(1);
 
 #boxContainer{
 	width:100%;
-	height:12.5vw;
+	height:50%;
 }
 
 div.box1, div.box2{
@@ -145,7 +159,7 @@ div.longB1{
 	top: -100%;
     position: relative;
     width: 5.25vw;
-    height: 11.75vw;
+    height: 11vw;
     margin-right: .5vw;
     border-radius: 10px;
     background-color: #000;
@@ -161,13 +175,13 @@ div.shortB2, div.shortB3, div.shortB4{
 #toolBox{
 	
     width:100%;
-    height: 6.57vw;
+    height: 25%;
 	
 }
 #toolBox2{
 	
     width:100%;
-    height: 6.57vw;
+    height: 25%;
 	
 }
 
@@ -180,6 +194,7 @@ div.shortB2, div.shortB3, div.shortB4{
 	margin-top:0;
 }
 #toolBox h2{
+	font-size:2vw;
 	letter-spacing:10px;
 	margin:0 0 0 5.75vw;
 
@@ -187,6 +202,7 @@ div.shortB2, div.shortB3, div.shortB4{
 	
 }
 div#toolBox h4{
+	font-size:1vw;
 	margin:0 0 0 5.75vw;	
 	letter-spacing:10px;
 	
@@ -200,6 +216,14 @@ div#toolBox h4{
 	width:33.33%;
 	height:100%;
 }
+#totals{
+	height: 16%;
+    margin: 34% 15px 0 15px;
+    font-size: 3vw;
+    font-weight: bold;
+    letter-spacing: .5vw;
+    color: #B20A21;
+}
 
 .graphContainer1{
 	width:100%;
@@ -207,16 +231,18 @@ div#toolBox h4{
 
 #graph1{
 	
-	padding: 15px 15px 15px 15px;
+	padding: 0px 15px 15px 15px;
 	width:calc(100% - 30px);
-	height:calc(100% - 60px);
+	height:calc(50% - 45px);
 }
 
 .twoB p {
 	max-width:0%;
 	display:inline-block;
 	margin:0 0 0 0 ;
-	
+	font-size:1vw;
+    color: #999;
+    font-weight: bold;
 }
 
 .twoB p:nth-child(3)  { left: 0%; position: relative; margin-left:15px;}
@@ -239,13 +265,13 @@ div#toolBox h4{
 
 .graphNav{
 
-	height:20%;
+	height:5vw;
 	
 	/*border:1px solid black;
-	*/padding:15px 15px 0 15px;
+	*/padding:15px 0px 0 15px;
 }
 .hourPre,.hourNxt{
-	width: 60px;
+	width: 40px;
 	height: 60px;
 	border: none;
 	color: white;
@@ -253,33 +279,35 @@ div#toolBox h4{
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
+	padding:0;
   }
 .hourPre{
-	background: url('Images/ows-sprite72.png') -0px -58px;
-	margin-left:10px;
+	background-image: url('Images/ows-sprite72.png');
+	background-position:-12px -58px;
+	transform:scale(1);
 }
 
-.dayTime{
-	width:calc(100% - 166px);
+#dayTime{
+	height:100%;
+	width:calc(100% - 85px);
 	text-align: center;
 	display:inline-block;
 	margin:0;
-	font-size:25px;
+	font-size:1.6vw;
 	font-weight:bold;
-	letter-spacing:12px;
+	letter-spacing:.5vw;
 }
 .hourNxt{
-	margin-right:10px;
-	background: url('Images/ows-sprite72.png') -60px -58px;
+	background: url('Images/ows-sprite72.png') -67px -58px;
 	float:right;
 	display:inline-block;
 }
 
 #graph2{
 	/*border: 1px solid black;
-	*/margin:0 15px 0px 15px;
-	width:calc(100% - 30px);
-	height:75%;
+	*/margin:0 0px 0px 15px;
+	width:calc(100% - 15px);
+	height:17vw;
 	
 }
 
@@ -289,19 +317,18 @@ div#toolBox h4{
 
 
 .three{
-	height:21.6vh;
-
+	height: 11vw;
+    padding: 0 0vw 4vw 4vw;
 }
 
 #info1{
-	margin-left:40px;
 	margin-top:30px;
 	height:auto;
 	margin-bottom:15px;
 	padding:10px;
 }
 #info2{
-	margin-left:25px;
+	
 	margin-top:30px;
 	height:auto;
 	margin-bottom:15px;
@@ -320,35 +347,45 @@ div#info2:hover{
 	padding:10px;
 }
 
-div.threeA, div.threeB{
-	width:34%;
+.threeA, .threeB{
+	width:33.33%;
 	height:100%;
 }
 
-div.flag {
+.flag {
   left: 0px;
-  height:50px;
-  width: 50px;
+  height:3vw;
+  width: 3vw;
   border-radius:10px;
-  
-  background: url('Images/ows-sprite72.png') -180px -3px,
-  rgba(178,10,33,1);
+  background-color:rgba(178,10,33,1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
  
 }
+.spriteF{
+	width:18px;
+	height:23px;
+	background: url('Images/ows-sprite72.png') -199px -17px;
+	background-size: (600/1.4)+em;
+}
+
 div.heading{
 	height:2px;
 	position:relative;
-	top:-40px;
-	left:70px;
+	top:-3vw;
+	margin-left:4vw;
+	font-size:1.1vw;
 }
 .heading h3{
 	margin:0;
 }
 
 div.blurb{
-	margin:0 0px 0 70px;
-	height:55px;
+	margin:0 0px 0 4vw;
+	height:4.8vw;
 	overflow:hidden;
+	font-size:1.4vw;
 	
 
 }
@@ -357,7 +394,7 @@ div.column.threeA, div.column.threeB{
 }
 
 div.threeC{
-	width:32%;
+	width:33.33%;
 	height:100%;
 	float:right;
 }
@@ -372,13 +409,13 @@ div.threeC{
   .box1C,.box2C{
 	float:right;
 	color:white;
-	font-size:14px;
+	font-size:.8vw;
 	overflow:hidden;
   }
   
  div.box1C{
-	width: 105px;
-	height:105px;
+	width: 8vw;
+	height:8vw;
 	margin-right:8%;
 	border-radius:10px;
 	background: url('Images/ows-sprite72.png') -305px -9px,
@@ -388,10 +425,9 @@ div.threeC{
   
 div.box2C{
 	background-color:#000;
-	width: 49%;
-	height:92px;
-	margin-right:0px;
-	padding:0 0 15px 20px;
+	width: 13vw;
+	height:8vw;
+	padding-right:1.5vw;
 	border-radius: 10px 0 0 10px ;
 }
 
@@ -404,17 +440,49 @@ div.box2C{
 div.bannerBox{
 	background: url('Images/ows-sprite72.png') -315px -21px,
     rgba(178,10,33,1);
-	width:93%;
+	width:65%;
 	height:20px;
-	margin:15px 0 0 0;
+	margin:15px 0 0 15px;
 	border-radius: 5px;
+	position:relative;
 	
 }
 #textB4{
-    height: 50%;
+    height: 46%;
     overflow: hidden;
-	margin:10px 30px 0 5px;
+	margin:10px 30px 0 15px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (max-width: 1010px) {

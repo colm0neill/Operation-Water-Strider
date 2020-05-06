@@ -37,9 +37,9 @@ Operation Water-Strider
 		
 			<div class="column oneC">
 				<ul id="navlist">
-					<a href="appointment.html"  alt="Appointments"><li id="appointments"></li></a>
-					<a href="schedule.html"  alt="calendar"><li id="calendar"></li></a>
-					<a href="notes.html" alt="Notes"><li id="notes"></li></a>
+					<a href="appointment.html"  alt="Appointments"><div class="square"><li id="appointments"></li></div></a>
+					<a href="schedule.html"  alt="calendar"><div class="square"><li id="calendar"></li></div></a>
+					<a href="notes.html" alt="Notes"><div class="square"><li id="notes"></li></div></a>
 				</ul>
 			</div>
 	</div>
@@ -65,6 +65,7 @@ Operation Water-Strider
 		
 		
 		<div class="column twoB">
+				<div id="totals">$0.00</div>
 				<div class="graphContainer1"></div>
 					<canvas id="graph1" width="1055px" height="675px"> </canvas>
 					<p>Mon</p><p>Tue</p><p>Wed</p><p>Thurs</p><p>Fri</p><p>Sat</p><p>Sun</p>
@@ -73,7 +74,7 @@ Operation Water-Strider
 		<div class="column twoC">
 				<div class="graphNav">
 					<button class="hourPre"> </button>
-					<p class="dayTime">FRIDAY<br>13:00</p>
+					<p id="dayTime">FRIDAY<br>13:00</p>
 					<button class="hourNxt"></button>
 				</div>
 					<canvas id="graph2" width="1055px" height="675px"> </canvas>
@@ -88,7 +89,7 @@ Operation Water-Strider
 		<div class="row three">
 			<div class="column threeA">
 				<div id="info1"> 
-					<div class="flag"></div>
+					<div class="flag"><div class="spriteF"></div></div>
 					<div class="heading"><b>This week.</b><h3>XX Appointment's</h3></div>
 					<div class="blurb">Do you see any Teletubbies in here? Do you see
 					a slender plastic tag clipped to my shirt with my name printed on it?
@@ -102,7 +103,7 @@ Operation Water-Strider
 			
 			<div class="column threeB">
 				<div id="info2"> 
-					<div class="flag"></div>
+					<div class="flag"><div class="spriteF"></div></div>
 					<div class="heading"><b>This week.</b><h3>XX Appointment's</h3></div>
 					<div class="blurb">
 					Do you see a little Asian child with a blank expression on his face 

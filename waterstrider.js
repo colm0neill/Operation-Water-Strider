@@ -9,11 +9,19 @@ var widthImg = window.innerWidth;
 var heightImg = window.innerHeight;
 console.log("Image Width is:"+widthImg+" Image Height is:"+ heightImg);
 
-
+clock();
 	
-	
-	
-	
+//----------------------Getting Time and Day-------------------//
+function clock(){
+  var d = new Date();
+  var h = d.getHours();
+  var n = d.getMinutes();
+  var dd = d.getDay();
+  var doW = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+  if(n<10){  n= "0"+n;  }
+  document.getElementById("dayTime").innerHTML = doW[dd]+"<br>"+h+":"+n;
+  var t = setTimeout(clock, 500);
+}
 	
 	
 	
