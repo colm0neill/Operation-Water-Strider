@@ -11,6 +11,22 @@ body{
 	margin:0;
 }
 
+#logout{
+	float:right;
+	margin-right:2vw;
+	font-size: 1.2vw;
+	border:0px;
+	padding:1vw;
+	border-radius:5px;
+	position:relative;
+	top:0;
+	
+}
+#logout:hover{
+	background:black;
+	color:white;
+}
+
 #bodyContainer{
 	width: inherit;
 	margin:14vh 9vw 14vh 9vw;
@@ -19,7 +35,7 @@ body{
 }
 
 #backgroundCurve{
-	background-image:url('Images/owsBack72.png');
+	background-image:url('../images/owsBack72.png');
     background-size: cover;	
 	background-position-x: right;
 	width: 100%;
@@ -91,22 +107,22 @@ body{
 
 #appointments {
   left: 0px;
-  background: url('Images/ows-sprite72.png') 0vw 0vw;
+  background: url('../images/ows-sprite72.png') 0vw 0vw;
   background-size: 68vw 40vw;
 }
   
 #calendar {
-  background: url(Images/ows-sprite72.png) -4.2vw 0;
+  background: url('../images/ows-sprite72.png') -4.2vw 0;
   background-size: 67vw 40vw;
 }
 
 #home {
-  background: url('Images/ows-sprite72.png') -0vw -8.3vw; 
+  background: url('../images/ows-sprite72.png') -0vw -8.3vw; 
   background-size: 68vw 40vw;
 }
 
 #notes {
-  background: url('Images/ows-sprite72.png') -8.3vw 0;
+  background: url('../images/ows-sprite72.png') -8.3vw 0;
   background-size: 68vw 40vw;
 }
 
@@ -298,7 +314,7 @@ div#toolBox h4{
 	padding:0;
   }
 .hourPre{
-	background-image: url('Images/ows-sprite72.png');
+	background-image: url('../images/ows-sprite72.png');
 	background-position:-12px -58px;
 	transform:scale(1);
 }
@@ -314,7 +330,7 @@ div#toolBox h4{
 	letter-spacing:.5vw;
 }
 .hourNxt{
-	background: url('Images/ows-sprite72.png') -67px -58px;
+	background: url('../images/ows-sprite72.png') -67px -58px;
 	float:right;
 	display:inline-block;
 }
@@ -382,7 +398,7 @@ div#info2:hover{
 .spriteF{
 	width: 1.4vw;
     height: 1.7vw;
-	background: url(Images/ows-sprite72.png) -224.5vw -1.3vw;
+	background: url('../images/ows-sprite72.png') -224.5vw -1.3vw;
     background-size: 70vw 41vw;
 }
 
@@ -464,7 +480,7 @@ div.bannerBox{
 .spriteFs{
 	width: 1.4vw;
     height: 1.7vw;
-    background: url(Images/ows-sprite72.png) -228.9vw -1.3vw;
+    background: url('../images/ows-sprite72.png') -228.9vw -1.3vw;
     background-size: 70vw 41vw;
 }
 .box1C div.spriteFs{

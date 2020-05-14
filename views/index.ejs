@@ -6,13 +6,14 @@
 <title>
 Operation Water-Strider
 </title>
-<link rel="stylesheet" href="waterstrider.css">
-<script src="waterstrider.js"></script>
+<link rel="stylesheet" href="/assets/waterstrider.css">
+<script src="/assets/waterstrider.js"></script>
 </head>
 <body>
 
-
-
+	<form action="/logout?_method=DELETE" method="POST">
+		<button type="submit" id="logout" style="float:right;">Log Out</button>
+	  </form>
 
 
 	<div id="bodyContainer">
@@ -23,7 +24,7 @@ Operation Water-Strider
 				<h1>
 					<b>HELLO,</b>
 				</h1>
-				<h3>User Name</h3>
+				<h3><%= name %></h3>
 			</p>
 		</div>
 		
@@ -37,11 +38,12 @@ Operation Water-Strider
 		
 			<div class="column oneC">
 				<ul id="navlist">
-					<a href="appointment.html"  alt="Appointments"><div class="square"><li id="appointments"></li></div></a>
-					<a href="schedule.html"  alt="calendar"><div class="square"><li id="calendar"></li></div></a>
-					<a href="notes.html" alt="Notes"><div class="square"><li id="notes"></li></div></a>
+					<a href="./appointments"  alt="Appointments"><div class="square"><li id="appointments"></li></div></a>
+					<a href="./schedule"  alt="calendar"><div class="square"><li id="calendar"></li></div></a>
+					<a href="./notes" alt="Notes"><div class="square"><li id="notes"></li></div></a>
 				</ul>
 			</div>
+			
 	</div>
 	
 	<div class="row two">
