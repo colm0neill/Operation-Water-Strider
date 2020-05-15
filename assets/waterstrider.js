@@ -7,27 +7,6 @@ var bk = document.getElementById("backgroundCurve");
 
 var widthImg = window.innerWidth;
 var heightImg = window.innerHeight;
-console.log("Image Width is:"+widthImg+" Image Height is:"+ heightImg);
-
-clock();
-	
-//----------------------Getting Time and Day-------------------//
-function clock(){
-  var d = new Date();
-  var h = d.getHours();
-  var n = d.getMinutes();
-  var dd = d.getDay();
-  var doW = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
-  if(n<10){  n= "0"+n;  }
-  document.getElementById("dayTime").innerHTML = doW[dd]+"<br>"+h+":"+n;
-  var t = setTimeout(clock, 1000);
-}
-	
-	
-	
-	
-	
-	
 	
 	
 var c = document.getElementById("graph1");
@@ -56,7 +35,7 @@ var dataPointsY = [];
 		dataPointsY[i] = g;
 	}
 
-	console.log(dataPointsY);
+	
 	for(i=0;i<9;i++){
 		if((i != 0 )||(i !=9)){
 			ctx.beginPath();
@@ -70,7 +49,6 @@ var dataPointsY = [];
 			
 			
 			ctxCir.beginPath();
-			//ctxCir.style = '#fff';
 			ctxCir.linewidth= 1;
 			ctxCir.arc((dataPointsX*i)+20,dataPointsY[i],10,0*Math.PI,1.5*Math.PI);
 			ctx.closePath();
@@ -104,11 +82,10 @@ var dataPointsY2 = [];
 	for(i=0;i<7;i++){
 		var t = largest2 /100;
 		var g = Math.round(h2-((array2[i]/t)*4));
-		console.log("G2 "+g);
 		dataPointsY2[i] = g;
 	}
 
-	console.log(dataPointsY2);
+	
 	for(i=0;i<7;i++){
 		if((i != 0 )||(i !=9)){
 			ctx2.beginPath();
@@ -120,7 +97,7 @@ var dataPointsY2 = [];
 			ctx.closePath();
 			ctx2.stroke();
 			
-		console.log(i+" Y "+dataPointsY2[i]);
+		
 			}
 	
 		else{
@@ -129,3 +106,119 @@ var dataPointsY2 = [];
 	}
 }
 
+
+//----------------------Getting Time and Day-------------------//
+
+window.onload = function() {runClock();}
+
+var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+
+
+function runClock(){
+	
+	var d = new Date();
+	var h = d.getHours();
+	var n = d.getMinutes();
+	var dd = d.getDay();
+	var doW = ["SUNDAY","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY"];
+	if(n<10){  n= "0"+n;  }
+	document.getElementById("dayTime").innerHTML = doW[dd]+"<br>"+h+":"+n;
+	var t = setTimeout(runClock, 1000);
+  }
+	
+//-----------------------------END-----------------------------//	
+	
+//----------------------Generating Calendar -------------------//
+
+window.onload = function() {drawCalendar();}
+
+
+
+function daysInMonth (month, year) { 
+	return new Date(year, month, 0).getDate(); 
+
+} 
+
+var date = new Date(); 
+var month = ""; 
+var year = "";
+var monthCount = 0;
+
+function drawCalendar() {
+	
+	if((month == "")&&(year == "")){
+	month = date.getMonth(); 
+	year = date.getFullYear();
+	console.log("If null true");
+	}
+	
+	var today = date.getDate();
+	var dayStart = new Date(year + "-" + (month +1)+ "-01").getDay();
+	
+	var getDateBox = document.getElementById("yearMonth");
+	getDateBox.innerHTML= months[month];
+
+	b = document.createElement("br");
+	m = document.createElement("span");
+	m.setAttribute("style","font-size:18px");
+	m.innerHTML=year;
+	getDateBox.appendChild(b);
+	getDateBox.appendChild(m);
+
+
+	var monthDays= daysInMonth(month,year);
+	var writeDays = document.getElementById("dayz");
+	
+	var totalDayBoxes = monthDays + dayStart;
+	
+  
+	
+
+	for(i = 0; i< totalDayBoxes; i++){
+		if(i<(dayStart-1)){
+			var x = document.createElement("li");
+			writeDays.appendChild(x);
+		}
+		else{
+		var x = document.createElement("li");
+		
+		x.innerHTML = (i+2)-dayStart;
+		writeDays.appendChild(x);
+		}
+	}
+
+	var y = document.getElementById("dayz");
+	var x = y.childNodes[(today+dayStart)-1];
+	x.setAttribute("class", "active"); 
+
+}
+
+
+function monthPrev(){
+	console.log("Prev foo");
+	month = date.getMonth() - 1; 
+	year = date.getFullYear() - 1;
+	removeCalendar();
+	drawCalendar();
+	monthCount--;
+	
+
+}
+
+function monthNext(){
+	console.log("Next foo");
+	month = date.getMonth() + 1; 
+	year = date.getFullYear() + 1;
+	removeCalendar();
+	drawCalendar();
+	monthCount++;
+
+}
+
+function removeCalendar(){
+	var r = document.getElementById("dayz");
+	while( r.firstChild ){
+		r.removeChild( r.firstChild );
+	  }
+}

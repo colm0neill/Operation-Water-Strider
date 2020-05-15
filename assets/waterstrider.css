@@ -90,9 +90,8 @@ body{
     margin: 0;
 }
 #navlist{
-	padding:20px 0 10px 0;
+	
 }
-
 #navlist li{
     height: 4.2vw;
 	list-style:none;
@@ -117,7 +116,7 @@ body{
 }
 
 #home {
-  background: url('../images/ows-sprite72.png') -0vw -8.3vw; 
+  background: url('../images/ows-sprite72.png') -0vw -8.6vw; 
   background-size: 68vw 40vw;
 }
 
@@ -493,15 +492,157 @@ div.bannerBox{
 	margin:10px 30px 0 15px;
 }
 
+/*Login & Register-----------------------------------------------------*/
 
 
+#loginCon, #regCon{
+	width:25%;
+	height:40vh;
+	padding: 5vh 0 25vh 65%;
+	margin-right:10%;
+}
+
+#bodyContainer img, #bodyContainer img{
+	margin:10%;
+	position:absolute;
+}
+
+#loginCon h1, #regCon h1{
+	text-align:right;
+	width:100%;
+	font-weight: bold;
+	font-size: 4vw;
+	letter-spacing: 1vw;
+}
+
+#loginCon input, #regCon input{
+	margin-bottom:20px;
+	width:100%;
+	display: block;
+}
+
+#loginCon button, #regCon button{
+	padding:1vw 3vw;
+	background-color:#8C0A21;
+	border:none;
+	border-radius:1vw;
+	text-decoration: none;
+	color:white;
+	font-size:1.5vw;
+}
+
+#loginCon a, #regCon a{
+	padding-top:5px;
+	float:right;
+	color:black;
+
+	
+}
+
+/*Schedule-----------------------------------------------------*/
+.calendarView{
+	width:66.66% !Important;
+
+}
+
+ul {list-style-type: none;}
 
 
+/* Month header */
+.month {
+  padding: 10px 0;
+  width: 100%;
+  background: #B20A21;
+  text-align: center;
+  border-radius:1vw;
+  height:50px;
+}
+
+/* Month list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Previous button inside month header */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+  margin-left:25px;
+}
+
+/* Next button */
+.month .next {
+  float: right;
+  padding-top: 10px;
+  margin-right:25px;
+}
+
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.5%;
+  color: #666;
+  text-align: center;
+}
+
+/* Days (1-31) */
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 14.2%;
+  padding: 5px 0;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+}
+
+.days li:hover{
+	background-color:black;
+	color:white;
+	border-radius:1vw;
+}
+
+/* Highlight the "current" day */
+li.active {
+  
+  background: ##B20A21;
+  color: white !important;
+  border-radius:1vw;
+}
 
 
+#todayLabel{
+	padding: 20px 0;
+	width: 90%;
+	background: #B20A21;
+	text-align: center;
+	border-radius:1vw;
+	color:white;
+	height:30px;
+	margin: 0 0 0 10%;
+	font-size: 3vw;
 
-
-
+}
 
 
 
@@ -513,7 +654,7 @@ div.bannerBox{
 @media only screen and (max-width: 1010px) {
 	body{
 	background-color:#a9a9a9;
-	background: linear-gradient(0deg, rgba(86,200,255,1) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(0deg, rgb(96, 27, 27) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
 	font-family:helvetica;
 	margin:0;
 	}
@@ -530,7 +671,7 @@ div.bannerBox{
 @media only screen and (max-width: 640px) {
   body{
 	background-color:#595959;
-	background: linear-gradient(0deg, rgba(0,158,253,1) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
+	background: linear-gradient(0deg, rgb(255, 42, 42) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
 	font-family:helvetica;
 	margin:0;
 }

@@ -43,16 +43,33 @@ Operation Water-Strider
 	</div>
 	
 	<div class="row two">
-		<div class="column twoA">
+		<div class="column twoA calendarView" onload="alert('onload callback fired');">
 		
+			<div class="month">
+				<ul>
+				  <li class="prev" onclick="monthPrev()">&#10094;</li>
+				  <li class="next" onclick="monthNext()">&#10095;</li>
+				  <li id="yearMonth">January<br><span style="font-size:18px">2000</span></li>
+				</ul>
+			  </div>
+			  
+			  <ul class="weekdays">
+				<li>Mo</li>
+				<li>Tu</li>
+				<li>We</li>
+				<li>Th</li>
+				<li>Fr</li>
+				<li>Sa</li>
+				<li>Su</li>
+			  </ul>
+			  
+			  <ul id="dayz" class="days">
+				
+			  </ul>
 		</div>
 		
-		<div class="column twoB">
-		
-		</div>
-		
-		<div class="column twoC">
-			
+		<div class="column twoC todayView">
+			<p id="todayLabel">Today</p>
 		</div>
 		
 	</div>
@@ -76,4 +93,5 @@ Operation Water-Strider
 
 <div id="backgroundCurve"></div>
 </body>
+
 </html>
