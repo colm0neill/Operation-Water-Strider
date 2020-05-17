@@ -89,9 +89,7 @@ body{
 	letter-spacing: .3vw;
     margin: 0;
 }
-#navlist{
-	
-}
+
 #navlist li{
     height: 4.2vw;
 	list-style:none;
@@ -556,6 +554,7 @@ ul {list-style-type: none;}
   text-align: center;
   border-radius:1vw;
   height:50px;
+  color:white;
 }
 
 /* Month list */
@@ -565,7 +564,7 @@ ul {list-style-type: none;}
 }
 
 .month ul li {
-  color: white;
+  
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -601,7 +600,7 @@ ul {list-style-type: none;}
 /* Days (1-31) */
 .days {
   padding: 10px 0;
-  background: #eee;
+
   margin: 0;
 }
 
@@ -616,7 +615,7 @@ ul {list-style-type: none;}
   color: #777;
 }
 
-.days li:hover{
+.dateB:hover{
 	background-color:black;
 	color:white;
 	border-radius:1vw;
@@ -625,7 +624,7 @@ ul {list-style-type: none;}
 /* Highlight the "current" day */
 li.active {
   
-  background: ##B20A21;
+  background: #B20A21;
   color: white !important;
   border-radius:1vw;
 }

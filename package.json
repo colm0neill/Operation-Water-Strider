@@ -22,5 +22,13 @@
     "dotenv": "^8.0.0",
     "nodemon": "^1.19.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colm0neill/Operation-Water-Strider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/colm0neill/Operation-Water-Strider/issues"
+  },
+  "homepage": "https://github.com/colm0neill/Operation-Water-Strider#readme",
   "description": ""
 }
