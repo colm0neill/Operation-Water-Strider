@@ -9,14 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@microsoft/microsoft-graph-client": "^2.0.0",
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.16.2",
+    "isomorphic-fetch": "^2.2.1",
     "method-override": "^3.0.0",
+    "moment": "^2.25.3",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-azure-ad": "^4.2.1",
+    "passport-local": "^1.0.0",
+    "simple-oauth2": "^3.4.0"
   },
   "devDependencies": {
     "dotenv": "^8.0.0",
