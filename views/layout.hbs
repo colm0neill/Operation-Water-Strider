@@ -1,0 +1,90 @@
+<!-- Copyright (c) Microsoft Corporation.
+     Licensed under the MIT License. -->
+
+<!-- <LayoutSnippet> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Operation Water Strider</title>
+
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="waterstrider.js"></script>
+  </head>
+
+  <body>
+      <div id="bodyContainer">
+    
+             
+            
+            {{#if user}}
+             	<div class="row one">
+		<div class="column oneA">
+			<p id="greeting">
+				<h1>
+					<b>HELLO,</b>
+				</h1>
+				<h3>{{ user.displayName }}!</h3>
+			</p>
+		</div>
+		
+		<div class="column oneB">
+			<p>
+				<br>
+				<br>
+				<br>
+			</p>
+		</div>
+		
+			<div class="column oneC">
+				<ul id="navlist">
+					<a href="./appointments"  alt="Appointments"><div class="square"><li id="appointments"></li></div></a>
+					{{#if urlIsHome}}
+          <a href="./calendar"  alt="calendar"><div class="square"><li id="calendar"></li></div></a>
+					{{/if}}
+          
+          <a href="./notes" alt="Notes"><div class="square"><li id="notes"></li></div></a>
+				</ul>
+			</div>
+			
+	</div>
+              
+            {{/if}}
+        
+          
+            {{#if user}}
+              
+              <a href="/auth/signout" class="">Sign Out</a>
+
+        
+            {{else}}
+              
+
+                
+
+	              
+             
+              
+            {{/if}}
+      
+        
+    
+    
+    <main role="main" class="container">
+      {{#each error}}
+        <div class="alert alert-danger" role="alert">
+          <p class="mb-3">{{ this.message }}</p>
+          {{#if this.debug }}
+            <pre class="alert-pre border bg-light p-2"><code>{{ this.debug }}</code></pre>
+          {{/if}}
+        </div>
+      {{/each}}
+
+      {{{body}}}
+    </main>
+
+    <!-- Bootstrap/jQuery -->
+  </div>
+    <div id="backgroundCurve"></div>
+  </body>
+</html>
+<!-- </LayoutSnippet> -->
