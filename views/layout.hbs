@@ -38,7 +38,9 @@
 			<div class="column oneC">
 				<ul id="navlist">
 					<a href="./appointments"  alt="Appointments"><div class="square"><li id="appointments"></li></div></a>
-					{{#if urlIsHome}}
+					{{#if active.calendar}}
+          <a href="./"  alt="home"><div class="square"><li id="home"></li></div></a>
+          {{else}}
           <a href="./calendar"  alt="calendar"><div class="square"><li id="calendar"></li></div></a>
 					{{/if}}
           

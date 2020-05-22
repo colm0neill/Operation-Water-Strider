@@ -2,6 +2,7 @@ window.onload = function() {drawCalendar();}
 
 
 
+
 function daysInMonth (month, year) { 
 	return new Date(year, month, 0).getDate(); 
 
@@ -114,9 +115,13 @@ function removeCalendar(){
 	  }
 }
 
+var selectedDate;
+
 function getTodayView(value){
 
-    var selectedDate = value;
+    selectedDate = value;
 
-    console.log(selectedDate);
+	console.log(selectedDate);
+	localStorage.setItem("vOneLocalStorage", selectedDate);  
 }
+

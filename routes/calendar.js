@@ -1,10 +1,8 @@
-// Copyright (c) Microsoft Corporation.
-// Licensed under the MIT License.
-
 var express = require('express');
 var router = express.Router();
 var tokens = require('../tokens.js');
 var graph = require('../graph.js');
+
 
 /* GET /calendar */
 // <GetRouteSnippet>
