@@ -535,11 +535,27 @@ font-size:1.5vw;
 padding-top:5px;
 float:right;
 color:black;
+}
 
-
+.signOut{
+  float:right;
+  padding:1vw 1.75vw;
+  background-color:#B20A21;
+  color:white;
+  border-radius: 1vw 0 0 1vw;
+  text-decoration: none;
+  position:relative;
+  top:-60px;
+}
+.signOut:hover{
+  background-color:black;
 }
 
 /*Schedule-----------------------------------------------------*/
+
+.calendarTwo{
+  height:40vw !Important;
+}
 .calendarView{
 width:66.66% !Important;
 
@@ -552,6 +568,7 @@ ul {list-style-type: none;}
 .month {
 padding: 10px 0;
 width: 100%;
+
 background: #B20A21;
 text-align: center;
 border-radius:1vw;
@@ -610,6 +627,7 @@ margin: 0;
 list-style-type: none;
 display: inline-block;
 width: 14.2%;
+height:2vw;
 padding: 5px 0;
 text-align: center;
 margin-bottom: 5px;

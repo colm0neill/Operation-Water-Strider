@@ -12,6 +12,12 @@
   </head>
 
   <body>
+
+     {{#if user}}
+              
+              <a href="/auth/signout" class="signOut">Sign Out</a>
+              
+            {{/if}}
       <div id="bodyContainer">
     
              
@@ -23,7 +29,7 @@
 				<h1>
 					<b>HELLO,</b>
 				</h1>
-				<h3>{{ user.displayName }}!</h3>
+				<h3>{{ user.displayName }}</h3>
 			</p>
 		</div>
 		
@@ -53,20 +59,7 @@
             {{/if}}
         
           
-            {{#if user}}
-              
-              <a href="/auth/signout" class="">Sign Out</a>
-
-        
-            {{else}}
-              
-
-                
-
-	              
-             
-              
-            {{/if}}
+           
       
         
     
