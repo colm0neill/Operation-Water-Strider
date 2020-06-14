@@ -35,9 +35,14 @@ module.exports = {
 
     const id = calendarz.idofCalendar;
     const oneX = await client
-      .api('/me/calendars/'+id+'/events')
+      //.api('/me/calendars/'+id+'/calendarView?startDateTime=2020-06-08T23:59:00&endDateTime=2020-06-08T23:59:00')
+      .api('/me/calendars/'+id+'/calendarview')
+      .query({
+        startdatetime : "2020-06-08T00:00:00",
+        enddatetime: "2020-06-08T23:59:00"
+      })
       .select('subject,start,end')
-      .orderby('createdDateTime DESC')
+      .orderby('createdDateTime ASC')
       .get();
 
     return oneX;
@@ -45,20 +50,26 @@ module.exports = {
   },
 
   
-  getOneEventsOD: async function(accessToken) {
+  getOneEventsOD: async function(accessToken, theDate) {
     const client = getAuthenticatedClient(accessToken);
-    var log = console.log("i got in");
-    const date1 = calendarz.theDate;
+    
+    const date1 = await calendarz.theDate;
     const id = calendarz.idofCalendar;
-    const oneXDay = await client
-      //.api('/me/calendars/'+id+'/calendarview?startdatetime='+date1+'T00:00:00.861Z&enddatetime='+date1+'T23:59:59.861Z')
-      .api('/me/calendars/'+id+'/calendarview?startdatetime=2020-06-08T00:00:00.861Z&enddatetime=2020-06-08T23:59:59.861Z')
-      .select('subject,start,end')
-      .orderby('createdDateTime DESC')
-      .get();
-
-    return oneXDay;
-
+    var log = console.log("_graph_api_response - Date: "+ date1);
+    const oneXE = await client
+    .api('/me/calendars/'+id+'/calendarview')
+    .query({
+      startdatetime : date1+"T00:00:00",
+      enddatetime: date1+"T23:59:00"
+    })
+    .select('subject,start,end')
+    .orderby('createdDateTime ASC')
+    .get()
+    .catch((err) => {
+      console.log(err);
+      
+  });
+    return oneXE;
   }
   
 

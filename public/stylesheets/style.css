@@ -668,11 +668,20 @@ font-size: 3vw;
   float: right;
 }
 
+#todayList .table{
+  margin: 0 5% 0 5%;
+  border-collapse:collapse;
+  width: 90%;
+}
 
-
-
-
-
+#todayList tbody tr td{
+  
+  border-bottom: 1px solid black;
+}
+#todayList td{
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+}
 
 
 @media only screen and (max-width: 1010px) {

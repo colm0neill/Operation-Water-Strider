@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var tokens = require('../tokens.js');
 var graph = require('../graph.js');
-var duck = require('../app');
+var fs = require('fs');
 
 var idofCalendar = '';
 
@@ -75,33 +75,42 @@ router.get('/',
         req.flash('error_msg', 'Could not get an access token');
       }
 
-      var date;
+      var theDate;
 
 
       router.post('/api', (req, res) => {
         const data = req.body;
-        //console.log(data.dateFormatted);
+        
         res.json({
           status:'SUCCESS: Date Received.'
         });
-        processDate(data.dateFormatted); 
+        theDate = data.dateFormatted;
+        exports.theDate = theDate;
+        setTimeout(processDate,100, accessToken, theDate); 
       });
 
-//the rest of the code is executing onload of the server and as far as i can see it is not
-// able to has the variable passed and called after the fact as it relies on the user to pass the date.
-async function processDate(dateFormatted, accessToken){
-  date = dateFormatted;
+
+     
+
+async function processDate(accessToken, theDate){
+  var z = await theDate;
+
+ 
     
-  var theDate = await date;
-        console.log("Server is requesting events for: "+ theDate);
-        exports.theDate = theDate;
+console.log("Server is requesting events for: "+ z);
         
-      if (idofCalendar !== '') {
+
+      if (typeof(theDate) !== 'undefined') {
+       
         
         try {
-          var dayOneXOne = await graph.getOneEventsOD(accessToken);
-          params.dayOneXOne = dayOneXOne.value;
-          console.log(dayOneXOne);
+          console.log('im trying');
+          var dayOne = await graph.getOneEventsOD(accessToken);
+          params.dayOne = dayOne.value;
+
+          console.log(dayOne.value);
+
+         
         } catch (err) {
           req.flash('error_msg', {
             message: 'Could not fetch events',
@@ -114,9 +123,12 @@ async function processDate(dateFormatted, accessToken){
         
       }
 
-
+     writeParams();
     }
-
+  function writeParams(params){
+    
+    
+  }
 
     
 
