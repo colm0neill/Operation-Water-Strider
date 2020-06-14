@@ -25,7 +25,6 @@ function drawCalendar() {
 	var today = date.getDate() ;
 	var thisMonth = date.getMonth();
     var thisYear = date.getFullYear();
-    console.log('month: '+month);
 	var dayStart = new Date(year + "-" + (month +1)+ "-01").getDay();
 	
 	var getDateBox = document.getElementById("yearMonth");
@@ -117,11 +116,42 @@ function removeCalendar(){
 
 var selectedDate;
 
-function getTodayView(value){
+async function getTodayView(value){
 
-    selectedDate = value;
+	var monthPlus
+	var dayPlus
 
-	console.log(selectedDate);
-	localStorage.setItem("vOneLocalStorage", selectedDate);  
+	selectedDate = value;
+	if(month<10){
+		monthPlus = "0"+(month+1);
+	}
+	else{monthPlus= month+1;}
+	if(selectedDate<10){
+		dayPlus = "0"+selectedDate;
+	}
+	else{dayPlus= selectedDate;}
+
+	var dateFormatted= year+'-'+monthPlus+"-"+dayPlus;
+	
+passDate(dateFormatted)
+.catch(error => {
+	console.log(error);
+	console.log("There was an error in passDate.");
+});
 }
 
+async function passDate(dateFormatted){
+
+const data = {dateFormatted};
+
+	const options = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	};
+
+	const response = await fetch('./calendar/api', options);
+	const derp = await response.json();
+}

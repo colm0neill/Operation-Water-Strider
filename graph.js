@@ -4,6 +4,8 @@ var calendarz = require('./routes/calendar');
 
 
 
+
+
 module.exports = {
   getUserDetails: async function(accessToken) {
     const client = getAuthenticatedClient(accessToken);
@@ -18,8 +20,6 @@ module.exports = {
   getEvents: async function(accessToken) {
     const client = getAuthenticatedClient(accessToken);
 
-    
-
     const events = await client
       .api('/me/calendars')
       .select('id,name')
@@ -27,12 +27,13 @@ module.exports = {
 
     return events;
   },
+
+
   
   getOneEvents: async function(accessToken) {
     const client = getAuthenticatedClient(accessToken);
 
     const id = calendarz.idofCalendar;
-console.log("fuck a duck"+id);
     const oneX = await client
       .api('/me/calendars/'+id+'/events')
       .select('subject,start,end')
@@ -41,44 +42,31 @@ console.log("fuck a duck"+id);
 
     return oneX;
 
-  }
-
- 
-};
-
-/*
-
-module.exports = {
-  getUserDetails: async function(accessToken) {
-    const client = getAuthenticatedClient(accessToken);
-
-    const user = await client.api('/me').get();
-    return user;
   },
- 
 
-  // <GetEventsSnippet>
-  getOneEvents: async function(accessToken) {
+  
+  getOneEventsOD: async function(accessToken) {
     const client = getAuthenticatedClient(accessToken);
-
-    
-
-    const oneX = await client
-      .api('/me/calendar/{id}')
-      .select('id,name')
+    var log = console.log("i got in");
+    const date1 = calendarz.theDate;
+    const id = calendarz.idofCalendar;
+    const oneXDay = await client
+      //.api('/me/calendars/'+id+'/calendarview?startdatetime='+date1+'T00:00:00.861Z&enddatetime='+date1+'T23:59:59.861Z')
+      .api('/me/calendars/'+id+'/calendarview?startdatetime=2020-06-08T00:00:00.861Z&enddatetime=2020-06-08T23:59:59.861Z')
+      .select('subject,start,end')
+      .orderby('createdDateTime DESC')
       .get();
 
-    return eventsOneXOne;
+    return oneXDay;
 
   }
-  // </GetEventsSnippet>
+  
+
 
  
 };
 
 
-}
-*/
 
 function getAuthenticatedClient(accessToken) {
   // Initialize Graph client
