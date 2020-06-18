@@ -36,13 +36,9 @@ module.exports = {
     const id = calendarz.idofCalendar;
     const oneX = await client
       //.api('/me/calendars/'+id+'/calendarView?startDateTime=2020-06-08T23:59:00&endDateTime=2020-06-08T23:59:00')
-      .api('/me/calendars/'+id+'/calendarview')
-      .query({
-        startdatetime : "2020-06-08T00:00:00",
-        enddatetime: "2020-06-08T23:59:00"
-      })
+      .api('/me/calendars/'+id+'/events')
       .select('subject,start,end')
-      .orderby('createdDateTime ASC')
+      .orderby('createdDateTime DESC')
       .get();
 
     return oneX;

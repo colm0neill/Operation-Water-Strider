@@ -38,13 +38,20 @@ function drawCalendar() {
 	getDateBox.appendChild(m);
 
 
-	var monthDays= daysInMonth(month,year);
+	var monthDays= daysInMonth((month+1),year);
 	var writeDays = document.getElementById("dayz");
 	
-	var totalDayBoxes = monthDays + dayStart;
+	if(dayStart == 0){
+		dayStart = dayStart+7;
+	}
+
+	var totalDayBoxes;
+	
+	totalDayBoxes = (monthDays-1) + dayStart;
+	// var totalDayBoxes = (monthDays-1) + dayStart;
 	
     
-	
+	console.log('this month is: '+thisMonth+' monthDays: '+monthDays+' dayStart: '+dayStart);
 
 	for(i = 0; i< totalDayBoxes; i++){
 		if(i<(dayStart-1)){
@@ -147,7 +154,8 @@ const data = {dateFormatted};
 	const options = {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Accept':'text/html'
 		},
 		body: JSON.stringify(data)
 	};

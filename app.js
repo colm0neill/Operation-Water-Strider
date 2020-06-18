@@ -1,4 +1,3 @@
-// Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
 var createError = require('http-errors');
@@ -13,15 +12,10 @@ require('dotenv').config();
 var passport = require('passport');
 var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 
-// Configure passport
 
-// In-memory storage of logged-in users
-// For demo purposes only, production apps should store
-// this in a reliable storage
 var users = {};
 
-// Passport calls serializeUser and deserializeUser to
-// manage users
+
 passport.serializeUser(function(user, done) {
   // Use the OID property of the user as a key
   users[user.profile.oid] = user;
@@ -32,8 +26,7 @@ passport.deserializeUser(function(id, done) {
   done(null, users[id]);
 });
 
-// <ConfigureOAuth2Snippet>
-// Configure simple-oauth2
+
 const oauth2 = require('simple-oauth2').create({
   client: {
     id: process.env.OAUTH_APP_ID,
@@ -45,11 +38,7 @@ const oauth2 = require('simple-oauth2').create({
     tokenPath: process.env.OAUTH_TOKEN_ENDPOINT
   }
 });
-// </ConfigureOAuth2Snippet>
 
-// Callback function called once the sign-in is complete
-// and an access token has been obtained
-// <SignInCompleteSnippet>
 async function signInComplete(iss, sub, profile, accessToken, refreshToken, params, done) {
   if (!profile.oid) {
     return done(new Error("No OID found in user profile."));
@@ -102,10 +91,7 @@ var graph = require('./graph');
 
 var app = express();
 
-// <SessionSnippet>
-// Session middleware
-// NOTE: Uses default in-memory session store, which is not
-// suitable for production
+
 app.use(session({
   secret: 'your_secret_value_here',
   resave: false,
@@ -138,13 +124,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static('images'));
 
+
 // <FormatDateSnippet>
 var hbs = require('hbs');
 var moment = require('moment');
 // Helper to format date/time sent by Graph
 hbs.registerHelper('eventDateTime', function(dateTime){
-  return moment(dateTime).format('M/D/YY h:mm A');
+  return moment(dateTime).format('h:mm A');
 });
+
+
 // </FormatDateSnippet>
 
 app.use(logger('dev'));
