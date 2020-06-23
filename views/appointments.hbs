@@ -1,0 +1,75 @@
+<script>
+
+</script>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<div class="row two appointmentTwo">
+    <div class="column twoA appointmentView">
+
+        <h1>Book an appointment.</h1>
+        <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post">
+            <div class="form-group">
+                <label for="fname">First name:</label>
+                <input required class="form-control" reqired type="text" id="fname" name="firstName" value="Tom">
+                <label for="lname">Last name:</label>
+                <input required class="form-control"  type="text" id="lname" name="lastName" value="Jones">
+                <label for="phone">Phone Number:</label>
+                <input required class="form-control"  type="text" id="phone" name="phone" value="0871234567">
+            </div>
+            <div class="form-group">
+                <label for="device">Device:</label>
+                <input class="form-control" type="text" id="device" name="device" value="iPhone 11">
+                <label for="note">Note:</label>
+                <textarea class="form-control" id="noteB" name="appNote" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="scheduledBy">Scheduled By:</label>
+                <input required class="form-control"  type="text" id="schBy" name="scheduledBy" value="{{ user.displayName }}">
+                <label for="scheduledFor">Scheduled For:</label>
+                <input required class="form-control"  type="text" id="schFor" name="scheduledFor" value="Colm">
+            </div>
+            <div>
+                <label for="scheduledBy">Appointment Lenght:</label>
+                <select id="times" name="appointmentLength">
+                    <option value="15">15 Minutes</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                </select><br>
+                <label for="dateTime">Appointment date & start time:</label>
+                <input  type="datetime-local" id="dateTime" name="dateTime">
+                <br>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href='/' class="btn btn-secondary">Cancel</a>
+            </div>
+
+            
+        </form>
+
+    </div>
+    <div class="column twoC notesAtt">
+        <p id="">Attributes</p>
+
+    </div>
+
+</div>
+
+<div class="row three notesThree">
+    <div class="column threeA">
+
+    </div>
+
+    <div class="column threeB">
+
+    </div>
+
+
+    <div class="column threeC">
+
+    </div>
+
+</div>
+</div>

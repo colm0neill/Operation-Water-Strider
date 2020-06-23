@@ -84,7 +84,10 @@ passport.use(new OIDCStrategy(
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
+var graphTriggers = require('./graphTriggers');
 var calendarRouter = require('./routes/calendar');
+var notesRouter = require('./routes/notes');
+var appointmentsRouter = require('./routes/appointments');
 var graph = require('./graph');
 
 
@@ -161,7 +164,10 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/calendar', calendarRouter);
+app.use('/notes', notesRouter);
+app.use('/appointments', appointmentsRouter);
 app.use('/users', usersRouter);
+
 
 
 

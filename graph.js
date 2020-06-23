@@ -1,6 +1,6 @@
 var graph = require('@microsoft/microsoft-graph-client');
 require('isomorphic-fetch');
-var calendarz = require('./routes/calendar');
+const calendarz = require('./graphTriggers');
 
 
 
@@ -17,23 +17,40 @@ module.exports = {
  
 
   // <GetEventsSnippet>
-  getEvents: async function(accessToken) {
+  getCalendars: async function(accessToken) {
     const client = getAuthenticatedClient(accessToken);
 
-    const events = await client
+    const calendars = await client
       .api('/me/calendars')
       .select('id,name')
       .get();
 
-    return events;
+    return calendars;
+  },
+
+
+  createCalendar: async function(accessToken){
+    const client = getAuthenticatedClient(accessToken);
+
+    const oneCal = {
+      name: "ONE 2 ONE"
+    };
+    
+
+    const createCal = await client
+      .api('/me/calendars')
+      .select('id,name')
+      .post(oneCal);
+
+  return createCal;
   },
 
 
   
-  getOneEvents: async function(accessToken) {
+  getOneEvents: async function(accessToken, xm) {
     const client = getAuthenticatedClient(accessToken);
 
-    const id = calendarz.idofCalendar;
+    const id = xm;
     const oneX = await client
       //.api('/me/calendars/'+id+'/calendarView?startDateTime=2020-06-08T23:59:00&endDateTime=2020-06-08T23:59:00')
       .api('/me/calendars/'+id+'/events')
@@ -46,11 +63,11 @@ module.exports = {
   },
 
   
-  getOneEventsOD: async function(accessToken, theDate) {
+  getOneEventsOD: async function(accessToken, theDate, xm) {
     const client = getAuthenticatedClient(accessToken);
     
     const date1 = await calendarz.theDate;
-    const id = calendarz.idofCalendar;
+    const id = xm;
     var log = console.log("_graph_api_response - Date: "+ date1);
     const oneXE = await client
     .api('/me/calendars/'+id+'/calendarview')
@@ -66,6 +83,45 @@ module.exports = {
       
   });
     return oneXE;
+  },
+
+
+  addEvent: async function(accessToken, appointmentDates, appointmentDetails, xm) {
+    const client = getAuthenticatedClient(accessToken);
+    
+
+    const id = calendarz.idofCalendar;
+
+
+     const event2 = {
+  subject: appointmentDetails.subject,
+  start: {
+      dateTime: appointmentDates.appointmentStartTD,
+      timeZone: "UTC"
+  },
+  end: {
+      dateTime: appointmentDates.appointmentEndTD,
+      timeZone: "UTC"
+  },
+  body: {
+    contentType: "html",
+    content: "<div><b>Store:</b> "+appointmentDetails.vodaStore+"<br><b>Scheduled For:</b> "+appointmentDetails.scheduledFor
+    +"<br><b>Scheduled By:</b> "+appointmentDetails.scheduledBy
+    +"</div><br>"+"<div><b>First Name:</b> "+ appointmentDetails.firstName +"<br><b>Last Name:</b> "+ 
+    appointmentDetails.lastName +"<br><b>Phone Number:</b> "+ appointmentDetails.phone +"<br> </div><br><b>Device:</b> "+appointmentDetails.device+"<br><br><b>Notes:</b> "+ 
+    appointmentDetails.content
+  }
+  
+};
+
+   const eventAdded = await client
+    .api('/me/calendars/'+xm+'/events')
+    .post(event2)
+    .catch((err) => {
+      console.log(err);
+      //console.log(event2);
+  });
+    return eventAdded;
   }
   
 

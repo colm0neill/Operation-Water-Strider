@@ -1,86 +1,76 @@
 <script src="wsSchedule.js"></script>
 
-	<div class="row two calendarTwo">
-		<div class="column twoA calendarView" >
-		
-			<div class="month">
-				<ul>
-				  <li class="prev" onclick="monthPrev()">&#10094;</li>
-				  <li class="next" onclick="monthNext()">&#10095;</li>
-				  <li id="yearMonth">January<br><span style="font-size:18px">2000</span></li>
-				</ul>
-			  </div>
-			  
-			  <ul class="weekdays">
-				<li>Mo</li>
-				<li>Tu</li>
-				<li>We</li>
-				<li>Th</li>
-				<li>Fr</li>
-				<li>Sa</li>
-				<li>Su</li>
-			  </ul>
-			  
-			  <ul id="dayz" class="days">
-				
-			  </ul>
+<div class="row two calendarTwo">
+	<div class="column twoA calendarView">
+
+		<div class="month">
+			<ul>
+				<li class="prev" onclick="monthPrev()">&#10094;</li>
+				<li class="next" onclick="monthNext()">&#10095;</li>
+				<li id="yearMonth">January<br><span style="font-size:18px">2000</span></li>
+			</ul>
 		</div>
-		
-		<div class="column twoC todayView">
-			<p id="todayLabel">Today</p>
-			<div id="todayList">
-				
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Start Time</th>
-	  <th scope="col">End Time</th>
-     
-    </tr>
-  </thead>
 
-	{{!-- {{-addEvents}} --}}
-  <tbody id ="handlebars-demo">
-    {{#each dayOne}}
-      <tr>
-        <td>{{this.subject}}</td>
-        <td>{{eventDateTime this.start.dateTime}}</td>
-		<td>{{eventDateTime this.end.dateTime}}</td>
-        
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+		<ul class="weekdays">
+			<li>Mo</li>
+			<li>Tu</li>
+			<li>We</li>
+			<li>Th</li>
+			<li>Fr</li>
+			<li>Sa</li>
+			<li>Su</li>
+		</ul>
 
-			</div>
+		<ul id="dayz" class="days">
+
+		</ul>
+	</div>
+
+	<div class="column twoC todayView">
+		<p id="todayLabel">Today</p>
+		<div id="todayList">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Start Time</th>
+						<th scope="col">End Time</th>
+
+					</tr>
+				</thead>
+
+				{{!-- {{-addEvents}} --}}
+				<tbody id="handlebars-demo">
+					{{#each dayOne}}
+					<tr>
+						<td>{{this.subject}}</td>
+						<td>{{eventDateTime this.start.dateTime}}</td>
+						<td>{{eventDateTime this.end.dateTime}}</td>
+
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+
 		</div>
-		
 	</div>
 
-		<div class="row three calendarThree">
-			<div class="column threeA">
-				
-			</div>
-			
-			<div class="column threeB">
-				
-			</div>
-		
-			
-			<div class="column threeC">
-				
-			</div>
-		
+</div>
+
+<div class="row three calendarThree">
+	<div class="column threeA">
+
 	</div>
+
+	<div class="column threeB">
+
 	</div>
 
 
+	<div class="column threeC">
 
+	</div>
 
-
-
-
-
-
-
+</div>
+</div>
