@@ -63,11 +63,11 @@ module.exports = {
   },
 
   
-  getOneEventsOD: async function(accessToken, theDate, xm) {
+  getOneEventsOD: async function(accessToken, theDate, idofCalendar) {
     const client = getAuthenticatedClient(accessToken);
     
-    const date1 = await calendarz.theDate;
-    const id = xm;
+    const date1 = theDate;
+    const id = idofCalendar;
     var log = console.log("_graph_api_response - Date: "+ date1);
     const oneXE = await client
     .api('/me/calendars/'+id+'/calendarview')

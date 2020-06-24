@@ -20,7 +20,7 @@ module.exports = {
             // Get the events
             var calendars = await graph.getCalendars(accessToken);
             params.calendars = calendars.value;
-            console.log(calendars.value);
+            //console.log(calendars.value);
         } catch (err) {
             req.flash('error_msg', {
                 message: 'Could not fetch events',
@@ -36,7 +36,7 @@ module.exports = {
         if (calendars.value[i].name == 'ONE 2 ONE') {
             idofCalendar = calendars.value[i].id;
             //exports.idofCalendar = idofCalendar;
-            console.log("id of Calendar"+ idofCalendar);
+            //console.log("id of Calendar"+ idofCalendar);
         }
     }
     if(idofCalendar == ''){

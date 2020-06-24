@@ -3,7 +3,7 @@ var router = express.Router();
 var tokens = require('../tokens.js');
 var graph = require('../graph.js');
 var fs = require('fs');
-const graphTriggers = require('../graphTriggers');
+const tgraph = require('../graphTriggers');
 
 var idofCalendar = '';
 var theDate;
@@ -57,8 +57,9 @@ router.get('/',
 
 
 
-    res.render('calendar', params);
+    res.render('calendar',{addEvents: false});
   }
+  
   }
 );
 
@@ -67,14 +68,14 @@ router.get('/',
 router.post('/api', async (req, res) => {
   const data = req.body;
 
-  theDate = data.dateFormatted;
-  exports.theDate = theDate;
+   theDate = data.dateFormatted;
+   exports.theDate = theDate;
 
   try {
-
+    
     await processDate(accessToken, theDate);
 
-    res.redirect('/events');
+    res.redirect('calendar');
   }
   catch (e) {
     res.redirect('/404');
@@ -95,9 +96,9 @@ router.post('/api', async (req, res) => {
 
 
 
-router.get('/events', (req, res) => {
+router.get('/calendar', (req, res) => {
   console.log("i did this");
-  res.render('calendar', params);
+  res.render('paritals/addEvents', params);
 });
 
 
@@ -116,9 +117,8 @@ async function processDate(accessToken, theDate) {
 
 
     try {
-      var xm = " ";
-      xm = await tgraph.getCalId(accessToken);
-      var dayOne = await graph.getOneEventsOD(accessToken, xm);
+      var idofCalendar = await tgraph.getCalId(accessToken);
+      var dayOne = await graph.getOneEventsOD(accessToken, theDate, idofCalendar);
       params.dayOne = dayOne.value;
 
       console.log(dayOne.value);

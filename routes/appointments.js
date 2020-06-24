@@ -72,6 +72,7 @@ router.post('/getAppointmentDet', async (req, res) =>{
       
         await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
         res.redirect("/appointments");
+        
 
     }catch (e){
       console.log(e);

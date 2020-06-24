@@ -135,7 +135,7 @@ var moment = require('moment');
 hbs.registerHelper('eventDateTime', function(dateTime){
   return moment(dateTime).format('h:mm A');
 });
-
+hbs.registerPartials(__dirname +'/views/partials');
 
 // </FormatDateSnippet>
 

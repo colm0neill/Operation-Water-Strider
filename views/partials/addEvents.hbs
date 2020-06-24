@@ -1,0 +1,22 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Start Time</th>
+			<th scope="col">End Time</th>
+
+		</tr>
+	</thead>
+
+	{{!-- {{-addEvents}} --}}
+	<tbody id="handlebars-demo">
+		{{#each dayOne}}
+		<tr>
+			<td>{{this.subject}}</td>
+			<td>{{eventDateTime this.start.dateTime}}</td>
+			<td>{{eventDateTime this.end.dateTime}}</td>
+
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
