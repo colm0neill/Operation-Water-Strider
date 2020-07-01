@@ -14,15 +14,15 @@
         <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post">
             <div class="form-group">
                 <label for="fname">First name:</label>
-                <input required class="form-control" reqired type="text" id="fname" name="firstName" value="Tom">
+                <input required class="form-control" reqired type="text" id="fname" name="firstName" >
                 <label for="lname">Last name:</label>
-                <input required class="form-control"  type="text" id="lname" name="lastName" value="Jones">
+                <input required class="form-control"  type="text" id="lname" name="lastName" >
                 <label for="phone">Phone Number:</label>
-                <input required class="form-control"  type="text" id="phone" name="phone" value="0871234567">
+                <input required class="form-control"  type="text" id="phone" name="phone" >
             </div>
             <div class="form-group">
                 <label for="device">Device:</label>
-                <input class="form-control" type="text" id="device" name="device" value="iPhone 11">
+                <input class="form-control" type="text" id="device" name="device" >
                 <label for="note">Note:</label>
                 <textarea class="form-control" id="noteB" name="appNote" rows="4"></textarea>
             </div>
@@ -30,7 +30,7 @@
                 <label for="scheduledBy">Scheduled By:</label>
                 <input required class="form-control"  type="text" id="schBy" name="scheduledBy" value="{{ user.displayName }}">
                 <label for="scheduledFor">Scheduled For:</label>
-                <input required class="form-control"  type="text" id="schFor" name="scheduledFor" value="Colm">
+                <input required class="form-control"  type="text" id="schFor" name="scheduledFor" >
             </div>
             <div>
                 <label for="scheduledBy">Appointment Lenght:</label>

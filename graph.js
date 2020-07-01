@@ -122,11 +122,60 @@ module.exports = {
       //console.log(event2);
   });
     return eventAdded;
-  }
+  },
+
+
+
+  getNotebooks:async function(accessToken){
   
+    const client = getAuthenticatedClient(accessToken);
 
 
- 
+    const notebooksCurrent = await client
+    .api('/me/onenote/notebooks')
+    .select('displayName,id')
+    .get()
+    .catch((err) => {
+      console.log("Error in getNotebooks");
+      console.log(err);
+      
+  });
+  return notebooksCurrent;
+  },
+
+
+  createNotebook: async function(accessToken){
+    const client = getAuthenticatedClient(accessToken);
+
+    const oneNoteb = {
+      displayName: "ONE 2 ONE"
+    };
+    
+
+    const createNoteb = await client
+      .api('/me/onenote/notebooks')
+      .select('id,displayName')
+      .post(oneNoteb);
+
+  return createNoteb;
+  },
+
+  addNote: async function(accessToken, note ,noteBookID){
+    const client = getAuthenticatedClient(accessToken);
+
+   
+
+    // const noteToAdd = await client
+    //   .api('/me/onenote/notebooks/'+noteBookID+'/Events')
+    //   .select('id,name')
+    //   .post(oneNoteb);
+
+  //return noteToAdd;
+  console.log("your note of "+note+" has been added");
+  }
+
+
+
 };
 
 
