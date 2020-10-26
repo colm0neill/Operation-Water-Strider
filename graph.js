@@ -28,6 +28,16 @@ module.exports = {
     return calendars;
   },
 
+  getMyGroups: async function(accessToken){
+    const client = getAuthenticatedClient(accessToken);
+    console.log("got into graph to request groups")
+    const getallGroups = await client
+        .api('/groups')
+        .select('displayName, id, description')
+        .get()
+
+        return getallGroups;
+  },
 
   createCalendar: async function(accessToken){
     const client = getAuthenticatedClient(accessToken);
