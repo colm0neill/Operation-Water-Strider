@@ -26,17 +26,31 @@ module.exports = {
       .get();
 
     return calendars;
+    console.log(calendars);
   },
 
   getMyGroups: async function(accessToken){
     const client = getAuthenticatedClient(accessToken);
-    console.log("got into graph to request groups")
+   
     const getallGroups = await client
-        .api('/groups')
+        .api('/me/transitiveMemberOf')
         .select('displayName, id, description')
         .get()
 
         return getallGroups;
+        
+  },
+
+  getMembersInGroup: async function(accessToken, storeID){
+    const client = getAuthenticatedClient(accessToken);
+    
+    const mems = await client
+      .api('/group/'+ storeID +'/members')
+      .select('displayName, userPrincipalName, jobTitle, id')
+      .orderby('displayName')
+      .get();
+
+      return mems;
   },
 
   createCalendar: async function(accessToken){

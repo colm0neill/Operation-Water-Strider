@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var tokens = require('./tokens.js');
 var graph = require('./graph.js');
+const { request } = require('./app.js');
 
 
 module.exports = {
@@ -20,12 +21,11 @@ module.exports = {
             // Get the events
             var calendars = await graph.getCalendars(accessToken);
             params.calendars = calendars.value;
-            //console.log(calendars.value);
-        } catch (err) {
-            req.flash('error_msg', {
-                message: 'Could not fetch events',
-                debug: JSON.stringify(err)
-            });
+            console.log(calendars.value);
+            console.log("Issues with values")
+        } catch {
+            console.error("There was an issue calling getCalendars");
+            
         }
     } else {
         req.flash('error_msg', 'Could not get an access token');
@@ -47,6 +47,58 @@ module.exports = {
 
     return idofCalendar;
 },
+
+getSortGroups: async function(accessToken){
+
+    //Called from app.js when initializing the auth callback 
+    //to pull in store and store group info and id's
+    
+    var params = {
+        active: { index: true }
+    };
+
+    var storeGroup = '';
+    
+    //Checks accessToken presence and calls to graph to get all groups.
+    if (accessToken && accessToken.length > 0) {
+        try {
+            var groupsInvolved = await graph.getMyGroups(accessToken);
+            params.groupsInvolved = groupsInvolved.value;
+            //console.log(groupsInvolved.value);
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+    else {
+        req.flash('error_msg', 'Could not get an access token');
+    }
+
+
+    //checks returned results for the correct store - staticly provided currently. 03/NOV/2020
+    async function findStore(groupsInvolved){
+
+       
+
+        for (var i = 0; i < groupsInvolved.value.length; i++) {
+            if (groupsInvolved.value[i].displayName == 'GWS' || groupsInvolved.value[i].displayName == 'ATH') {
+                
+                storeGroup = groupsInvolved.value[i];
+
+                
+            }
+            
+        }
+    }
+
+    await findStore(groupsInvolved);
+    //console.log(storeGroup);
+    return storeGroup;
+
+
+},
+
 
 
 

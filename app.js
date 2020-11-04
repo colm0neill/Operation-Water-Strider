@@ -11,7 +11,7 @@ require('dotenv').config();
 
 var passport = require('passport');
 var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
-
+const tgraph = require('./graphTriggers.js');
 
 var users = {};
 
@@ -46,23 +46,47 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
 
   try{
     const user = await graph.getUserDetails(accessToken);
+   
+    const storeGroup = await tgraph.getSortGroups(accessToken);
 
+    //console.log(storeGroup);
+    
     if (user) {
       // Add properties to profile
       profile['email'] = user.mail ? user.mail : user.userPrincipalName;
     }
+    if (storeGroup) {
+      // Add properties to profile
+      profile['store'] = storeGroup.displayName;
+      profile['storeID'] = storeGroup.id;
+      profile['storeDes'] = storeGroup.description;
+    }
+    else{
+      profile['store'] = "";
+      profile['storeID'] = "";
+      profile['storeDes'] = "";
+    }
+
+    exports.profile = profile;
   } catch (err) {
     return done(err);
+
+    
   }
+
+  //console.log(profile);
+
 
   // Create a simple-oauth2 token from raw tokens
   let oauthToken = oauth2.accessToken.create(params);
 
   // Save the profile and tokens in user storage
   users[profile.oid] = { profile, oauthToken };
-  return done(null, users[profile.oid]);
+  return done(null, users[profile.oid]);  
 }
 // </SignInCompleteSnippet>
+
+
 
 // Configure OIDC strategy
 passport.use(new OIDCStrategy(
@@ -131,6 +155,7 @@ app.use(express.static('images'));
 // <FormatDateSnippet>
 var hbs = require('hbs');
 var moment = require('moment');
+const { profile } = require('console');
 // Helper to format date/time sent by Graph
 hbs.registerHelper('eventDateTime', function(dateTime){
   return moment(dateTime).format('h:mm A');

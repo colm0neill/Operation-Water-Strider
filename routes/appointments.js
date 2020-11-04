@@ -3,6 +3,7 @@ var router = express.Router();
 var tokens = require('../tokens.js');
 var graph = require('../graph.js');
 var tgraph = require('../graphTriggers');
+const app = require('../app');
 
 var params;
 var accessToken;
@@ -16,10 +17,35 @@ router.get('/',
        params = {
         active: { appointments: true }
       };
-
+      
+     await fetchMembers(accessToken);
     }
     res.render('appointments');
 });
+
+
+
+
+
+async function fetchMembers(accessToken){
+  const storeID = await app.profile.storeID;
+  //console.log(storeID);
+
+  try{
+  const membersF = await graph.getMembersInGroup(accessToken, storeID);
+  if(membersF){
+  console.log(membersF);
+  }
+  } catch (error){
+    console.log(error);
+  }
+  
+
+}
+
+
+
+
 
 router.post('/getAppointmentDet', async (req, res) =>{
 
