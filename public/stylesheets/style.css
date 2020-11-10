@@ -719,6 +719,14 @@ textarea {
 
 /* --------------------------------- Appointments -------------------------------*/
 
+
+#colleagues, #times, #dateTime{
+  width:100%;
+  height:calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  border-radius:.25rem;
+}
+
 .appointmentTwo{
 height:auto;
 }
@@ -729,6 +737,14 @@ height:auto;
   .appointmentForm{
    /* display: inline-block;
   */
+}
+
+.twoC.bookAtt{
+  padding-left:20px;
+}
+
+#bookCon{
+  visibility:hidden;
 }
 
 

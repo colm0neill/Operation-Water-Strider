@@ -17,27 +17,38 @@ router.get('/',
        params = {
         active: { appointments: true }
       };
-      
-     await fetchMembers(accessToken);
+
+      accessToken;
+      try {
+        accessToken = await tokens.getAccessToken(req);
+      } catch (err) {
+        req.flash('error_msg', {
+          message: 'Could not get access token. Try signing out and signing in again.',
+          debug: JSON.stringify(err)
+        });
+      }
     }
-    res.render('appointments');
+    await fetchMembers(accessToken);
+
+    res.render('appointments', params);
 });
 
 
 
-
+let members ='';
 
 async function fetchMembers(accessToken){
   const storeID = await app.profile.storeID;
   //console.log(storeID);
 
   try{
-  const membersF = await graph.getMembersInGroup(accessToken, storeID);
-  if(membersF){
-  console.log(membersF);
-  }
+
+   members = await graph.getMembersInGroup(accessToken, storeID);
+    params.members = members.value;
+  //console.log(members);
+  
   } catch (error){
-    console.log(error);
+    console.log(error);  
   }
   
 
@@ -49,6 +60,21 @@ async function fetchMembers(accessToken){
 
 router.post('/getAppointmentDet', async (req, res) =>{
 
+  let membersMail = '';
+  if (members) {
+
+    for (var i = 0; i < members.value.length; i++) {
+
+      if (members.value[i].displayName == req.body.colleagues) {
+
+        membersMail = members.value[i].userPrincipalName;
+      }
+    }
+  }
+
+  const isAvailable = await graph.checkAvailability(accessToken, membersMail);
+
+
     const appointmentDetails = {
         subject: "ONEXONE-"+req.body.firstName+" "+req.body.lastName,
         firstName : req.body.firstName,
@@ -57,9 +83,13 @@ router.post('/getAppointmentDet', async (req, res) =>{
         device : req.body.device,
         content: req.body.appNote,
         scheduledBy: req.body.scheduledBy,
-        scheduledFor: req.body.scheduledFor,
+        scheduledFor: req.body.colleagues,
+        colleaguesMail: membersMail,
         vodaStore: '45 William Street, Galway'
+
     }
+
+    
 
     const appointTimeDate = {
         appointmentLength: req.body.appointmentLength,
@@ -126,7 +156,7 @@ router.post('/getAppointmentDet', async (req, res) =>{
             var eventAdded = await graph.addEvent(accessToken, appointmentDates, appointmentDetails, xm);
             params.eventAdded = eventAdded.value;
 
-            console.log(eventAdded.value);
+            //console.log(eventAdded.value);
 
         } 
         catch (err){

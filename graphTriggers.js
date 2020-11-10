@@ -21,8 +21,8 @@ module.exports = {
             // Get the events
             var calendars = await graph.getCalendars(accessToken);
             params.calendars = calendars.value;
-            console.log(calendars.value);
-            console.log("Issues with values")
+            //console.log(calendars.value);
+            //console.log("Issues with values 2")
         } catch {
             console.error("There was an issue calling getCalendars");
             

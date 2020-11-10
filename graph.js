@@ -44,13 +44,64 @@ module.exports = {
   getMembersInGroup: async function(accessToken, storeID){
     const client = getAuthenticatedClient(accessToken);
     
-    const mems = await client
-      .api('/group/'+ storeID +'/members')
+
+    let membersList = await client
+      .api('/groups/'+storeID+'/members')
       .select('displayName, userPrincipalName, jobTitle, id')
-      .orderby('displayName')
       .get();
 
-      return mems;
+     return membersList;
+
+      
+  },
+
+  checkAvailability: async function(accesstoken, membersMail){
+    const client = getAuthenticatedClient(accessToken);
+    
+    const meetingTimeSuggestionsResult = {
+      attendees: [ 
+        { 
+          type: "required",  
+          emailAddress: { 
+            name: "Alex Wilbur",
+            address: "alexw@contoso.onmicrosoft.com" 
+          } 
+        }
+      ],  
+      locationConstraint: { 
+        isRequired: false,  
+        suggestLocation: false,  
+        locations: [ 
+          { 
+            resolveAvailability: false,
+            displayName: "Conf room Hood" 
+          } 
+        ] 
+      },  
+      timeConstraint: {
+        activityDomain:"work", 
+        timeSlots: [ 
+          { 
+            start: { 
+              dateTime: "2019-04-16T09:00:00",  
+              timeZone: "Pacific Standard Time" 
+            },  
+            end: { 
+              dateTime: "2019-04-18T17:00:00",  
+              timeZone: "Pacific Standard Time" 
+            } 
+          } 
+        ] 
+      },  
+      isOrganizerOptional: "false",
+      meetingDuration: "PT1H",
+      returnSuggestionReasons: "true",
+      minimumAttendeePercentage: "100"
+    };
+
+    const availability = await client
+    .api()
+
   },
 
   createCalendar: async function(accessToken){
@@ -127,6 +178,15 @@ module.exports = {
       dateTime: appointmentDates.appointmentEndTD,
       timeZone: "UTC"
   },
+  attendees: [
+    {
+      "emailAddress": {
+        "address":appointmentDetails.colleaguesMail,
+        "name": appointmentDetails.scheduledFor
+      },
+      "type": "required"
+    }
+  ],
   body: {
     contentType: "html",
     content: "<div><b>Store:</b> "+appointmentDetails.vodaStore+"<br><b>Scheduled For:</b> "+appointmentDetails.scheduledFor
@@ -137,6 +197,8 @@ module.exports = {
   }
   
 };
+
+//console.log(appointmentDetails.scheduledFor);
 
    const eventAdded = await client
     .api('/me/calendars/'+xm+'/events')
