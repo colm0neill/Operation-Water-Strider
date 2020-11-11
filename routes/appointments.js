@@ -66,13 +66,13 @@ router.post('/getAppointmentDet', async (req, res) =>{
     for (var i = 0; i < members.value.length; i++) {
 
       if (members.value[i].displayName == req.body.colleagues) {
-
+        
         membersMail = members.value[i].userPrincipalName;
       }
     }
   }
 
-  const isAvailable = await graph.checkAvailability(accessToken, membersMail);
+  
 
 
     const appointmentDetails = {
@@ -89,7 +89,16 @@ router.post('/getAppointmentDet', async (req, res) =>{
 
     }
 
-    
+    const appLen = req.body.appointmentLength;
+
+    let appDur = '';
+    //console.log(appLength);
+    if (appLen == 60){
+        appDur = "PT1H";
+    }
+    else{
+      appDur = "PT"+appLen+"M";
+    }
 
     const appointTimeDate = {
         appointmentLength: req.body.appointmentLength,
@@ -122,12 +131,27 @@ router.post('/getAppointmentDet', async (req, res) =>{
       }
       
      
+    try{
+      const isAvailable = await graph.checkAvailability(accessToken,appointmentDates,appointmentDetails, appDur);
+      
+      console.log("This is what was returned from available req")
+      console.log(isAvailable);
+
+
+
+    }catch (e){
+    console.log(e);
+    console.log("Redirected to 404");
+      res.redirect('/404');
+  }
+
 
 
     try{
-      
-        await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
-        res.redirect("/appointments");
+        
+        //await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
+        //res.redirect("/appointments");
+        res.render('appointments', { name: 'Tobi' })
         
 
     }catch (e){

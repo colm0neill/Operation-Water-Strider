@@ -55,54 +55,65 @@ module.exports = {
       
   },
 
-  checkAvailability: async function(accesstoken, membersMail){
+  checkAvailability: async function(accessToken, appointmentDates, appointmentDetails, appDur){
     const client = getAuthenticatedClient(accessToken);
     
     const meetingTimeSuggestionsResult = {
-      attendees: [ 
-        { 
-          type: "required",  
-          emailAddress: { 
-            name: "Alex Wilbur",
-            address: "alexw@contoso.onmicrosoft.com" 
-          } 
-        }
-      ],  
-      locationConstraint: { 
-        isRequired: false,  
-        suggestLocation: false,  
-        locations: [ 
-          { 
-            resolveAvailability: false,
-            displayName: "Conf room Hood" 
-          } 
-        ] 
-      },  
-      timeConstraint: {
-        activityDomain:"work", 
-        timeSlots: [ 
-          { 
-            start: { 
-              dateTime: "2019-04-16T09:00:00",  
-              timeZone: "Pacific Standard Time" 
-            },  
-            end: { 
-              dateTime: "2019-04-18T17:00:00",  
-              timeZone: "Pacific Standard Time" 
-            } 
-          } 
-        ] 
-      },  
-      isOrganizerOptional: "false",
-      meetingDuration: "PT1H",
-      returnSuggestionReasons: "true",
-      minimumAttendeePercentage: "100"
+      
+        Schedules: [appointmentDetails.colleaguesMail],
+        StartTime: {
+          dateTime: appointmentDates.appointmentStartTD,
+          timeZone: "Pacific Standard Time"
+        },
+        EndTime: {
+          dateTime: appointmentDates.appointmentEndTD,
+          timeZone: "Pacific Standard Time"
+        },
+        availabilityViewInterval: "15"
+      
+      
+
+      // locationConstraint: { 
+      //   isRequired: false,  
+      //   suggestLocation: false,  
+      //   locations: [ 
+      //     { 
+      //       resolveAvailability: false,
+      //       displayName: "NA" 
+      //     } 
+      //   ] 
+      // },  
+      // timeConstraint: {
+      //   activityDomain:"unrestricted", 
+      //   timeSlots: [ 
+      //     { 
+      //       start: { 
+      //         dateTime: appointmentDates.appointmentStartTD,  
+      //         timeZone: "Pacific Standard Time" 
+      //       },  
+      //       end: { 
+      //         dateTime: appointmentDates.appointmentEndTD,  
+      //         timeZone: "Pacific Standard Time" 
+      //       } 
+      //     } 
+      //   ] 
+      // },  
+      // isOrganizerOptional: "false",
+      // meetingDuration: appDur,
+      // returnSuggestionReasons: "true",
+      // minimumAttendeePercentage: "50"
     };
 
     const availability = await client
-    .api()
+    .api('/users/'+appointmentDetails.colleaguesMail+'/findMeetingTimes')
+    .post(meetingTimeSuggestionsResult);
 
+    return availability;
   },
+
+
+
+
 
   createCalendar: async function(accessToken){
     const client = getAuthenticatedClient(accessToken);
