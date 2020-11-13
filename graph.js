@@ -55,60 +55,15 @@ module.exports = {
       
   },
 
-  checkAvailability: async function(accessToken, appointmentDates, appointmentDetails, appDur){
+  checkAvailability: async function(accessToken, checkDate, grupID){
     const client = getAuthenticatedClient(accessToken);
     
-    const meetingTimeSuggestionsResult = {
-      
-        Schedules: [appointmentDetails.colleaguesMail],
-        StartTime: {
-          dateTime: appointmentDates.appointmentStartTD,
-          timeZone: "Pacific Standard Time"
-        },
-        EndTime: {
-          dateTime: appointmentDates.appointmentEndTD,
-          timeZone: "Pacific Standard Time"
-        },
-        availabilityViewInterval: "15"
-      
-      
 
-      // locationConstraint: { 
-      //   isRequired: false,  
-      //   suggestLocation: false,  
-      //   locations: [ 
-      //     { 
-      //       resolveAvailability: false,
-      //       displayName: "NA" 
-      //     } 
-      //   ] 
-      // },  
-      // timeConstraint: {
-      //   activityDomain:"unrestricted", 
-      //   timeSlots: [ 
-      //     { 
-      //       start: { 
-      //         dateTime: appointmentDates.appointmentStartTD,  
-      //         timeZone: "Pacific Standard Time" 
-      //       },  
-      //       end: { 
-      //         dateTime: appointmentDates.appointmentEndTD,  
-      //         timeZone: "Pacific Standard Time" 
-      //       } 
-      //     } 
-      //   ] 
-      // },  
-      // isOrganizerOptional: "false",
-      // meetingDuration: appDur,
-      // returnSuggestionReasons: "true",
-      // minimumAttendeePercentage: "50"
-    };
+    const scheduleCheck = await client
+    .api('/groups/'+grupID+'/calendarView?startDateTime='+checkDate.checkDateStart+'-00:00&endDateTime='+checkDate.checkDateEnd+'-00:00')
+    .get();
 
-    const availability = await client
-    .api('/users/'+appointmentDetails.colleaguesMail+'/findMeetingTimes')
-    .post(meetingTimeSuggestionsResult);
-
-    return availability;
+    return scheduleCheck;
   },
 
 
@@ -172,13 +127,13 @@ module.exports = {
   },
 
 
-  addEvent: async function(accessToken, appointmentDates, appointmentDetails, xm) {
+  addEvent: async function(accessToken, appointmentDates, appointmentDetails, groupID) {
     const client = getAuthenticatedClient(accessToken);
     
 
     const id = calendarz.idofCalendar;
 
-
+    //console.log(xm);
      const event2 = {
   subject: appointmentDetails.subject,
   start: {
@@ -209,14 +164,15 @@ module.exports = {
   
 };
 
-//console.log(appointmentDetails.scheduledFor);
+
 
    const eventAdded = await client
-    .api('/me/calendars/'+xm+'/events')
+    .api('/groups/'+groupID+'/events')
     .post(event2)
     .catch((err) => {
+      console.log("Error from added event.");
       console.log(err);
-      //console.log(event2);
+    
   });
     return eventAdded;
   },

@@ -89,17 +89,6 @@ router.post('/getAppointmentDet', async (req, res) =>{
 
     }
 
-    const appLen = req.body.appointmentLength;
-
-    let appDur = '';
-    //console.log(appLength);
-    if (appLen == 60){
-        appDur = "PT1H";
-    }
-    else{
-      appDur = "PT"+appLen+"M";
-    }
-
     const appointTimeDate = {
         appointmentLength: req.body.appointmentLength,
         dateTime: req.body.dateTime
@@ -118,6 +107,14 @@ router.post('/getAppointmentDet', async (req, res) =>{
         appointmentEndTD: end
     }
 
+    var checkBegin =  begin.slice(0, 19);
+    var checkEnd =  end.slice(0, 19);
+
+    const checkDate = {
+      checkDateStart: checkBegin,
+      checkDateEnd: checkEnd
+    }
+    
    
 
     
@@ -132,10 +129,15 @@ router.post('/getAppointmentDet', async (req, res) =>{
       
      
     try{
-      const isAvailable = await graph.checkAvailability(accessToken,appointmentDates,appointmentDetails, appDur);
+      const grupID = app.profile.storeID;
+
+      const scheduleCheck = await graph.checkAvailability(accessToken, checkDate, grupID);
       
       console.log("This is what was returned from available req")
-      console.log(isAvailable);
+      console.log(scheduleCheck);
+
+      //scheduleCheck will check the view of events with in the parameters of which the event is to be scheduled,
+      //this check must be done and sorted before executing the event creation and proposed to the user.
 
 
 
@@ -149,9 +151,9 @@ router.post('/getAppointmentDet', async (req, res) =>{
 
     try{
         
-        //await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
-        //res.redirect("/appointments");
-        res.render('appointments', { name: 'Tobi' })
+        await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
+        res.redirect("/appointments");
+        //res.render('appointments', { name: 'Tobi' })
         
 
     }catch (e){
@@ -165,19 +167,19 @@ router.post('/getAppointmentDet', async (req, res) =>{
       
       try{
        
-        var xm = " ";
-        xm = await tgraph.getCalId(accessToken);
-      
+        var groupID = app.profile.storeID;
+        
+         
     }
         catch (err){
           console.log(err);
            console.log("ERROR: Couldnt get to getCalId()");
           }
 
-          if(xm !== " "){
+          if(groupID !== " "){
 
         try{
-            var eventAdded = await graph.addEvent(accessToken, appointmentDates, appointmentDetails, xm);
+            var eventAdded = await graph.addEvent(accessToken, appointmentDates, appointmentDetails, groupID);
             params.eventAdded = eventAdded.value;
 
             //console.log(eventAdded.value);
