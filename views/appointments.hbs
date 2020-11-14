@@ -1,6 +1,6 @@
-<script>
+<script src="wsAppointments.js"></script>
 
-</script>
+
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -38,7 +38,7 @@
                 </select>
             </div>
             <div>
-                <label for="scheduledBy">Appointment Lenght:</label>
+                <label for="appointmentLength">Appointment Lenght:</label>
                 <select id="times" name="appointmentLength">
                     <option value="15">15 Minutes</option>
                     <option value="30">30 Minutes</option>
@@ -48,7 +48,7 @@
                 <input  type="datetime-local" id="dateTime" name="dateTime">
                 </br>
                 </br>
-                <button type="submit" class="btn btn-primary">Check Availability</button>
+                <button type="submit" onClick="showReturnedData()" class="btn btn-primary">Check Availability</button>
                 <a href='/' class="btn btn-secondary">Cancel</a>
             </div>
 
@@ -56,13 +56,36 @@
         </form>
 
     </div>
-    <div class="column twoC bookAtt">
+    <div class="column twoC bookAtt" id="bookAtt">
         <h3 id="bookCon">Booking Confirmation</h3>
-        <p id="bookingCon"></p>
-
+        {{!-- {{#if booking.availability}} --}}
+        <p>Please review your Appointment brefore Confirming</p>
+        <span>Availability:{{ booking.availability}}</span>
+        <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post"></form>
+        <label for="fnameR">First name:</label>
+         <input class="form-control"  type="text" id="fnameR" name="fnameR" value="{{ booking.fnameR }} " readonly >
+        <label for="lnameR">Last name:</label>
+        <input class="form-control"  type="text" id="lnameR" name="lnameR" value="{{ booking.lnameR }} " readonly >
+        <label for="phoneR">Phone Number:</label>
+        <input class="form-control"  type="text" id="phoneR" name="phoneR" value="{{ booking.phoneR }} " readonly >
+        <label for="deviceR">Device:</label>
+        <input class="form-control"  type="text" id="deviceR" name="deviceR" value="{{ booking.deviceR }} " readonly >
+        <label for="noteR">Note:</label>
+        <input class="form-control"  type="text" id="noteR" name="noteR" value="{{ booking.noteR }} " readonly >
+        <label for="scheduledForR">Scheduled For:</label>
+        <input class="form-control"  type="text" id="scheduledForR" name="scheduledForR" value="{{ booking.scheduledForR }} " readonly >
+        <label for="appointmentLengthR">Appointment Lenght:</label>
+        <input class="form-control"  type="text" id="appointmentLengthR" name="appointmentLengthR" value="{{ booking.appointmentLengthR }} " readonly >
+        <label for="dateTime">Appointment date & start time:</label>
+        <input class="form-control"  type="text" id="dateTimeR" name="dateTimeR" value="{{ booking.dateTimeR }} " readonly >
+        </br>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+        <a href='/' class="btn btn-secondary">Cancel</a>
+        {{!-- {{/if}} --}}
+    </form>
     </div>
-
-</div>
+    
+    </div>
 
 <div class="row three notesThree">
     <div class="column threeA">

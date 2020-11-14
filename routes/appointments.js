@@ -137,8 +137,9 @@ router.post('/getAppointmentDet', async (req, res) =>{
       console.log(scheduleCheck);
 
       //scheduleCheck will check the view of events with in the parameters of which the event is to be scheduled,
-      //this check must be done and sorted before executing the event creation and proposed to the user.
+      //this check must be done and sorted before executing the event creation and proposed to the user.  
 
+      
 
 
     }catch (e){
@@ -151,7 +152,7 @@ router.post('/getAppointmentDet', async (req, res) =>{
 
     try{
         
-        await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
+       // await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
         res.redirect("/appointments");
         //res.render('appointments', { name: 'Tobi' })
         
