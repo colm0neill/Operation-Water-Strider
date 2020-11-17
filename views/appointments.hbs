@@ -16,9 +16,9 @@
                 <label for="fname">First name:</label>
                 <input required class="form-control" reqired type="text" id="fname" name="firstName" value="Test">
                 <label for="lname">Last name:</label>
-                <input required class="form-control"  type="text" id="lname" name="lastName" value="Testing">
+                <input required class="form-control" type="text" id="lname" name="lastName" value="Testing">
                 <label for="phone">Phone Number:</label>
-                <input required class="form-control"  type="text" id="phone" name="phone" value="0871234567">
+                <input required class="form-control" type="text" id="phone" name="phone" value="0871234567">
             </div>
             <div class="form-group">
                 <label for="device">Device:</label>
@@ -28,13 +28,15 @@
             </div>
             <div class="form-group">
                 <label for="scheduledBy">Scheduled By:</label>
-                <input required class="form-control"  type="text" id="schBy" name="scheduledBy" value="{{ user.displayName }} " readonly >
+                <input required class="form-control" type="text" id="schBy" name="scheduledBy"
+                    value="{{ user.displayName }} " readonly>
                 <label for="scheduledFor">Scheduled For:</label></br>
                 {{!-- <input required class="form-control"  type="text" id="schFor" name="scheduledFor" > --}}
-                
+
                 <select id="colleagues" name="colleagues">
-                    {{#each members }}<option name="scheduleFor" id="schFor" value="{{this.displayName}}">{{this.displayName}} ({{this.jobTitle}})</option>
-                {{/each}}
+                    {{#each members }}<option name="scheduleFor" id="schFor" value="{{this.displayName}}">
+                        {{this.displayName}} ({{this.jobTitle}})</option>
+                    {{/each}}
                 </select>
             </div>
             <div>
@@ -45,47 +47,58 @@
                     <option value="60">1 Hour</option>
                 </select><br>
                 <label for="dateTime">Appointment date & start time:</label>
-                <input  type="datetime-local" id="dateTime" name="dateTime">
+                <input type="datetime-local" id="dateTime" name="dateTime">
                 </br>
                 </br>
                 <button type="submit" onClick="showReturnedData()" class="btn btn-primary">Check Availability</button>
                 <a href='/' class="btn btn-secondary">Cancel</a>
             </div>
 
-            
+
         </form>
 
     </div>
     <div class="column twoC bookAtt" id="bookAtt">
+        {{#if this.checkedData}}
         <h3 id="bookCon">Booking Confirmation</h3>
-        {{!-- {{#if booking.availability}} --}}
+        {{#if this.availability}}
         <p>Please review your Appointment brefore Confirming</p>
-        <span>Availability:{{ booking.availability}}</span>
-        <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post"></form>
+        <span>Availability: {{ this.availability}}</span>
+        <form class="appointmentForm" action="./appointments/createAppointment" method="post"></form>
         <label for="fnameR">First name:</label>
-         <input class="form-control"  type="text" id="fnameR" name="fnameR" value="{{ booking.fnameR }} " readonly >
+        <input class="form-control" type="text" id="fnameR" name="fnameR" value="{{ this.appointmentDetails.firstName }} " readonly>
         <label for="lnameR">Last name:</label>
-        <input class="form-control"  type="text" id="lnameR" name="lnameR" value="{{ booking.lnameR }} " readonly >
+        <input class="form-control" type="text" id="lnameR" name="lnameR" value="{{ this.appointmentDetails.lastName }} " readonly>
         <label for="phoneR">Phone Number:</label>
-        <input class="form-control"  type="text" id="phoneR" name="phoneR" value="{{ booking.phoneR }} " readonly >
+        <input class="form-control" type="text" id="phoneR" name="phoneR" value="{{ this.appointmentDetails.phone }} " readonly>
         <label for="deviceR">Device:</label>
-        <input class="form-control"  type="text" id="deviceR" name="deviceR" value="{{ booking.deviceR }} " readonly >
+        <input class="form-control" type="text" id="deviceR" name="deviceR" value="{{ this.appointmentDetails.device }} " readonly>
         <label for="noteR">Note:</label>
-        <input class="form-control"  type="text" id="noteR" name="noteR" value="{{ booking.noteR }} " readonly >
+        <input class="form-control" type="text" id="noteR" name="noteR" value="{{ this.appointmentDetails.content }} " readonly>
         <label for="scheduledForR">Scheduled For:</label>
-        <input class="form-control"  type="text" id="scheduledForR" name="scheduledForR" value="{{ booking.scheduledForR }} " readonly >
+        <input class="form-control" type="text" id="scheduledForR" name="scheduledForR"
+            value="{{ this.appointmentDetails.scheduledFor }} " readonly>
         <label for="appointmentLengthR">Appointment Lenght:</label>
-        <input class="form-control"  type="text" id="appointmentLengthR" name="appointmentLengthR" value="{{ booking.appointmentLengthR }} " readonly >
+        <input class="form-control" type="text" id="appointmentLengthR" name="appointmentLengthR"
+            value="{{ this.appointmentDetails.appointmentLength }} " readonly>
         <label for="dateTime">Appointment date & start time:</label>
-        <input class="form-control"  type="text" id="dateTimeR" name="dateTimeR" value="{{ booking.dateTimeR }} " readonly >
+        <input class="form-control" type="text" id="dateTimeR" name="dateTimeR" value="{{ this.appointmentDates.checkDateStart }} "
+            readonly>
         </br>
         <button type="submit" class="btn btn-primary">Confirm</button>
-        <a href='/' class="btn btn-secondary">Cancel</a>
-        {{!-- {{/if}} --}}
-    </form>
+        <a href='/appointments' class="btn btn-secondary">Cancel</a>
+        </form>
+        
+        {{else}}
+        <span>Availability: {{ this.availability }}</span>
+        <p>Please alter your booking as this slot is not available</p>
+        <a href='/appointments' class="btn btn-secondary">Check For another time.</a>
+        {{/if}}
+
+        {{/if}}
     </div>
-    
-    </div>
+
+</div>
 
 <div class="row three notesThree">
     <div class="column threeA">
