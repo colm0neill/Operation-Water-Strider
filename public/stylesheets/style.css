@@ -747,7 +747,18 @@ height:auto;
  /* visibility:hidden; */
 }
 
+.true,.false {
+  padding: 0px 10px;
+   border-radius: 5px;
+  text-transform: uppercase;
+}
+.true{
+  background-color: #28a745;
+}
 
+.false {
+  background-color: #a72828;
+}
 
 
 @media only screen and (max-width: 1010px) {

@@ -31,8 +31,6 @@
                 <input required class="form-control" type="text" id="schBy" name="scheduledBy"
                     value="{{ user.displayName }} " readonly>
                 <label for="scheduledFor">Scheduled For:</label></br>
-                {{!-- <input required class="form-control"  type="text" id="schFor" name="scheduledFor" > --}}
-
                 <select id="colleagues" name="colleagues">
                     {{#each members }}<option name="scheduleFor" id="schFor" value="{{this.displayName}}">
                         {{this.displayName}} ({{this.jobTitle}})</option>
@@ -63,7 +61,7 @@
         <h3 id="bookCon">Booking Confirmation</h3>
         {{#if this.availability}}
         <p>Please review your Appointment brefore Confirming</p>
-        <span>Availability: {{ this.availability}}</span>
+        <span><h4>Availability: <span class="true">{{ this.availability }}</span></h4></span>
         <form class="appointmentForm" action="./getAppointmentDet/createAppointment" method="post">
         <label for="fnameR">First name:</label>
         <input class="form-control" type="text" id="fnameR" name="fnameR" value="{{ this.appointmentDetails.firstName }} " readonly>
@@ -90,7 +88,7 @@
         </form>
         
         {{else}}
-        <span>Availability: {{ this.availability }}</span>
+        <span><h4>Availability: <span class="false">{{ this.availability }}</span></h4></span>
         <p>Please alter your booking as this slot is not available</p>
         <a href='/appointments' class="btn btn-secondary">Check For another time.</a>
         {{/if}}

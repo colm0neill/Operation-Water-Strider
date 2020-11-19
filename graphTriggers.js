@@ -64,7 +64,7 @@ getSortGroups: async function(accessToken){
         try {
             var groupsInvolved = await graph.getMyGroups(accessToken);
             params.groupsInvolved = groupsInvolved.value;
-            //console.log(groupsInvolved.value);
+           
 
         }
         catch (err) {
@@ -79,7 +79,7 @@ getSortGroups: async function(accessToken){
     //checks returned results for the correct store - staticly provided currently. 03/NOV/2020
     async function findStore(groupsInvolved){
 
-       
+      if(groupsInvolved !== undefined){
 
         for (var i = 0; i < groupsInvolved.value.length; i++) {
             if (groupsInvolved.value[i].displayName == 'GWS' || groupsInvolved.value[i].displayName == 'ATH') {
@@ -90,6 +90,9 @@ getSortGroups: async function(accessToken){
             }
             
         }
+       
+
+    }
     }
 
     await findStore(groupsInvolved);
