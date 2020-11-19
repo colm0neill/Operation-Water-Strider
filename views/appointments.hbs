@@ -14,17 +14,17 @@
         <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post">
             <div class="form-group">
                 <label for="fname">First name:</label>
-                <input required class="form-control" reqired type="text" id="fname" name="firstName" value="Test">
+                <input required class="form-control" reqired type="text" id="fname" name="firstName" value="">
                 <label for="lname">Last name:</label>
-                <input required class="form-control" type="text" id="lname" name="lastName" value="Testing">
+                <input required class="form-control" type="text" id="lname" name="lastName" value="">
                 <label for="phone">Phone Number:</label>
-                <input required class="form-control" type="text" id="phone" name="phone" value="0871234567">
+                <input required class="form-control" type="text" id="phone" name="phone" value="">
             </div>
             <div class="form-group">
                 <label for="device">Device:</label>
-                <input class="form-control" type="text" id="device" name="device" value="TestPhone Max Pro">
+                <input class="form-control" type="text" id="device" name="device" value="">
                 <label for="note">Note:</label>
-                <textarea class="form-control" id="noteB" name="appNote" rows="4">This is a Test</textarea>
+                <textarea class="form-control" id="noteB" name="appNote" rows="4"></textarea>
             </div>
             <div class="form-group">
                 <label for="scheduledBy">Scheduled By:</label>
@@ -64,7 +64,7 @@
         {{#if this.availability}}
         <p>Please review your Appointment brefore Confirming</p>
         <span>Availability: {{ this.availability}}</span>
-        <form class="appointmentForm" action="./appointments/createAppointment" method="post"></form>
+        <form class="appointmentForm" action="./getAppointmentDet/createAppointment" method="post">
         <label for="fnameR">First name:</label>
         <input class="form-control" type="text" id="fnameR" name="fnameR" value="{{ this.appointmentDetails.firstName }} " readonly>
         <label for="lnameR">Last name:</label>

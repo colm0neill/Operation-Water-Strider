@@ -195,13 +195,13 @@ var availability = true;
 });
 
 
-router.post('/createAppointment', async (req, res) => {
+router.post('/getAppointmentDet/createAppointment', async (req, res) => {
 
   try {
 
-    // await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
+    await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
     res.redirect("/appointments");
-    //res.render('appointments', { name: 'Tobi' })
+    
 
 
   } catch (e) {
