@@ -102,7 +102,7 @@ list-style:none;
 background-repeat: no-repeat
 }
 
-#appointments,#calendar, #home, #notes{
+#appointments,#calendar, #notes,#home-app, #home-cal, #home-note{
 width: 4.2vw;
 background-repeat:no-repeat;
 
@@ -119,7 +119,7 @@ background: url('../images/ows-sprite72.png') -4.2vw 0;
 background-size: 67vw 40vw;
 }
 
-#home {
+#home-cal, #home-app, #home-note {
 background: url('../images/ows-sprite72.png') -0vw -8.6vw; 
 background-size: 68vw 40vw;
 }
@@ -720,12 +720,20 @@ textarea {
 /* --------------------------------- Appointments -------------------------------*/
 
 
-#colleagues, #times, #dateTime{
+#colleagues, #times{
   width:100%;
   height:calc(1.5em + .75rem + 2px);
   padding: .375rem .75rem;
   border-radius:.25rem;
 }
+
+#dateTime, #time{
+width:30%;
+  height:calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  border-radius:.25rem;
+}
+
 
 .appointmentTwo{
 height:auto;

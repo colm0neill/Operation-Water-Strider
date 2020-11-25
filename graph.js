@@ -61,8 +61,10 @@ module.exports = {
 
     const scheduleCheck = await client
     .api('/groups/'+grupID+'/calendarView?startDateTime='+checkDate.checkDateStart+'-00:00&endDateTime='+checkDate.checkDateEnd+'-00:00')
+    .select('start, end, attendees')
     .get();
 
+    console.log(scheduleCheck);
     return scheduleCheck;
   },
 

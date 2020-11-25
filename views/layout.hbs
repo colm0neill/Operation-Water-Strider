@@ -42,15 +42,23 @@
 
       <div class="column oneC">
         <ul id="navlist">
+          {{#if active.appointments}}
+          <a href="./" alt="home">
+            <div class="square">
+              <li id="home-app"></li>
+            </div>
+          </a>
+          {{else}}
           <a href="./appointments" alt="Appointments">
             <div class="square">
               <li id="appointments"></li>
             </div>
           </a>
+          {{/if}}
           {{#if active.calendar}}
           <a href="./" alt="home">
             <div class="square">
-              <li id="home"></li>
+              <li id="home-cal"></li>
             </div>
           </a>
           {{else}}
@@ -61,11 +69,19 @@
           </a>
           {{/if}}
 
+          {{#if active.notes}}
+          <a href="./" alt="home">
+            <div class="square">
+              <li id="home-note"></li>
+            </div>
+          </a>
+          {{else}}
           <a href="./notes" alt="Notes">
             <div class="square">
               <li id="notes"></li>
             </div>
           </a>
+          {{/if}}
         </ul>
       </div>
 

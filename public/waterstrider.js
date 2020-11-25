@@ -18,7 +18,7 @@ var w = c.width;
 var h = c.height;
 
 var dataPointsX = w/6.5;
-var array = [100 , 10, 20, 40, 60, 80, 100, 30];
+var array = [100, 10, 20, 40, 60, 80, 100, 30];
 var largest= 0;
 var dataPointsY = [];
 
@@ -69,8 +69,8 @@ var w2 = d.width;
 var h2 = d.height;
 
 var dataPointsX2 = w2/8;
-var array2 = [100 , 10, 20, 40, 60, 80, 100, 30];
-var largest2= 0;
+var array2 = [100, 10, 20, 40, 60, 80, 100, 30];
+var largest2= 10;
 var dataPointsY2 = [];
 
 	for (i=0; i<=largest2;i++){

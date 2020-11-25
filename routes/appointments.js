@@ -80,7 +80,7 @@ router.post('/getAppointmentDet', async (req, res) => {
 
 
 
-   appointmentDetails = {
+  appointmentDetails = {
     subject: "ONEXONE-" + req.body.firstName + " " + req.body.lastName,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -94,10 +94,13 @@ router.post('/getAppointmentDet', async (req, res) => {
     vodaStore: '45 William Street, Galway'
 
   }
+  var timeFromForm = req.body.time;
+  var HHMM = moment(timeFromForm, 'H:mm a').format("HH:mm");
+  var theTimeDate = req.body.dateTime + "T" + HHMM;
 
   const appointTimeDate = {
     appointmentLength: req.body.appointmentLength,
-    dateTime: req.body.dateTime
+    dateTime: theTimeDate
   }
   var begin = appointTimeDate.dateTime + ":00.000Z";
   var end;
@@ -106,7 +109,7 @@ router.post('/getAppointmentDet', async (req, res) => {
   var y = appointTimeDate.appointmentLength * 60000 + (x);
   var t = new Date(y);
   end = t.toISOString();
-  //console.log('The new time is: '+appointmentDetails);
+
 
   appointmentDates = {
     appointmentStartTD: begin,
@@ -120,8 +123,10 @@ router.post('/getAppointmentDet', async (req, res) => {
     checkDateStart: checkBegin,
     checkDateEnd: checkEnd
   }
-var checkedData = false;
-var availability = true;
+  var checkedData = false;
+  var availability = true;
+  var busy = false;
+  var appsConflict = [];
 
 
   try {
@@ -139,42 +144,74 @@ var availability = true;
 
     const scheduleCheck = await graph.checkAvailability(accessToken, checkDate, grupID);
     params.scheduleCheck = scheduleCheck.value;
-    
-    for(var i = 0; i < params.scheduleCheck.length; i++){
-      
-    var strt = params.scheduleCheck[i].start.dateTime.slice(0, 19);
-    var en = params.scheduleCheck[i].end.dateTime.slice(0, 19);
 
-    var date1 = [moment(strt), moment(en)];
-    var date2 = [moment(checkDate.checkDateStart), moment(checkDate.checkDateEnd)];
 
-    var range  = moment.range(date1);
-    var range2 = moment.range(date2);
+    for (var i = 0; i < params.scheduleCheck.length; i++) {
 
-    if(range.overlaps(range2)) {
-      if((range2.contains(range, true) || range.contains(range2, true)) && !date1[0].isSame(date2[0]))
-       availability = false;
-    else
-      availability = false;
-  }
+      var strt = params.scheduleCheck[i].start.dateTime.slice(0, 19);
+      var en = params.scheduleCheck[i].end.dateTime.slice(0, 19);
 
+      // console.log(params.scheduleCheck[i].attendees);
+
+      //console.log(i+" "+params.scheduleCheck[i].attendees.emailAddress.address);
+      //console.log(i+" "+params.scheduleCheck[i].attendees[i].status.response);
+
+      try {
+        var colleguemailChecked = params.scheduleCheck[i].attendees[i].emailAddress.address;
+        var collegueresponseChecked = params.scheduleCheck[i].attendees[i].status.response;
+      } catch (error) {
+        console.log(error);
+      }
+
+      console.log(colleguemailChecked);
+      console.log(collegueresponseChecked);
+
+      var appBookTimeStrt = strt.slice(11, 16);
+      var appBookTimeEn = en.slice(11, 16);
+
+      appsConflict[i] = { times: appBookTimeStrt + " - " + appBookTimeEn };
+
+      var date1 = [moment(strt), moment(en)];
+      var date2 = [moment(checkDate.checkDateStart), moment(checkDate.checkDateEnd)];
+
+      var range = moment.range(date1);
+      var range2 = moment.range(date2);
+
+
+
+      if (appointmentDetails.colleaguesMail == colleguemailChecked) {
+        if (collegueresponseChecked == "accepted") {
+          busy = true;
+        }
+
+
+        if (range.overlaps(range2)) {
+          if ((range2.contains(range, true) || range.contains(range2, true)) && !date1[0].isSame(date2[0]))
+            availability = false;
+          else
+            availability = false;
+        }
+      }
     }
+
 
     checkedData = true;
 
     params.availability = availability;
+    params.busy = busy;
+    params.appsConflict = appsConflict;
     params.checkedData = checkedData;
     params.appointmentDates = checkDate;
     params.appointmentDetails = appointmentDetails;
 
 
-    console.log(params);
-    
-    res.render('appointments',params);
-    
-    
+    //console.log(params);
+
+    res.render('appointments', params);
+
+
     //console.log("Availability for your appointment is: "+availability);
-    
+
     //scheduleCheck will check the view of events with in the parameters of which the event is to be scheduled,
     //this check must be done and sorted before executing the event creation and proposed to the user.  
 
@@ -189,7 +226,7 @@ var availability = true;
 
 
 
-    
+
 
 
 });
@@ -201,7 +238,7 @@ router.post('/getAppointmentDet/createAppointment', async (req, res) => {
 
     await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
     res.redirect("/appointments");
-    
+
 
 
   } catch (e) {
