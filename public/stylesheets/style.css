@@ -89,11 +89,13 @@ margin-top:25px;
 font-size: 2.2vw;
 letter-spacing:.8vw;
 margin:0;
+font-family: helvetica;
 }
 .oneA h3{
 font-size: 1.3vw;
 letter-spacing: .3vw;
-  margin: 0;
+margin: 0;
+font-family: helvetica;
 }
 
 #navlist li{
@@ -235,7 +237,46 @@ letter-spacing:10px;
 
 }
 
+.box1 ,.box2{
+  background-image: url('../images/ows-sprite72.png');
+  background-position: -28.6vw -17.4vw;
+  background-size: 155vw 85vw;
+  transform:scale(1);
+}
 
+#box1Text{
+  color:white;
+  font-size:1vw;
+  padding:  0 10px 0 28px;
+  width:100%;
+}
+
+.longB1 {
+  background-image: url('../images/ows-sprite72.png');
+  background-position:-22.2vw 0.7vw;
+  background-size: 60vw 30vw;
+  transform:scale(1);
+}
+.shortB2 {
+  background-image: url('../images/ows-sprite72.png');
+  background-position: -8.5vw -8.8vw;
+  background-size: 70vw 42vw;
+  transform:scale(1);
+}
+
+.shortB3 {
+  background-image: url('../images/ows-sprite72.png');
+  background-position: -16.4vw -6.7vw;
+  background-size: 67vw 34vw;
+  transform:scale(1);
+}
+
+.shortB4 {
+  background-image: url('../images/ows-sprite72.png');
+  background-position: -16.4vw -6.7vw;
+  background-size: 67vw 34vw;
+  transform:scale(1);
+}
 
 
 
@@ -319,7 +360,8 @@ padding:0;
 }
 .hourPre{
 background-image: url('../images/ows-sprite72.png');
-background-position:-12px -58px;
+background-position:-71vw -57.5vw;
+background-size: 71vw 52vw;
 transform:scale(1);
 }
 
@@ -334,7 +376,8 @@ font-weight:bold;
 letter-spacing:.5vw;
 }
 .hourNxt{
-background: url('../images/ows-sprite72.png') -67px -58px;
+background: url('../images/ows-sprite72.png') -76vw -57.5vw;
+background-size: 71vw 52vw;
 float:right;
 display:inline-block;
 }
@@ -719,6 +762,9 @@ textarea {
 
 /* --------------------------------- Appointments -------------------------------*/
 
+#headingApt{
+padding-left:4vw;
+}
 
 #colleagues, #times{
   width:100%;
@@ -727,33 +773,118 @@ textarea {
   border-radius:.25rem;
 }
 
-#dateTime, #time{
-width:30%;
+
+#time{
+  width:38%;
   height:calc(1.5em + .75rem + 2px);
   padding: .375rem .75rem;
   border-radius:.25rem;
 }
+#dateTime{
+width:60%;
+  height:calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  border-radius:.25rem;
+  outline-style: none;
+}
 
 
+.form-group{
+background-color:rgba(48, 48, 48, 0.664);
+margin-bottom:40px!Important;
+padding:20px;
+border-radius:15px;
+}
+.btn-group{
+  margin-top:30px;
+ 
+}
+
+/* .check{
+  cursor: not-allowed;
+  pointer-events: none;
+} */
+
+.form-group input[type="radio"] {
+  -webkit-appearance: none;
+  box-sizing: none;
+  border-radius:5px;
+  border: none;
+  width: 4.2vw;
+  height: 4.2vw;
+  margin-left:11%;
+}
+.form-group .radio{
+  margin-top:10px;
+  margin-left:.8vw;
+  text-align: center;
+}
+
+#retailSales {
+  background-image: url('../images/ows-sprite72.png');
+  background-position:-8.5vw -88.6vw;
+  background-size: 68vw 40vw;
+  transform:scale(1);
+}
+#repairs {
+  background-image: url('../images/ows-sprite72.png');
+  background-position:-4.3vw -88.6vw;
+  background-size: 68vw 40vw;
+  transform:scale(1);
+}
+#busSales {
+  background-image: url('../images/ows-sprite72.png');
+  background-position:-21.25vw -88.6vw;
+  background-size: 68vw 40vw;
+  transform:scale(1);
+}
+
+.form-group input[type="radio"]:checked{
+  background-color:rgb(177, 177, 177);
+}
+
+.form-group input[type="radio"]:focus{
+  outline-style: none;
+}
+
+/* #noteApt{
+width: 100%;
+height: 16vw;
+
+border-radius: 1vw;
+
+} */
 .appointmentTwo{
 height:auto;
+padding:none!Important;
 }
+
+ .row{
+  margin-right:0px!Important;
+  margin-left:0px!Important;
+}
+
 .appointmentView{
-  width:66.66% !Important;
+  width:40.00% !Important;
+ 
   
   }
-  .appointmentForm{
-   /* display: inline-block;
-  */
+  .appForm2{
+  background-color:rgba(48, 48, 48, 0.664);
+  padding:10px;
+  border-radius: 15px ;
+}
+
+.bookAtt{
+  width:60.00% !Important;
+  padding: 0 0vw 0 4vw;
+  
 }
 
 .twoC.bookAtt{
   padding-left:20px;
 }
 
-#bookAtt{
- /* visibility:hidden; */
-}
 
 .true,.false {
   padding: 0px 10px;

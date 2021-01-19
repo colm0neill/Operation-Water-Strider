@@ -81,19 +81,13 @@ router.post('/getAppointmentDet', async (req, res) => {
 
 
   appointmentDetails = {
-    subject: "ONEXONE-" + req.body.firstName + " " + req.body.lastName,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    phone: req.body.phone,
-    device: req.body.device,
-    content: req.body.appNote,
     scheduledBy: req.body.scheduledBy,
     scheduledFor: req.body.colleagues,
     colleaguesMail: membersMail,
     appointmentLength: req.body.appointmentLength,
     vodaStore: '45 William Street, Galway'
-
   }
+
   var timeFromForm = req.body.time;
   var HHMM = moment(timeFromForm, 'H:mm a').format("HH:mm");
   var theTimeDate = req.body.dateTime + "T" + HHMM;
@@ -145,26 +139,35 @@ router.post('/getAppointmentDet', async (req, res) => {
     const scheduleCheck = await graph.checkAvailability(accessToken, checkDate, grupID);
     params.scheduleCheck = scheduleCheck.value;
 
+   // console.log("this");
 
     for (var i = 0; i < params.scheduleCheck.length; i++) {
 
       var strt = params.scheduleCheck[i].start.dateTime.slice(0, 19);
       var en = params.scheduleCheck[i].end.dateTime.slice(0, 19);
 
-      // console.log(params.scheduleCheck[i].attendees);
+      console.log(params.scheduleCheck[i].attendees);
 
       //console.log(i+" "+params.scheduleCheck[i].attendees.emailAddress.address);
       //console.log(i+" "+params.scheduleCheck[i].attendees[i].status.response);
-
+     
       try {
+
         var colleguemailChecked = params.scheduleCheck[i].attendees[i].emailAddress.address;
         var collegueresponseChecked = params.scheduleCheck[i].attendees[i].status.response;
+        // if(colleguemailChecked == undefined){
+        // if(appointmentDetails.scheduledBy == appointmentDetails.scheduledFor){
+        //   colleguemailChecked = appointmentDetails.colleaguesMail;
+        // }
+      // }
       } catch (error) {
         console.log(error);
       }
 
+
+
       console.log(colleguemailChecked);
-      console.log(collegueresponseChecked);
+      //console.log(collegueresponseChecked);
 
       var appBookTimeStrt = strt.slice(11, 16);
       var appBookTimeEn = en.slice(11, 16);
@@ -177,7 +180,7 @@ router.post('/getAppointmentDet', async (req, res) => {
       var range = moment.range(date1);
       var range2 = moment.range(date2);
 
-
+      var returnDate = begin.slice(11,16)+"-"+end.slice(11,16)+" "+begin.slice(8,10)+begin.slice(4,8)+begin.slice(2,4);
 
       if (appointmentDetails.colleaguesMail == colleguemailChecked) {
         if (collegueresponseChecked == "accepted") {
@@ -202,10 +205,11 @@ router.post('/getAppointmentDet', async (req, res) => {
     params.appsConflict = appsConflict;
     params.checkedData = checkedData;
     params.appointmentDates = checkDate;
+    params.displayDate = returnDate;
     params.appointmentDetails = appointmentDetails;
 
 
-    //console.log(params);
+    // console.log(params);
 
     res.render('appointments', params);
 
@@ -233,6 +237,18 @@ router.post('/getAppointmentDet', async (req, res) => {
 
 
 router.post('/getAppointmentDet/createAppointment', async (req, res) => {
+
+
+  appointmentDetails["subject"]="ONEXONE-" + req.body.firstName + " " + req.body.lastName;
+  appointmentDetails["firstName"]=req.body.firstName;
+  appointmentDetails["lastName"]=req.body.lastName;
+  appointmentDetails["phone"]= req.body.phone;
+  appointmentDetails["device"]=req.body.device;
+  appointmentDetails["content"]= req.body.appNote;
+  
+  
+
+ 
 
   try {
 

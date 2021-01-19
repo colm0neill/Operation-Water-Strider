@@ -7,7 +7,7 @@
 <head>
   <title>Operation Water Strider</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="waterstrider.js"></script>
+  <script src="/waterstrider.js"></script>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
         <h1>
           <b>HELLO,</b>
         </h1>
-        <h3>{{ user.displayName }}</h3>
+        <h3 name="userName">{{ user.displayName }}</h3>
         </p>
       </div>
 
@@ -43,7 +43,7 @@
       <div class="column oneC">
         <ul id="navlist">
           {{#if active.appointments}}
-          <a href="./" alt="home">
+          <a href="/" alt="home">
             <div class="square">
               <li id="home-app"></li>
             </div>
@@ -56,7 +56,7 @@
           </a>
           {{/if}}
           {{#if active.calendar}}
-          <a href="./" alt="home">
+          <a href="/" alt="home">
             <div class="square">
               <li id="home-cal"></li>
             </div>
@@ -70,7 +70,7 @@
           {{/if}}
 
           {{#if active.notes}}
-          <a href="./" alt="home">
+          <a href="/" alt="home">
             <div class="square">
               <li id="home-note"></li>
             </div>

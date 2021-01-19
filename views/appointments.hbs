@@ -1,4 +1,4 @@
-<script src="wsAppointments.js"></script>
+<script src="/wsAppointments.js"></script>
 
 
 
@@ -6,44 +6,47 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
-
+<h1 id="headingApt">Book an appointment.</h1>
 <div class="row two appointmentTwo">
     <div class="column twoA appointmentView">
 
-        <h1>Book an appointment.</h1>
-        <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post">
-            <div class="form-group">
-                <label for="fname">First name:</label>
-                <input required class="form-control" reqired type="text" id="fname" name="firstName" value="">
-                <label for="lname">Last name:</label>
-                <input required class="form-control" type="text" id="lname" name="lastName" value="">
-                <label for="phone">Phone Number:</label>
-                <input required class="form-control" type="text" id="phone" name="phone" value="">
+        {{!-- <h1>Book an appointment.</h1> --}}
+        <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post" onsubmit="myButton.disabled = true; return true;">
+            <div class="form-group" id="apt-radio">
+                <label for="Atype">Appointment Type</label></br>
+
+                <label class="radio" for="retailSales">
+                    <input type="radio" id="retailSales" name="aptType" value="Sales Advisor"
+                        onclick="showRelCollegues(this.value)">
+                    <br>Retail Sales</label>
+
+                <label class="radio" for="repairs">
+                    <input type="radio" id="repairs" name="aptType" value="Device Doctor"
+                        onclick="showRelCollegues(this.value)">
+                    <br>Repairs</label>
+
+                <label class="radio" for="busSales">
+                    <input type="radio" id="busSales" name="aptType" value="Business Advisor"
+                        onclick="showRelCollegues(this.value)">
+                    <br>Business Sales</label>
+
+
+
             </div>
             <div class="form-group">
-                <label for="device">Device:</label>
-                <input class="form-control" type="text" id="device" name="device" value="">
-                <label for="note">Note:</label>
-                <textarea class="form-control" id="noteB" name="appNote" rows="4"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="scheduledBy">Scheduled By:</label>
-                <input required class="form-control" type="text" id="schBy" name="scheduledBy"
-                    value="{{ user.displayName }} " readonly>
                 <label for="scheduledFor">Scheduled For:</label></br>
                 <select id="colleagues" name="colleagues">
                     {{#each members }}<option name="scheduleFor" id="schFor" value="{{this.displayName}}">
-                        {{this.displayName}} ({{this.jobTitle}})</option>
+                        {{this.displayName}} ( {{this.jobTitle}} )</option>
                     {{/each}}
                 </select>
+                <label for="scheduledBy">Scheduled By:</label>
+                <input required class="form-control" type="text" id="schBy" name="scheduledBy"
+                    value="{{ user.displayName }}" readonly>
             </div>
-            <div>
-                <label for="appointmentLength">Appointment Lenght:</label>
-                <select id="times" name="appointmentLength">
-                    <option value="15">15 Minutes</option>
-                    <option value="30">30 Minutes</option>
-                    <option value="60">1 Hour</option>
-                </select><br>
+
+            <div class="form-group">
+
                 <label for="dateTime">Appointment date & start time:</label></br>
                 <select id="time" name="time">
                     <option value="9:00 AM">9:00 AM</option>
@@ -93,51 +96,59 @@
                 </select>
                 <input type="date" id="dateTime" name="dateTime">
                 </br>
+                <label for="appointmentLength">Appointment Length:</label>
+                <select id="times" name="appointmentLength">
+                    <option value="15">15 Minutes</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                </select><br>
                 </br>
-                <button type="submit" onClick="showReturnedData()" class="btn btn-primary">Check Availability</button>
-                <a href='/' class="btn btn-secondary">Cancel</a>
-            </div>
 
+                <div class="btn-group">
+                    {{#if this.availability}}
+                    <button type="button" class="btn btn-light" disabled>Check
+                        Availability</button>
+                    {{else}}
+                    <button type="submit" name="myButton" class="btn btn-primary" id="checkA">Check
+                        Availability</button>
+                    {{/if}}
+                    <a href='/' class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
 
         </form>
 
     </div>
     <div class="column twoC bookAtt" id="bookAtt">
         {{#if this.checkedData}}
-        <h3 id="bookCon">Booking Confirmation</h3>
+        {{!-- <h3 id="bookCon">Booking Confirmation</h3> --}}
         {{#if this.availability}}
-        <p>Please review your Appointment brefore Confirming</p>
-        <span>
-            <h4>Availability: <span class="true">Available</span></h4>
-        </span>
-        <form class="appointmentForm" action="./getAppointmentDet/createAppointment" method="post">
+
+        <form class="appointmentForm appForm2" action="./getAppointmentDet/createAppointment" method="post">
+
+            <span>
+                <h4>Availability: <span class="true">Available</span></h4>
+            </span>
+
             <label for="fnameR">First name:</label>
-            <input class="form-control" type="text" id="fnameR" name="fnameR"
-                value="{{ this.appointmentDetails.firstName }} " readonly>
+            <input class="form-control" type="text" id="fname" name="firstName" value=" " required>
             <label for="lnameR">Last name:</label>
-            <input class="form-control" type="text" id="lnameR" name="lnameR"
-                value="{{ this.appointmentDetails.lastName }} " readonly>
+            <input class="form-control" type="text" id="lname" name="lastName" value=" " required>
             <label for="phoneR">Phone Number:</label>
-            <input class="form-control" type="text" id="phoneR" name="phoneR"
-                value="{{ this.appointmentDetails.phone }} " readonly>
+            <input class="form-control" type="text" id="phone" name="phone" value=" " required>
             <label for="deviceR">Device:</label>
-            <input class="form-control" type="text" id="deviceR" name="deviceR"
-                value="{{ this.appointmentDetails.device }} " readonly>
+            <input class="form-control" type="text" id="device" name="device" value=" ">
             <label for="noteR">Note:</label>
-            <input class="form-control" type="text" id="noteR" name="noteR"
-                value="{{ this.appointmentDetails.content }} " readonly>
+            <textarea class="form-control" id="noteApt" name="appNote" rows="3" value=" "></textarea>
             <label for="scheduledForR">Scheduled For:</label>
             <input class="form-control" type="text" id="scheduledForR" name="scheduledForR"
                 value="{{ this.appointmentDetails.scheduledFor }} " readonly>
-            <label for="appointmentLengthR">Appointment Lenght:</label>
-            <input class="form-control" type="text" id="appointmentLengthR" name="appointmentLengthR"
-                value="{{ this.appointmentDetails.appointmentLength }} " readonly>
-            <label for="dateTime">Appointment date & start time:</label>
+            <label for="dateTime">Appointment times & date:</label>
             <input class="form-control" type="text" id="dateTimeR" name="dateTimeR"
-                value="{{ this.appointmentDates.checkDateStart }} " readonly>
+                value="{{ this.displayDate }} " readonly>
             </br>
-            <button type="submit" class="btn btn-primary">Confirm</button>
-            <a href='/appointments' class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary" id="confirm">Confirm</button>
+            <a href='/appointments' class="btn btn-secondary" id="cancel2">Cancel</a>
         </form>
 
         {{else}}
@@ -145,9 +156,9 @@
             <h4>Availability: <span class="false">Unavailable</span></h4>
         </span>
         {{#if this.busy}}
-            Your collegue is busy at:</br>
-            {{#each this.appsConflict}} <h5>{{this.times}}</h5></br>
-            {{/each}}
+        Your collegue is busy at:</br>
+        {{#each this.appsConflict}} <h5>{{this.times}}</h5></br>
+        {{/each}}
         {{/if}}
         </br>
         <p>Please alter your booking as this slot is not available</p>
@@ -175,3 +186,98 @@
 
 </div>
 </div>
+
+
+
+
+
+{{!-- <h1>Book an appointment.</h1>
+<form class="appointmentForm" action="./appointments/getAppointmentDet" method="post">
+    <div class="form-group">
+        <label for="fname">First name:</label>
+        <input required class="form-control" reqired type="text" id="fname" name="firstName" value="">
+        <label for="lname">Last name:</label>
+        <input required class="form-control" type="text" id="lname" name="lastName" value="">
+        <label for="phone">Phone Number:</label>
+        <input required class="form-control" type="text" id="phone" name="phone" value="">
+    </div>
+    <div class="form-group">
+        <label for="device">Device:</label>
+        <input class="form-control" type="text" id="device" name="device" value="">
+        <label for="note">Note:</label>
+        <textarea class="form-control" id="noteB" name="appNote" rows="4"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="scheduledBy">Scheduled By:</label>
+        <input required class="form-control" type="text" id="schBy" name="scheduledBy" value="{{ user.displayName }} "
+            readonly>
+        <label for="scheduledFor">Scheduled For:</label></br>
+        <select id="colleagues" name="colleagues">
+            {{#each members }}<option name="scheduleFor" id="schFor" value="{{this.displayName}}">
+                {{this.displayName}} ({{this.jobTitle}})</option>
+            {{/each}}
+        </select>
+    </div>
+    <div>
+        <label for="appointmentLength">Appointment Length:</label>
+        <select id="times" name="appointmentLength">
+            <option value="15">15 Minutes</option>
+            <option value="30">30 Minutes</option>
+            <option value="60">1 Hour</option>
+        </select><br>
+        <label for="dateTime">Appointment date & start time:</label></br>
+        <select id="time" name="time">
+            <option value="9:00 AM">9:00 AM</option>
+            <option value="9:15 AM">9:15 AM</option>
+            <option value="9:30 AM">9:30 AM</option>
+            <option value="9:45 AM">9:45 AM</option>
+
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="10:15 AM">10:15 AM</option>
+            <option value="10:30 AM">10:30 AM</option>
+            <option value="10:45 AM">10:45 AM</option>
+
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="11:15 AM">11:15 AM</option>
+            <option value="11:30 AM">11:30 AM</option>
+            <option value="11:45 AM">11:45 AM</option>
+
+            <option value="12:00 PM">12:00 PM</option>
+            <option value="12:15 PM">12:15 PM</option>
+            <option value="12:30 PM">12:30 PM</option>
+            <option value="12:45 PM">12:45 PM</option>
+
+            <option value="1:00 PM">1:00 PM</option>
+            <option value="1:15 PM">1:15 PM</option>
+            <option value="1:30 PM">1:30 PM</option>
+            <option value="1:45 PM">1:45 PM</option>
+
+            <option value="2:00 PM">2:00 PM</option>
+            <option value="2:15 PM">2:15 PM</option>
+            <option value="2:30 PM">2:30 PM</option>
+            <option value="2:45 PM">2:45 PM</option>
+
+            <option value="3:00 PM">3:00 PM</option>
+            <option value="3:15 PM">3:15 PM</option>
+            <option value="3:30 PM">3:30 PM</option>
+            <option value="3:45 PM">3:45 PM</option>
+
+            <option value="4:00 PM">4:00 PM</option>
+            <option value="4:15 PM">4:15 PM</option>
+            <option value="4:30 PM">4:30 PM</option>
+            <option value="4:45 PM">4:45 PM</option>
+
+            <option value="5:00 PM">5:00 PM</option>
+            <option value="5:15 PM">5:15 PM</option>
+            <option value="5:30 PM">5:30 PM</option>
+            <option value="5:45 PM">5:45 PM</option>
+        </select>
+        <input type="date" id="dateTime" name="dateTime">
+        </br>
+        </br>
+        <button type="submit" onClick="showReturnedData()" class="btn btn-primary">Check Availability</button>
+        <a href='/' class="btn btn-secondary">Cancel</a>
+    </div>
+
+
+</form> --}}

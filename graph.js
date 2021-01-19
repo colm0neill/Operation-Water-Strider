@@ -26,7 +26,7 @@ module.exports = {
       .get();
 
     return calendars;
-    console.log(calendars);
+    //console.log(calendars);
   },
 
   getMyGroups: async function(accessToken){
@@ -64,7 +64,6 @@ module.exports = {
     .select('start, end, attendees')
     .get();
 
-    console.log(scheduleCheck);
     return scheduleCheck;
   },
 
@@ -226,7 +225,7 @@ module.exports = {
     //   .post(oneNoteb);
 
   //return noteToAdd;
-  console.log("your note of "+note+" has been added");
+  //console.log("your note of "+note+" has been added");
   }
 
 

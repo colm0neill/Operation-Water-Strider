@@ -121,7 +121,7 @@ getNoteId: async function(accessToken) {
             // Get the events
             var noteBooks = await graph.getNotebooks(accessToken);
             params.noteBooks = noteBooks.value;
-            console.log(noteBooks.value);
+            //console.log(noteBooks.value);
         } catch (err) {
             req.flash('error_msg', {
                 message: 'Could not fetch events',
