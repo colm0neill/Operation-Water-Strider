@@ -71,37 +71,19 @@ module.exports = {
 
 
 
-  createCalendar: async function(accessToken){
-    const client = getAuthenticatedClient(accessToken);
-
-    const oneCal = {
-      name: "ONE 2 ONE"
-    };
-    
-
-    const createCal = await client
-      .api('/me/calendars')
-      .select('id,name')
-      .post(oneCal);
-
-  return createCal;
-  },
-
-
   
-  getOneEvents: async function(accessToken, xm) {
+  getEventsMonthView: async function(accessToken, startOfMonth, endOfMonth, storeGroupID) {
     const client = getAuthenticatedClient(accessToken);
-
-    const id = xm;
-    const oneX = await client
-      //.api('/me/calendars/'+id+'/calendarView?startDateTime=2020-06-08T23:59:00&endDateTime=2020-06-08T23:59:00')
-      .api('/me/calendars/'+id+'/events')
-      .select('subject,start,end')
+   
+    const events = await client
+      .api('/groups/'+storeGroupID+'/calendarView?startDateTime='+startOfMonth+'T00:00:00&endDateTime='+endOfMonth+'T23:59:00&$top=1000')
+      //.api('/me//'+id+'/events')
+      .select('webLink,subject,body,start,end,attendees')
       .orderby('createdDateTime DESC')
       .get();
-
-    return oneX;
-
+      
+    return events;
+    
   },
 
   
