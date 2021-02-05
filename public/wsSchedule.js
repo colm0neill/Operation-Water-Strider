@@ -24,7 +24,7 @@ async function drawCalendar() {
 	var yearMonth = document.getElementsByClassName('yearMonth')[0].id;
 	month = yearMonth.slice(0, (yearMonth.length - 4));
 	year = yearMonth.slice((yearMonth.length - 4), yearMonth.length);
-	console.log("month is :" + month + " Year is: " + year);
+	//console.log("month is :" + month + " Year is: " + year);
 	month = parseInt(month, 10);
 	year = parseInt(year, 10);
 
@@ -96,7 +96,7 @@ async function drawCalendar() {
 async function assignTd(thisYear, thisMonth, thisMonth2, today, dayStart) {
 	
 
-	console.log("today is: "+today);
+	//console.log("today is: "+today);
 
 	if ((thisYear == year) && (thisMonth == month)) {
 		var y = document.getElementById("dayz");

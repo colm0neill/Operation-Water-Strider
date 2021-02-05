@@ -45,7 +45,7 @@ router.get('/',
 
       await setDate();
       
-console.log(params.eventsMonth);
+//console.log(params.eventsMonth);
       res.render('calendar', params);
 
 
@@ -58,7 +58,7 @@ console.log(params.eventsMonth);
 
 async function setDate() {
   
-console.log("current month is:"+ currentMonth);
+//console.log("current month is:"+ currentMonth);
 
 
 try{
@@ -68,7 +68,7 @@ try{
     currentMonth = moment().month();
     currentYear = moment().year();
 
-    console.log("current month is:"+ currentMonth);
+    //console.log("current month is:"+ currentMonth);
  
   }
   
@@ -81,7 +81,7 @@ await getCalendarData(currentMonth, currentYear);
     monthName: currentMonthStr,
     year: currentYear
    }
-   console.log("current month is:"+ currentMonth);
+   //console.log("current month is:"+ currentMonth);
    //console.log(params.date);
 };
 
@@ -178,7 +178,7 @@ router.post('/getNewMonthView', async (req, res) => {
     year: currentYear
    }
 
-  console.log(params.date)
+  //console.log(params.date)
 
   await setDate();
   
@@ -199,7 +199,7 @@ async function processDate(accessToken, theDate) {
 
 
 
-  console.log("Server is requesting events for: " + z);
+  //console.log("Server is requesting events for: " + z);
 
 
   if (typeof (theDate) !== 'undefined') {
