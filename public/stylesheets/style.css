@@ -287,51 +287,53 @@ letter-spacing:10px;
 .twoB{
 width:33.33%;
 height:100%;
+padding-top:5.5vw;
 }
+
 .totalsL{
-height:5%;
-margin: 31% 15px 0 15px;
+
+margin: 0 1.5vw 0 1.5vw;
 font-size: 1vw;
   font-weight: bold;
   letter-spacing: .5vw;
   color: #000;
 }
+
 #totals{
-height: 14%;
-  
   font-size: 3vw;
   font-weight: bold;
   letter-spacing: .5vw;
   color: #B20A21;
+  margin:0;
 }
 
 .graphContainer1{
 width:100%;
+height:calc(100% - 7.5vw);
 }
 
 #graph1{
+width:100%;
+height:100%;
 
-padding: 0px 15px 15px 15px;
-width:calc(100% - 30px);
-height:calc(50% - 45px);
+}
+#graph1:hover{
+  background-color: rgba(102, 102, 102, 0.445);
+  border-radius:1vw;
 }
 
-.twoB p {
-max-width:0%;
-display:inline-block;
-margin:0 0 0 0 ;
-font-size:1vw;
+#dayLabels {
+  text-align: center;
   color: #999;
   font-weight: bold;
+  height: 1.5vw;
+  font-size: 1vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.5vw 0 1.5vw;
+  vertical-align: bottom;
 }
 
-.twoB p:nth-child(3)  { left: 0%; position: relative; margin-left:15px;}
-.twoB p:nth-child(4)  { left: 14.28%; position: relative; }
-.twoB p:nth-child(5)  { left: 28.57%; position: relative; }
-.twoB p:nth-child(6)  { left: 42.84%; position: relative; }
-.twoB p:nth-child(7)  { left: 57.12%; position: relative; }
-.twoB p:nth-child(8)  { left: 71.4%; position: relative; }
-.twoB p:nth-child(9)  { left: 85.68%; position: relative;  margin-right:15px;}
 
 
 
@@ -339,59 +341,63 @@ font-size:1vw;
 
 
 .twoC{
-width:33.33%;
+width:calc(33.33% - 3vw);
 height:100%;
+
+margin: 0 1.5vw 0 1.5vw;
+padding-top: 5.5vw;
 }
 
-.graphNav{
-
-height:5vw;
-
-/*border:1px solid black;
-*/padding:7.8vw 0px 0 15px;
+#graphNav{
+  display: flex;
+  justify-content: space-between;
+  width:100%;
+  height:4.5vw;
 }
+
 .hourPre,.hourNxt{
-width: 40px;
-height: 60px;
+width: 19%;
+height: 100%;
 border: none;
 color: white;
 background-color:rgba(255,255,255,0);
 text-align: center;
 text-decoration: none;
-display: inline-block;
+
 font-size: 16px;
 padding:0;
 }
 .hourPre{
 background-image: url('../images/ows-sprite72.png');
-background-position:-71vw -57.5vw;
-background-size: 71vw 52vw;
+background-position:-0.3vw -46.4vw;
+background-size: 67vw 42vw;
 transform:scale(1);
 }
 
 #dayTime{
 height:100%;
-width:calc(100% - 85px);
+width:60%;
 text-align: center;
-display:inline-block;
+
 margin:0;
 font-size:1.6vw;
 font-weight:bold;
 letter-spacing:.5vw;
 }
 .hourNxt{
-background: url('../images/ows-sprite72.png') -76vw -57.5vw;
-background-size: 71vw 52vw;
-float:right;
-display:inline-block;
+background: url('../images/ows-sprite72.png');
+background-position:-4vw -46.4vw;
+background-size: 67vw 42vw;
 }
 
 #graph2{
-/*border: 1px solid black;
-*/margin:0 0px 0px 15px;
-width:calc(100% - 15px);
-height:10.2vw;
 
+width:100%;
+height:calc(100% - 4.5vw);
+}
+#graph2:hover{
+  background-color: rgba(102, 102, 102, 0.445);
+  border-radius:1vw;
 }
 
 /* ----------------------ROW TWO END-----------------------*/
@@ -533,7 +539,7 @@ background-repeat:no-repeat;
 
 div.box2C{
 background-color:#000;
-width: 15vw;
+width: 14.5vw;
 height:8.7vw;
 border-radius: 10px 0 0 10px ;
 }
