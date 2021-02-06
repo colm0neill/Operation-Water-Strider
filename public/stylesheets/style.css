@@ -340,7 +340,7 @@ height:100%;
 
 
 
-.twoC{
+.twoC.graph2{
 width:calc(33.33% - 3vw);
 height:100%;
 
@@ -599,30 +599,30 @@ margin:.8vw;
 /*Login & Register-----------------------------------------------------*/
 
 
-#loginCon, #regCon{
-width:30%;
-height:40vh;
-padding: 5vh 0 25vh 60%;
-margin-right:10%;
+#loginCon{
+height:59vh;
 text-align:right;
 box-sizing: content-box;
-
+padding:5vw 8vw 5vh 8vw;
 }
 
-#bodyContainer img, #bodyContainer img{
-margin:10%;
-position:absolute;
+#siteLogo{
+margin:5% 5%;
+float:left;
+width:15vw;
+height:15vw;
 }
 
-#loginCon h1, #regCon h1{
+#loginCon h1{
 text-align:right;
 width:100%;
 font-weight: bold;
-font-size: 3.5rsrsvw;
+font-size: 3.5vw;
 letter-spacing: 1vw;
+padding-left: 60%;
 }
 
-#loginCon input, #regCon input{
+#loginCon input{
 margin-bottom:20px;
 width:100%;
 display: block;
@@ -636,6 +636,11 @@ border-radius:1vw;
 text-decoration: none;
 color:white;
 font-size:1.5vw;
+}
+
+.infoReq{
+  padding-left: 70%;
+  font-size: 1.5vw;
 }
 
 #loginCon a, #regCon a{
@@ -1002,25 +1007,12 @@ padding:none!Important;
 }
 
 
-@media only screen and (max-width: 1010px) {
-body{
-background-color:#a9a9a9;
-background: linear-gradient(0deg, rgb(96, 27, 27) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
-font-family:helvetica;
-margin:0;
-}
-  
-#bodyContainer{
-margin:5vh 5vw 5vh 5vw;
-}
 
 
 
+@media only screen and (max-width: 600px) {
 
-}
-
-@media only screen and (max-width: 640px) {
-body{
+  body{
 background-color:#595959;
 background: linear-gradient(0deg, rgb(255, 42, 42) 0%, rgba(217,217,217,1) 53%, rgba(255,255,255,1) 100%);
 font-family:helvetica;
@@ -1029,19 +1021,138 @@ margin:0;
 
 #bodyContainer{
 margin:5vh 5vw 5vh 5vw;
+height:90vh;
 }
 
-.oneA,.oneC{
-width:40%;
+/* -----------------------Login page----------------------- */
+#siteLogo{
+ position: unset; 
+ margin:0 0 0 0;
+ width:30vw;
+ height:30vw;
+ float:unset;
 }
-.oneB{
-width:10%;
-}
-.row.one{
-  width:90vw;
-  float:left;
-}
-.row.two{float:none!important;}
 
+#loginCon{
+  width:100%;
+  height:100%;
+ align-content: center; 
+ padding:25vh 0 0 0;
+ margin :10vw 0 0 0 ;
+ text-align:center;
+ box-sizing: content-box;
+}
+
+#loginCon h1{
+  font-size: 5vw;
+  text-align:center;
+  padding: 0 20vw 0 20vw;
+
+}
+.infoReq{
+  text-align:center;
+  padding: 5vw 30vw 5vw 30vw;
+  font-size: 3vw;
+}
+
+#loginCon form{
+  height:15vw;
+  align-content: center;
+  display: inline-block;
+}
+
+#loginCon .login{
+  align-content:center;
+  padding:2vw 8vw;
+  border-radius:3vw;
+  font-size: 5vw;
+}
+
+
+/* -----------------------Login Page End----------------------- */
+
+/* -----------------------Home Page----------------------- */
+
+
+.one {
+  height: 10%;
+  padding: 0 4vw 0vw 4vw;
+ 
+  
+}
+
+.two{
+  
+}
+
+div.oneA, div.oneC{
+  width:50%;
+  height:100%;
+  display: inline-block;
+}
+ div.oneB{
+   width:0px;
+ }
+
+#greeting{
+margin-top:0px;
+}
+
+
+
+ 
+#info1, #info2 {
+  height: 5.7vh;
+}
+
+div.blurb{
+  font-size: .75rem;
+}
+div.threeA, div.threeB, div.threeC{
+  width:100%;
+  height:22%;
+ 
+}
+
+.threeA{
+  padding:0vw 4vw;
+  margin-top:15px;
+}
+.threeB{
+  padding:0vw 4vw;
+  margin-top:15px;
+}
+
+.threeC{
+  padding-left:4vw;
+  margin-top:15px;
+}
+
+div#info1 {
+  padding:20px;
+  background-color: rgba(150,150,150,.4);
+  border-radius: 10px;
+  
+}
+div#info2 {
+  padding:20px;
+  background-color: rgba(150,150,150,.4);
+  border-radius: 10px;
+  
+}
+
+
+div.box1C{
+  width:30vw;
+  height:30vw;
+  font-size:1.2vh;
+}
+
+div.box2C{
+  height:30vw;
+  width:45vw;
+  font-size:1.2vh;
+}
+/* -----------------------Home Page End----------------------- */
 
 }
