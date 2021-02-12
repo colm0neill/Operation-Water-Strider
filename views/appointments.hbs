@@ -7,44 +7,48 @@
 <div class="row two appointmentTwo">
     <div class="column twoA appointmentView">
 
-        {{!-- <h1>Book an appointment.</h1> --}}
+       
         <form class="appointmentForm" action="./appointments/getAppointmentDet" method="post" onsubmit="myButton.disabled = true; return true;">
             <div class="form-group" id="apt-radio">
-                <label for="Atype">Appointment Type</label></br>
+                <label class="Atype" for="Atype">Appointment Type</label>
 
-                <label class="radio" for="retailSales">
+                <div class="radioContainer">
+
+                <label class="radio rSales" for="retailSales">
                     <input type="radio" id="retailSales" name="aptType" value="Sales Advisor"
                         onclick="showRelCollegues(this.value)">
                     <br>Retail Sales</label>
 
-                <label class="radio" for="repairs">
+                <label class="radio repairs" for="repairs">
                     <input type="radio" id="repairs" name="aptType" value="Device Doctor"
                         onclick="showRelCollegues(this.value)">
                     <br>Repairs</label>
 
-                <label class="radio" for="busSales">
+                <label class="radio bSales" for="busSales">
                     <input type="radio" id="busSales" name="aptType" value="Business Advisor"
                         onclick="showRelCollegues(this.value)">
                     <br>Business Sales</label>
 
-
+                </div>
 
             </div>
+
+
             <div class="form-group">
-                <label for="scheduledFor">Scheduled For:</label></br>
+                <label class="schF" for="scheduledFor">Scheduled For:</label>
                 <select id="colleagues" name="colleagues">
                     {{#each members }}<option name="scheduleFor" id="schFor" value="{{this.displayName}}">
                         {{this.displayName}} ( {{this.jobTitle}} )</option>
                     {{/each}}
                 </select>
-                <label for="scheduledBy">Scheduled By:</label>
+                <label  class="schB"for="scheduledBy">Scheduled By:</label>
                 <input required class="form-control" type="text" id="schBy" name="scheduledBy"
                     value="{{ user.displayName }}" readonly>
             </div>
 
             <div class="form-group">
 
-                <label for="dateTime">Appointment date & start time:</label></br>
+                <label class="schTime" for="dateTime">Appointment date & start time:</label>
                 <select id="time" name="time">
                     <option value="9:00 AM">9:00 AM</option>
                     <option value="9:15 AM">9:15 AM</option>
@@ -92,14 +96,14 @@
                     <option value="5:45 PM">5:45 PM</option>
                 </select>
                 <input type="date" id="dateTime" name="dateTime">
-                </br>
-                <label for="appointmentLength">Appointment Length:</label>
+                
+                <label class="schLen" for="appointmentLength">Appointment Length:</label>
                 <select id="times" name="appointmentLength">
                     <option value="15">15 Minutes</option>
                     <option value="30">30 Minutes</option>
                     <option value="60">1 Hour</option>
-                </select><br>
-                </br>
+                </select>
+                
 
                 <div class="btn-group">
                     {{#if this.availability}}
