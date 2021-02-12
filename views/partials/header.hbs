@@ -1,0 +1,65 @@
+ {{#if user}}
+    <div class="row one">
+      <div class="column oneA">
+        <div id="greeting">
+          <h1><b>HELLO,</b></h1>
+          <h3 name="userName"> {{ user.displayName }} </h3>
+        </div>
+      </div>
+
+      <div class="column oneB">
+        <p>
+          <br>
+          <br>
+          <br>
+        </p>
+      </div>
+
+      <div class="column oneC">
+        <ul id="navlist">
+          {{#if active.appointments}}
+          <a href="/" alt="home">
+            <div class="square">
+              <li id="home-app"></li>
+            </div>
+          </a>
+          {{else}}
+          <a href="/appointments" alt="Appointments">
+            <div class="square">
+              <li id="appointments"></li>
+            </div>
+          </a>
+          {{/if}}
+          {{#if active.calendar}}
+          <a href="/" alt="home">
+            <div class="square">
+              <li id="home-cal"></li>
+            </div>
+          </a>
+          {{else}}
+          <a href="/calendar" alt="calendar">
+            <div class="square">
+              <li id="calendar"></li>
+            </div>
+          </a>
+          {{/if}}
+
+          {{#if active.notes}}
+          <a href="/" alt="home">
+            <div class="square">
+              <li id="home-note"></li>
+            </div>
+          </a>
+          {{else}}
+          <a href="/notes" alt="Notes">
+            <div class="square">
+              <li id="notes"></li>
+            </div>
+          </a>
+          {{/if}}
+        </ul>
+      </div>
+
+    </div>
+
+    {{/if}}
