@@ -1075,7 +1075,9 @@ width: calc(100% - 10vw);
   border-radius:3vw;
   font-size: 5vw;
 }
-
+.signOut{
+  top:0px;
+}
 
 /* -----------------------Login Page End----------------------- */
 
