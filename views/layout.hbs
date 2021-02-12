@@ -40,63 +40,75 @@
         </div>
       </div>
 
-      <div class="column oneB">
-        <p>
-          <br>
-          <br>
-          <br>
-        </p>
-      </div>
+     
 
-      <div class="column oneC">
-        <ul id="navlist">
-          {{#if active.appointments}}
-          <a href="/" alt="home">
-            <div class="square">
-              <li id="home-app"></li>
-            </div>
-          </a>
-          {{else}}
-          <a href="/appointments" alt="Appointments">
-            <div class="square">
-              <li id="appointments"></li>
-            </div>
-          </a>
-          {{/if}}
-          {{#if active.calendar}}
-          <a href="/" alt="home">
-            <div class="square">
-              <li id="home-cal"></li>
-            </div>
-          </a>
-          {{else}}
-          <a href="/calendar" alt="calendar">
-            <div class="square">
-              <li id="calendar"></li>
-            </div>
-          </a>
-          {{/if}}
 
-          {{#if active.notes}}
-          <a href="/" alt="home">
-            <div class="square">
-              <li id="home-note"></li>
-            </div>
-          </a>
-          {{else}}
-          <a href="/notes" alt="Notes">
-            <div class="square">
-              <li id="notes"></li>
-            </div>
-          </a>
-          {{/if}}
-        </ul>
-      </div>
+
+      <nav class="oneC navbar navbar-expand-lg navbar-light bg-light">
+
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <ul id="navlist" class="navbar-nav ml-auto">
+            {{#if active.appointments}}
+            <a class="nav-item nav-link" href="/" alt="home">
+            <span class="menu-label">Home</span>
+              <div class="square">
+                <li id="home-app"></li>
+              </div>
+            </a>
+            {{else}}
+            <a class="nav-item nav-link" href="/appointments" alt="Appointments">
+            <span class="menu-label">Appointments</span>
+              <div class="square">
+                <li id="appointments"></li>
+              </div>
+            </a>
+            {{/if}}
+            {{#if active.calendar}}
+            <a class="nav-item nav-link" href="/" alt="home">
+            <span class="menu-label">Home</span>
+              <div class="square">
+                <li id="home-cal"></li>
+              </div>
+            </a>
+            {{else}}
+            <a class="nav-item nav-link" href="/calendar" alt="calendar">
+            <span class="menu-label">Calendar</span>
+              <div class="square">
+                <li id="calendar"></li>
+              </div>
+            </a>
+            {{/if}}
+
+            {{#if active.notes}}
+            <a class="nav-item nav-link" href="/" alt="home">
+            <span class="menu-label">Home</span>
+              <div class="square">
+                <li id="home-note"></li>
+              </div>
+            </a>
+            {{else}}
+            <a class="nav-item nav-link" href="/notes" alt="Notes">
+            <span class="menu-label">Notes</span>
+              <div class="square">
+                <li id="notes"></li>
+              </div>
+            </a>
+            {{/if}}
+          </ul>
+        </div>
+      </nav>
+
+
+
 
     </div>
 
     {{/if}}
-  
+
 
 
 

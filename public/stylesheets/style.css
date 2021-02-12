@@ -68,35 +68,33 @@ clear: both;
 /* ----------------------ROW ONE START---------------------*/
 
 .one{
-height:7vw;
+
 padding:0 4vw 0 4vw;
 }
 .oneA, .oneC{
-width: 45%;
+width: 50%;
 height:100%;
 }
 
-.oneB{
-width: 10%; 
-height:100%;
-}
+
 .navlist ul{
 float:right;	
 }
 
-#greeting{
 
-margin-top:25px;
+
+.menu-label{
+  display: none;
 }
 
 .oneA h1{
-font-size: 2.2vw;
+font-size: 1.75rem;
 letter-spacing:.8vw;
 margin:0;
 font-family: helvetica;
 }
 .oneA h3{
-font-size: 1.3vw;
+font-size: 1rem;
 letter-spacing: .3vw;
 margin: 0;
 font-family: helvetica;
@@ -1022,6 +1020,12 @@ margin:0;
 #bodyContainer{
 margin:5vh 5vw 5vh 5vw;
 height:90vh;
+overflow-y: scroll;
+width: calc(100% - 10vw);
+}
+
+#bodyContainer::-webkit-scrollbar {
+  display: none;
 }
 
 /* -----------------------Login page----------------------- */
@@ -1075,38 +1079,222 @@ height:90vh;
 
 
 .one {
-  height: 10%;
+  margin-top:7vw;
   padding: 0 4vw 0vw 4vw;
  
   
 }
 
-.two{
-  
+.oneA{
+  padding: .5rem 1rem;
+  vertical-align: center;
+  width:38%;
 }
 
-div.oneA, div.oneC{
-  width:50%;
-  height:100%;
-  display: inline-block;
+.oneC{
+  width:62%;
 }
+
+#greeting h1{
+ font-size: 1.5rem;
+}
+#greeting h3{
+  font-size: .75rem;
+ }
+
+.menu-label{
+  display:contents;
+}
+
+.navbar{
+  padding: 0;
+}
+.navbar-nav .show{
+  flex-direction: row;
+}
+.two{
+  height:100%;
+}
+
+.twoA{
+  width:100%;
+  margin:0 4vw;
+  display:flex;
+}
+
+.square{
+  width: 10.2vw;
+  height: 10.2vw;
+  border-radius: 5px;
+}
+#navlist li {
+  height: 7.2vw;
+  width: 7.2vw;
+}
+
+#calendar,#appointments, #notes,#home-note,#home-cal, #home-app{
+background-size: 105vw 70vw;
+}
+#calendar{
+background-position: -6.3vw 0;
+}
+#appointments{
+  background-position: -0.0vw 0;
+}
+#notes{
+  background-position: -12.3vw 0;
+}
+#home-note{
+  background-position: -0.0vw -15vw;
+}
+#home-cal{
+  background-position: -0.0vw -15vw;;
+}
+#home-app{
+  background-position: -0.0vw -15vw;;
+}
+
+.nav-item,.nav-link{
+  padding: 30px 0 ;
+}
+
+
+.twoB, .twoC{
+  width:100%;
+  
+}
+#boxContainer{
+  width:50%;
+}
+
+div.box1{
+  width:35vw;
+  height:35vw;
+  border-radius:3.8vw;
+ 
+}
+#box1Text{
+  font-size: .5rem;
+}
+
+.box1{
+  background-position: -81.5vw -45.4vw;
+  background-size: 450vw 240vw;
+  transform: scale(1);
+}
+
+.box2{
+  display: none;
+}
+
+#toolBox{
+  display: none;
+}
+
+#toolBox2{
+ width:50%;
+}
+
+div.longB1,div.shortB2, div.shortB3, div.shortB4{
+  width: 16.3vw;
+  height: 16.3vw;
+  margin: 0vw 0vw 2vw 2vw;
+  border-radius: 3vw;
+
+  background-size: 241vw 133vw;
+    transform: scale(1);
+}
+
+.longB1{
+background-position: -89.2vw -27.3vw;
+}
+.shortB2{
+  background-position: -29.2vw -27.3vw;
+}
+.shortB3{
+  background-position: -14.2vw -27.3vw;
+}
+.shortB4{
+  background-position: -59.2vw -27.3vw;
+}
+
+
  div.oneB{
    width:0px;
  }
+
+.three{
+  padding: 0 0vw 8vw 4vw;
+}
+
+.totalsL{
+  margin: 0 4vw;
+  font-size: .75rem;
+}
+
+.graphContainer1{
+  width:unset;
+  margin: 0 4vw;
+}
+
+#dayLabels{
+  padding: 0 10vw;
+  font-size: .5rem;
+}
+
+.twoC.graph2{
+  width:100%;
+  margin: 0 5vw 0 5vw;
+}
+
+#graph1, #graph2{
+  background-color: rgb(87, 87, 87);
+  border-radius: 1vw;
+}
+
+#dayTime{
+  font-size: .5rem;
+}
+
+#graphNav{
+  padding:0 24vw;
+  height: 6.5vw;
+}
+
+.hourPre, .hourNxt{
+  width:4vw;
+  height: 75%;
+  margin: 5% 0;
+}
+
 
 #greeting{
 margin-top:0px;
 }
 
-
-
  
 #info1, #info2 {
-  height: 5.7vh;
+  height: 100%;
+  
+}
+
+.flag{
+  height: 5vw;
+  width: 5vw;
+  border-radius: 1.5vw;
+}
+
+div.heading{
+  height:100%;
+  margin-bottom:0px;
+  margin-left: 7vw;
+  top:-6vw;
 }
 
 div.blurb{
   font-size: .75rem;
+  height:13.5vw;
+  margin: 0 2vw 0 2vw
 }
 div.threeA, div.threeB, div.threeC{
   width:100%;
@@ -1115,11 +1303,11 @@ div.threeA, div.threeB, div.threeC{
 }
 
 .threeA{
-  padding:0vw 4vw;
+  padding:0vw 8vw 0vw 4vw;
   margin-top:15px;
 }
 .threeB{
-  padding:0vw 4vw;
+  padding:0vw 8vw 0vw 4vw;
   margin-top:15px;
 }
 
@@ -1129,29 +1317,49 @@ div.threeA, div.threeB, div.threeC{
 }
 
 div#info1 {
-  padding:20px;
+  padding:10px;
   background-color: rgba(150,150,150,.4);
   border-radius: 10px;
   
 }
 div#info2 {
-  padding:20px;
+  padding:5px;
   background-color: rgba(150,150,150,.4);
   border-radius: 10px;
   
 }
+div.bannerBox{
+  width: 40vw;
+  height: 4.6vw;
+}
+.spriteF, .spriteFs{
+  width: 4.4vw;
+  height: 4.7vw;
+  background: url(../images/ows-sprite72.png) -36.8vw -2.8vw;
+    background-size: 180vw 100vw;
+}
+.box1C div.spriteFs{
+  margin:1vw 2vw;
+}
 
+  #textB4, #textB3{
+  height: 100%;
+  margin: 0vw 4vw 0 4vw;
+}
 
 div.box1C{
-  width:30vw;
-  height:30vw;
+  width:35vw;
+  height:35vw;
   font-size:1.2vh;
+  margin-right:6%;
+  border-radius:3.8vw;
 }
 
 div.box2C{
-  height:30vw;
-  width:45vw;
+  height:35vw;
+  width:42vw;
   font-size:1.2vh;
+  border-radius: 3.8vw 0 0 3.8vw;
 }
 /* -----------------------Home Page End----------------------- */
 
