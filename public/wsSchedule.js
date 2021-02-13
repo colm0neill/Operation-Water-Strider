@@ -89,8 +89,9 @@ async function drawCalendar() {
 		}
 	}
 
-	await assignTd(thisYear, thisMonth, month2, today, dayStart);
-}
+	 let completed = await assignTd(thisYear, thisMonth, month2, today, dayStart);
+	console.log(completed);
+	}
 
 
 async function assignTd(thisYear, thisMonth, thisMonth2, today, dayStart) {
@@ -112,6 +113,8 @@ async function assignTd(thisYear, thisMonth, thisMonth2, today, dayStart) {
 		else{ todayIs = today+ '-' + (thisMonth2) + '-' + year;}
 
 	
+		return "its been done";
+
 	await getTodayView(todayIs);
 }
 
