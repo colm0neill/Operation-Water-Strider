@@ -196,6 +196,25 @@ module.exports = {
   return createNoteb;
   },
 
+  getStatsWeekView: async function(storeGroupID, startOfWeek, endOfWeek, accessToken) {
+    const client = getAuthenticatedClient(accessToken);
+   
+    const eventsThisWeek = await client
+      .api('/groups/'+storeGroupID+'/calendarView?startDateTime='+startOfWeek+'T00:00:00&endDateTime='+endOfWeek+'T23:59:00&$top=1000')
+      //.api('/me//'+id+'/events')
+      .select('start,end')
+      .orderby('createdDateTime DESC')
+      .get();
+      
+    return eventsThisWeek;
+    
+  },
+
+
+
+
+
+
   addNote: async function(accessToken, note ,noteBookID){
     const client = getAuthenticatedClient(accessToken);
 
