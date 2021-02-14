@@ -1,111 +1,167 @@
-window.onload = function () {
-	
-	
-	
+document.addEventListener('DOMContentLoaded', function() {
+    drawGraphs();
+}, false);
 
-var bk = document.getElementById("backgroundCurve");
-
-var widthImg = window.innerWidth;
-var heightImg = window.innerHeight;
-	
-	
-var c = document.getElementById("graph1");
-var ctx = c.getContext("2d");
-var ctxCir = c.getContext("2d");
-ctx.scale(1,1);
-	
-var w = c.width;
-var h = c.height;
-
-var dataPointsX = w/6.5;
-var array = [100, 10, 20, 40, 60, 80, 100, 30];
-var largest= 0;
-var dataPointsY = [];
-
-	for (i=0; i<=largest;i++){
-		if (array[i]>largest) {
-			var largest=array[i];
-		}
-	}
-	
-	for(i=0;i<7;i++){
-		var t = largest /100;
-		var g = Math.round(h-((array[i]/t)*5.5));
+async function drawGraphs() {
+	const graphValues = await getGraphValues();
 		
-		dataPointsY[i] = g;
-	}
+	//console.log("i got a fish");
 
+	var ctx = document.getElementById('graph2').getContext('2d');
+	var chart = new Chart(ctx, {
+		// The type of chart we want to create
+		type: 'bar',
 	
-	for(i=0;i<9;i++){
-		if((i != 0 )||(i !=9)){
-			ctx.beginPath();
-			ctx.translate(.5,.5);
-			ctx.moveTo((dataPointsX*i)+20,dataPointsY[i]);
-			ctx.lineTo((dataPointsX*(i+1)+20),dataPointsY[i+1]);
-			ctx.lineCap = "round";
-			ctx.lineWidth = 10;
-			ctx.closePath();
-			ctx.stroke();
-			
-			
-			ctxCir.beginPath();
-			ctxCir.linewidth= 1;
-			ctxCir.arc((dataPointsX*i)+20,dataPointsY[i],10,0*Math.PI,1.5*Math.PI);
-			ctx.closePath();
-			ctxCir.stroke();
-			
+		// The data for our dataset
+		data: {
+			labels: graphValues.hourViewTimes,
+			datasets: [{
+				backgroundColor: 'rgb(0, 0, 0)',
+				borderColor: 'rgba(255, 255, 255,1)',
+				data: graphValues.hourView
+			}]
+		},
+	
+		// Configuration options go here
+		options: {
+			layout: {
+				padding: {
+					left: 0,
+					right: 0,
+					top: 20,
+					bottom: 10
+				}
+			},
+			legend: {
+				display: false,
+			},
+			gridLines: {
+				display: false
+			 },
+			scales: {
+				yAxes: [{
+					
+					ticks: {
+						display:false,
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false,
+					  }
+					
+				}],
+				xAxes: [{
+					barPercentage: 0.2,
+					ticks: {
+						display:false,
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false,
+					  },
+					  
+				}]
 			}
-	
-		else{
-			console.log("I equal's"+ i);
 		}
-	}
-	
-var d = document.getElementById("graph2");
-var ctx2 = d.getContext("2d");
-ctx2.scale(1,1);
-	
-var w2 = d.width;
-var h2 = d.height;
+	});
 
-var dataPointsX2 = w2/8;
-var array2 = [100, 10, 20, 40, 60, 80, 100, 30];
-var largest2= 10;
-var dataPointsY2 = [];
 
-	for (i=0; i<=largest2;i++){
-		if (array2[i]>largest2) {
-			var largest2=array2[i];
-		}
-	}
-	
-	for(i=0;i<7;i++){
-		var t = largest2 /100;
-		var g = Math.round(h2-((array2[i]/t)*4));
-		dataPointsY2[i] = g;
-	}
 
+	var ctx = document.getElementById('graph1').getContext('2d');
+	var chart = new Chart(ctx, {
+		// The type of chart we want to create
+		type: 'line',
 	
-	for(i=0;i<7;i++){
-		if((i != 0 )||(i !=9)){
-			ctx2.beginPath();
-			
-			ctx2.moveTo((dataPointsX*i)+132,dataPointsY2[i]);
-			ctx2.lineTo((dataPointsX*i+132),h2-20);
-			ctx2.lineCap = "round";
-			ctx2.lineWidth = 20;
-			ctx.closePath();
-			ctx2.stroke();
-			
-		
+		// The data for our dataset
+		data: {
+			labels: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+			datasets: [{
+				borderJoinStyle:'round',
+     			 borderCapStyle:'round',
+				  lineTension:0,
+				  borderWidth:5,
+				  pointRadius:0,
+				  pointHoverRadius: 5,
+				backgroundColor: 'rgba(0, 0, 0,0)',
+				borderColor: 'rgba(0, 0, 0,1)',
+				data: graphValues.weekView
+			}]
+		},
+	
+		// Configuration options go here
+		options: {
+			layout: {
+				padding: {
+					left: 20,
+					right: 30,
+					top: 20,
+					bottom: 0
+				}
+			},
+			legend: {
+				display: false,
+			},
+			gridLines: {
+				display: false
+			 },
+			 tooltips:{
+				 xPadding: 10,
+			 },
+			scales: {
+				yAxes: [{
+					
+					ticks: {
+						display:false,
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false,
+					  }
+					
+				}],
+				xAxes: [{
+					ticks: {
+						beginAtZero:false,
+						display:false,
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false,
+					  },
+					  
+				}]
 			}
-	
-		else{
-			console.log("I equal's"+ i);
 		}
-	}
+	});
+
+
+
+
+
 }
 
+
+async function getGraphValues(){
+
+	const options = {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		
+	};
+	try {
+		const response = await fetch('/calcGraphData');
+		const graphValues = await response.json();
+		//console.log(graphValues);
+		return graphValues;
+		
+	}
+	catch (err) {
+		console.log(err);
+		console.log("Error Occured: failed to get new events.")
+	}
+}
 
 //----------------------Getting Time and Day-------------------//
 
