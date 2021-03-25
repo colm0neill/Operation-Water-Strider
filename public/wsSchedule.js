@@ -198,19 +198,53 @@ async function getNewMonth(month, year) {
 	const data = { month, year };
 
 	const options = {
-		method: "POST",
+		method: "PUT",
 		headers: {
 			"Content-Type": "application/json"
 		},
 		body: JSON.stringify(data)
 	};
 	try {
-		const response = await fetch('calendar/getNewMonthView', options);
+		const response = await fetch('calendar/updateDate', options);
+		const result = await response.json();
+		console.log("Information Update:" );
+		console.log(result.status);
+		if(result.status=="success"){
+			getNewMonthData();
+		}
 		
 	}
 	catch (err) {
 		console.log(err);
 		console.log("Error Occured: failed to get new events.")
+	}
+	// try {
+	// 	console.log("Reload is about to occur");
+	// 	location.reload();
+
+		
+	// }
+	// catch (err) {
+	// 	console.log(err);
+	// 	console.log("Error Occured: failed to reload page.");
+
+	// }
+
+
+}
+
+async function getNewMonthData() {
+	const options = {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json"
+		}
+	};
+	try {
+		const response = await fetch('calendar/getNxPrMonth', options);
+		
+	} catch (error) {
+		console.log(error);
 	}
 	try {
 		console.log("Reload is about to occur");
@@ -223,7 +257,4 @@ async function getNewMonth(month, year) {
 		console.log("Error Occured: failed to reload page.");
 
 	}
-
-
 }
-
