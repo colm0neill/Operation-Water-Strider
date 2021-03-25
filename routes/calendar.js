@@ -12,28 +12,21 @@ const { param } = require('./index.js');
 const { response } = require('express');
 
 
-var idofCalendar = '';
-var theDate;
-var accessToken;
-let params = {
-  active: { calendar: true }
-};
-let currentMonth = undefined;
-let currentMonthStr = undefined;
-let currentYear = undefined;
 
 /* GET /calendar */
 // <GetRouteSnippet>
-router.get('/',
+router.get('/', setDate,
   async function (req, res, next) {
     if (!req.isAuthenticated()) {
       // Redirect unauthenticated requests to home page
       res.redirect('/')
     } else {
 
+      let params = {
+        active: { calendar: true }
+      };
+      let accessToken;
 
-      // Get the access token
-      accessToken;
       try {
         accessToken = await tokens.getAccessToken(req);
       } catch (err) {
@@ -43,73 +36,173 @@ router.get('/',
         });
       }
 
-      await setDate();
-      
-//console.log(params.eventsMonth);
+      try {
+        await getCalendarData(app.profile.calCurrentView, accessToken, params);
+        params.date = app.profile.calCurrentView;
+      }
+      catch (error) {
+        console.log(error)
+      }
+
+
+      //console.log(params.eventsMonth);
       res.render('calendar', params);
 
 
-      
+
     }
   });
 
 
 
 
-async function setDate() {
-  
-//console.log("current month is:"+ currentMonth);
 
 
-try{
-  if ((currentMonth == undefined)&&(currentYear == undefined)) {
+router.put('/updateDate', setDate, async (req, res,next) => {
+  const data = req.body;
+  //console.log("Server data = " + data.month + data.year);
 
-    currentMonthStr = moment().format('MMMM');
-    currentMonth = moment().month();
-    currentYear = moment().year();
 
-    //console.log("current month is:"+ currentMonth);
- 
-  }
-  
-}catch(err){console.log(err);}
-   
-await getCalendarData(currentMonth, currentYear);
+  currentMonthStr = moment().month(data.month).format('MMMM');
+  currentMonth = data.month;
+  currentYear = data.year;
 
-   params.date = {
-    month:currentMonth,
+  app.profile['calCurrentView'] = {
+    month: currentMonth,
     monthName: currentMonthStr,
     year: currentYear
-   }
-   //console.log("current month is:"+ currentMonth);
-   //console.log(params.date);
+  }
+
+  if (req.body.month && req.body.year) {
+
+    res.json({
+      status: "success",
+      month: data.month,
+      year: data.year
+    });
+
+  } else {
+    
+    res.json({
+      status: "failed",
+      month: data.month,
+      year: data.year
+    });
+  }
+});
+
+
+
+
+
+
+
+
+
+router.get('/getNxPrMonth', async (req, res) => {
+
+  let params = {
+    active: { calendar: true }
+  };
+
+  let accessToken;
+
+  try {
+    accessToken = await tokens.getAccessToken(req);
+  } catch (err) {
+    req.flash('error_msg', {
+      message: 'Could not get access token. Try signing out and signing in again.',
+      debug: JSON.stringify(err)
+    });
+  }
+
+  try {
+    
+    await getCalendarData(app.profile.calCurrentView, accessToken, params)
+    params.date = app.profile.calCurrentView;
+  }
+  catch (error) {
+    console.log(error)
+  }
+
+
+
+  //console.log(params.eventsMonth);
+  res.render('calendar', params);
+
+
+
+
+  
+});
+
+
+
+
+
+
+
+
+
+async function setDate(req, res, next) {
+
+ 
+
+
+if(!app.profile.calCurrentView){
+
+  try {
+    
+     
+      let currentMonthStr = moment().format('MMMM');
+      let currentMonth = moment().month();
+      let currentYear = moment().year();
+
+      app.profile['calCurrentView'] = {
+        month: currentMonth,
+        monthName: currentMonthStr,
+        year: currentYear
+      }
+
+     
+        
+  
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+  next();
+  return
 };
 
 
 
 
 
-async function getCalendarData(month, year) {
-
+async function getCalendarData(calCurrentView, accessToken, params) {
+  var month = calCurrentView.month;
+  var year = calCurrentView.year;
+  
 
   var startDate = '';
 
-  if(year && month){
+  if (year && month) {
     startDate = moment([year, month]);
   }
-  else{startDate = moment([currentYear, currentMonth])}
+  else { startDate = moment([currentYear, currentMonth]) }
 
   let startOfMonth = '';
   let endOfMonth = '';
 
-  
 
-    startOfMonth = moment(startDate).startOf('month').format('YYYY-MM-DD');
-    endOfMonth = moment(startDate).endOf('month').format('YYYY-MM-DD');
-   
+
+  startOfMonth = moment(startDate).startOf('month').format('YYYY-MM-DD');
+  endOfMonth = moment(startDate).endOf('month').format('YYYY-MM-DD');
+
 
   const storeGroupID = app.profile.storeID;
- 
+
   //console.log("Start Of Month" + startOfMonth);
   if (accessToken && accessToken.length > 0) {
 
@@ -122,7 +215,7 @@ async function getCalendarData(month, year) {
         //console.log(params.eventsMonth);
       }
     } catch (err) {
-    console.log(err)
+      console.log(err)
     }
   } else {
     //req.flash('error_msg', 'Could not get an access token');
@@ -148,12 +241,12 @@ async function getCalendarData(month, year) {
         var bodyL = params.eventsMonth[i].body.content.length;
         var bodyString = params.eventsMonth[i].body.content;
         var dBody = bodyString.slice(148, (bodyL - 20));
-       
+
         params.eventsMonth[i].displayTime = time;
         params.eventsMonth[i].id = i;
         params.eventsMonth[i].displayBody = dBody;
         delete params.eventsMonth[i].body;
-        
+
         //console.log(params.eventsMonth[i]);
       }
     }
@@ -163,70 +256,9 @@ async function getCalendarData(month, year) {
   }
 }
 
-router.post('/getNewMonthView', async (req, res) => {
-  const data = req.body;
-  //console.log("Server data = " + data.month + data.year);
-
-  
-  currentMonthStr = moment().month(data.month).format('MMMM');
-  currentMonth = data.month;
-  currentYear = data.year;
-
-  params.date = {
-    month:currentMonth,
-    monthName: currentMonthStr,
-    year: currentYear
-   }
-
-  //console.log(params.date)
-
-  await setDate();
-  
-  
-   res.send(params)
-});
 
 
 
-
-
-
-
-
-
-async function processDate(accessToken, theDate) {
-  var z = await theDate;
-
-
-
-  //console.log("Server is requesting events for: " + z);
-
-
-  if (typeof (theDate) !== 'undefined') {
-
-
-    try {
-      var idofCalendar = await tgraph.getCalId(accessToken);
-      var dayOne = await graph.getOneEventsOD(accessToken, theDate, idofCalendar);
-      params.dayOne = dayOne.value;
-
-      console.log(dayOne.value);
-
-
-    } catch (err) {
-      req.flash('error_msg', {
-        message: 'Could not fetch events',
-        debug: JSON.stringify(err)
-      });
-    }
-  } else {
-    req.flash('error_msg', 'Could not get a date from the users post request');
-    console.log('error: unable to await getOneEventsOD');
-
-  }
-
-
-}
 
 
 module.exports = router;
