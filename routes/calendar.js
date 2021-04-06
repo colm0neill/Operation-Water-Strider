@@ -11,11 +11,15 @@ const app = require('../app');
 const { param } = require('./index.js');
 const { response } = require('express');
 
-
+function duck(req, res, next){
+  console.log("the duck says");
+  console.log(app.profile);
+  next();
+}
 
 /* GET /calendar */
 // <GetRouteSnippet>
-router.get('/', setDate,
+router.get('/', duck, setDate,
   async function (req, res, next) {
     if (!req.isAuthenticated()) {
       // Redirect unauthenticated requests to home page
@@ -27,6 +31,8 @@ router.get('/', setDate,
       };
       let accessToken;
 
+      //console.log(app.profile)
+
       try {
         accessToken = await tokens.getAccessToken(req);
       } catch (err) {
@@ -35,6 +41,7 @@ router.get('/', setDate,
           debug: JSON.stringify(err)
         });
       }
+
 
       try {
         await getCalendarData(app.profile.calCurrentView, accessToken, params);
@@ -149,8 +156,9 @@ async function setDate(req, res, next) {
  
 
 
-if(!app.profile.calCurrentView){
 
+if(!("calCurrentView" in app.profile)){
+  //console.log('there is not calCurrentView in app.profile.');
   try {
     
      

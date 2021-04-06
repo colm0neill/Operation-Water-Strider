@@ -1,3 +1,16 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<div id = 'imgContainer'>
+    <img id="errorImg" src="404.png" />
+</div>
+<div id="errorPgContainer">
+    <button id="goBack" class="btn btn-dark" onclick="goBack()">Go Back</button>
+    <h1>Error:{{error.status}}</h1>
+    <h2>The Page you are looking for is: {{message}}</h2>
+
+    <pre id="preErrorPg">{{error.stack}}</pre>
+
+</div>

@@ -21,22 +21,23 @@ module.exports = {
             // Get the events
             var calendars = await graph.getCalendars(accessToken);
             params.calendars = calendars.value;
-            //console.log(calendars.value);
-            //console.log("Issues with values 2")
         } catch {
-            console.error("There was an issue calling getCalendars");
             
+            req.flash('message-alert',{ 
+                type:'danger',
+                message: 'Could not contact the graph to get Calendar'});
         }
     } else {
-        req.flash('error_msg', 'Could not get an access token');
+        req.flash('message-alert',{ 
+        type:'danger',
+        message: 'Could not get an access token'});
     }
 
 
     for (var i = 0; i < calendars.value.length; i++) {
         if (calendars.value[i].name == 'ONE 2 ONE') {
             idofCalendar = calendars.value[i].id;
-            //exports.idofCalendar = idofCalendar;
-            //console.log("id of Calendar"+ idofCalendar);
+            
         }
     }
     if(idofCalendar == ''){
@@ -96,7 +97,6 @@ getSortGroups: async function(accessToken){
     }
 
     await findStore(groupsInvolved);
-    //console.log(storeGroup);
     return storeGroup;
 
 
@@ -121,7 +121,7 @@ getNoteId: async function(accessToken) {
             // Get the events
             var noteBooks = await graph.getNotebooks(accessToken);
             params.noteBooks = noteBooks.value;
-            //console.log(noteBooks.value);
+          
         } catch (err) {
             req.flash('error_msg', {
                 message: 'Could not fetch events',
@@ -138,15 +138,20 @@ getNoteId: async function(accessToken) {
         if (noteBooks.value[i].displayName == 'ONE 2 ONE') {
             idofNotebook = noteBooks.value[i].id;
             
-            console.log("id of Note Book is: "+ idofNotebook);
+         
         }
-        else{console.log('got no heart tom!');}
+        else{
+            req.flash('message-alert',{
+                type:'danger',
+                message:'NoteBook name could not be found.'
+            })
+        }
     }
 }
 await derp(noteBooks);
-console.log('Note id: '+idofNotebook);
+
     if(idofNotebook == ''){
-        console.log("i run second");
+      
         var idofNoteB = await graph.createNotebook(accessToken);
         idofNotebook = idofNoteB.id;
         

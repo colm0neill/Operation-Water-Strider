@@ -121,8 +121,8 @@ var app = express();
 
 app.use(session({
   secret: 'your_secret_value_here',
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   unset: 'destroy'
 }));
 
@@ -134,6 +134,8 @@ app.use(function(req, res, next) {
   // Read any flashed errors and save
   // in the response locals
   res.locals.error = req.flash('error_msg');
+  res.locals.message = req.flash('message_alert');
+
 
   // Check for simple error string and
   // convert to layout's expected format
@@ -142,25 +144,31 @@ app.use(function(req, res, next) {
     res.locals.error.push({message: 'An error occurred', debug: errs[i]});
   }
 
+  
   next();
 });
+ 
 // </SessionSnippet>
-
+var exphbs = require('express-handlebars');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs());
 app.set('view engine', 'hbs');
 app.use(express.static('images'));
 
 
 // <FormatDateSnippet>
-var hbs = require('hbs');
+//var hbs = require('hbs');
+
 var moment = require('moment');
 const { profile } = require('console');
 // Helper to format date/time sent by Graph
-hbs.registerHelper('eventDateTime', function(dateTime){
-  return moment(dateTime).format('h:mm A');
+var hbs = exphbs.create({
+  eventDateTime: function(dateTime) {
+    return moment(dateTime).format('h:mm A');
+  }
 });
-hbs.registerPartials(__dirname +'/views/partials');
+//hbs.registerPartials(__dirname +'/views/partials');
 
 // </FormatDateSnippet>
 
