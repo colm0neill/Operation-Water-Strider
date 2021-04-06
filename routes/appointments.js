@@ -2,18 +2,18 @@ var express = require('express');
 var router = express.Router();
 var tokens = require('../tokens.js');
 var graph = require('../graph.js');
-var tgraph = require('../graphTriggers');
 const app = require('../app');
 const Moment = require('moment');
 const MomentRange = require('moment-range');
+const { request } = require('../app');
 const moment = MomentRange.extendMoment(Moment);
 
 
 var params;
-var accessToken;
+
 
 router.get('/',
-  async function (req, res, next) {
+  async function (req, res) {
     if (!req.isAuthenticated()) {
       // Redirect unauthenticated requests to home page
       res.redirect('/')
@@ -22,14 +22,15 @@ router.get('/',
         active: { appointments: true }
       };
 
-      accessToken;
+      var accessToken;
       try {
         accessToken = await tokens.getAccessToken(req);
       } catch (err) {
-        req.flash('error_msg', {
+        req.flash('message-alert', {
+          type: 'danger',
           message: 'Could not get access token. Try signing out and signing in again.',
-          debug: JSON.stringify(err)
         });
+        res.redirect('/appointments')
       }
     }
     await fetchMembers(accessToken);
@@ -53,6 +54,10 @@ async function fetchMembers(accessToken) {
 
   } catch (error) {
     console.log(error);
+    req.flash('message_alert', {
+      type: 'danger',
+      message: 'Error: ' + error
+    });
   }
 
 
@@ -64,6 +69,18 @@ let appointmentDates = "";
 
 
 router.post('/getAppointmentDet', async (req, res) => {
+
+  var accessToken;
+      try {
+        accessToken = await tokens.getAccessToken(req);
+      } catch (err) {
+        req.flash('message-alert', {
+          type: 'danger',
+          message: 'Could not get access token. Try signing out and signing in again.',
+        });
+        res.redirect('/appointments')
+      }
+
 
   let membersMail = '';
   if (members) {
@@ -98,6 +115,7 @@ router.post('/getAppointmentDet', async (req, res) => {
   }
   var begin = appointTimeDate.dateTime + ":00.000Z";
   var end;
+  
 
   var x = Date.parse(appointTimeDate.dateTime + "Z");
   var y = appointTimeDate.appointmentLength * 60000 + (x);
@@ -124,50 +142,28 @@ router.post('/getAppointmentDet', async (req, res) => {
 
 
   try {
-    accessToken = await tokens.getAccessToken(req);
-  } catch (err) {
-    req.flash('error_msg', {
-      message: 'Could not get access token. Try signing out and signing in again.',
-      debug: JSON.stringify(err)
-    });
-  }
-
-
-  try {
     const grupID = app.profile.storeID;
-
+  
     const scheduleCheck = await graph.checkAvailability(accessToken, checkDate, grupID);
     params.scheduleCheck = scheduleCheck.value;
 
-   // console.log("this");
+   
 
     for (var i = 0; i < params.scheduleCheck.length; i++) {
 
       var strt = params.scheduleCheck[i].start.dateTime.slice(0, 19);
       var en = params.scheduleCheck[i].end.dateTime.slice(0, 19);
 
-      console.log(params.scheduleCheck[i].attendees);
 
-      //console.log(i+" "+params.scheduleCheck[i].attendees.emailAddress.address);
-      //console.log(i+" "+params.scheduleCheck[i].attendees[i].status.response);
-     
       try {
 
         var colleguemailChecked = params.scheduleCheck[i].attendees[i].emailAddress.address;
         var collegueresponseChecked = params.scheduleCheck[i].attendees[i].status.response;
-        // if(colleguemailChecked == undefined){
-        // if(appointmentDetails.scheduledBy == appointmentDetails.scheduledFor){
-        //   colleguemailChecked = appointmentDetails.colleaguesMail;
-        // }
-      // }
+
       } catch (error) {
         console.log(error);
       }
 
-
-
-      console.log(colleguemailChecked);
-      //console.log(collegueresponseChecked);
 
       var appBookTimeStrt = strt.slice(11, 16);
       var appBookTimeEn = en.slice(11, 16);
@@ -180,7 +176,6 @@ router.post('/getAppointmentDet', async (req, res) => {
       var range = moment.range(date1);
       var range2 = moment.range(date2);
 
-      var returnDate = begin.slice(11,16)+"-"+end.slice(11,16)+" "+begin.slice(8,10)+begin.slice(4,8)+begin.slice(2,4);
 
       if (appointmentDetails.colleaguesMail == colleguemailChecked) {
         if (collegueresponseChecked == "accepted") {
@@ -190,15 +185,19 @@ router.post('/getAppointmentDet', async (req, res) => {
 
         if (range.overlaps(range2)) {
           if ((range2.contains(range, true) || range.contains(range2, true)) && !date1[0].isSame(date2[0]))
-            availability = false;
+            availability = true;
           else
             availability = false;
         }
       }
     }
 
+    var returnDate = begin.slice(11, 16) + "-" + end.slice(11, 16) + " " + begin.slice(8, 10) + begin.slice(4, 8) + begin.slice(2, 4);
+   
+
 
     checkedData = true;
+    console.log(availability);
 
     params.availability = availability;
     params.busy = busy;
@@ -213,8 +212,6 @@ router.post('/getAppointmentDet', async (req, res) => {
 
     res.render('appointments', params);
 
-
-    //console.log("Availability for your appointment is: "+availability);
 
     //scheduleCheck will check the view of events with in the parameters of which the event is to be scheduled,
     //this check must be done and sorted before executing the event creation and proposed to the user.  
@@ -236,68 +233,136 @@ router.post('/getAppointmentDet', async (req, res) => {
 });
 
 
+
 router.post('/getAppointmentDet/createAppointment', async (req, res) => {
 
-
-  appointmentDetails["subject"]="ONEXONE-" + req.body.firstName + " " + req.body.lastName;
-  appointmentDetails["firstName"]=req.body.firstName;
-  appointmentDetails["lastName"]=req.body.lastName;
-  appointmentDetails["phone"]= req.body.phone;
-  appointmentDetails["device"]=req.body.device;
-  appointmentDetails["content"]= req.body.appNote;
-  
-  
-
- 
+  var accessToken;
+  try {
+    accessToken = await tokens.getAccessToken(req);
+  } catch (err) {
+    req.flash('message-alert', {
+      type: 'danger',
+      message: 'Could not get access token. Try signing out and signing in again.',
+    });
+    res.redirect('/appointments')
+  }
 
   try {
 
-    await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
-    res.redirect("/appointments");
-
-
-
-  } catch (e) {
-    console.log(e);
-    console.log("Redirected to 404");
-    res.redirect('/404');
-  }
-
-  async function reqAddEvent(accessToken, appointmentDates, appointmentDetails) {
-
-    try {
-
-      var groupID = app.profile.storeID;
-
+    var isDataValid = true;
+    if (req.body.firstName == "" || req.body.lastName == "" || req.body.phone == "") {
+      isDataValid = false;
+      throw 'Missing Data: First Name, Last Name & Phone number must be provided.'
 
     }
-    catch (err) {
-      console.log(err);
-      console.log("ERROR: Couldnt get to getCalId()");
+
+
+    var correctPhNum = await checkPhoneNum(req.body.phone);
+    console.log(correctPhNum);
+    if (correctPhNum == false) {
+      isDataValid = false;
+      throw 'Phone Number must have a valid prefix of 08X'
     }
 
-    if (groupID !== " ") {
 
-      try {
-        var eventAdded = await graph.addEvent(accessToken, appointmentDates, appointmentDetails, groupID);
-        params.eventAdded = eventAdded.value;
 
-        //console.log(eventAdded.value);
+    appointmentDetails["subject"] = "ONEXONE-" + req.body.firstName + " " + req.body.lastName;
+    appointmentDetails["firstName"] = req.body.firstName;
+    appointmentDetails["lastName"] = req.body.lastName;
+    appointmentDetails["phone"] = req.body.phone;
+    appointmentDetails["device"] = req.body.device;
+    appointmentDetails["content"] = req.body.appNote;
 
-      }
-      catch (err) {
-        console.log(err);
-        console.log("ERROR: Couldnt get to getCalendarID()");
-      }
+
+    if (isDataValid == true) {
+      console.log("i got here");
+      await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
+      req.flash('message_alert', {
+        type: "success",
+        message: 'Appointment Successfully Booked, awaiting response.'
+      });
+      res.redirect("/appointments");
     }
+
     else {
-      console.log("there was an issue.")
+      return
+
     }
 
+
+  } catch (error) {
+    req.flash('message_alert', {
+      type: 'danger',
+      message: 'Error: ' + error
+    });
+    res.redirect('/appointments');
+    console.log("redirected");
   }
+
 });
 
 
+//Asynchronous function that takes valid parameters from where it is called and access token.
+//This code adds an event to the calendar via an api call.
+async function reqAddEvent(accessToken, appointmentDates, appointmentDetails) {
+
+//initalizing group id for calendar in local variable.
+  var groupID = app.profile.storeID;
+
+
+
+//if there is a group id it will take the read in parameters and call graph.addEvent to execute the api call.
+  try {
+    if (groupID !== "") {
+    var eventAdded = await graph.addEvent(accessToken, appointmentDates, appointmentDetails, groupID);
+    params.eventAdded = eventAdded.value;
+    }
+    else{
+      throw "Could not get 'groupID'";
+    }
+
+
+  }
+  catch (error) {
+    console.log(error);
+    req.flash('message_alert', {
+      type: 'danger',
+      message: 'Error: ' + error
+    });
+  }
+}
+
+
+
+
+
+// Called to validate if a string is a valid irish mobile number.
+async function checkPhoneNum(phNumber) {
+
+ if (phNumber.length >= 10) {
+    var staticPre = phNumber.slice(0, 2);
+    staticPre = parseInt(staticPre);
+    
+    if (staticPre === 8) {
+      var varPrefix = phNumber.slice(2, 3);
+      varPrefix = parseInt(varPrefix);
+
+      if ((varPrefix === 3) || (varPrefix === 5) || (varPrefix === 6) || (varPrefix === 7) || (varPrefix === 9)) {
+
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    else {
+      return false;
+    }
+  }
+  else {
+    return false;
+  }
+}
 
 
 module.exports = router;

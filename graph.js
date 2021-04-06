@@ -26,7 +26,7 @@ module.exports = {
       .get();
 
     return calendars;
-    //console.log(calendars);
+    
   },
 
   getMyGroups: async function(accessToken){
@@ -92,7 +92,7 @@ module.exports = {
     
     const date1 = theDate;
     const id = idofCalendar;
-    var log = console.log("_graph_api_response - Date: "+ date1);
+    
     const oneXE = await client
     .api('/me/calendars/'+id+'/calendarview')
     .query({
@@ -116,7 +116,7 @@ module.exports = {
 
     const id = calendarz.idofCalendar;
 
-    //console.log(xm);
+ 
      const event2 = {
   subject: appointmentDetails.subject,
   start: {
@@ -226,7 +226,7 @@ module.exports = {
     //   .post(oneNoteb);
 
   //return noteToAdd;
-  //console.log("your note of "+note+" has been added");
+
   }
 
 
