@@ -28,7 +28,9 @@ function showRelCollegues(type){
        if(add.includes(i)){
         var h = employees.options[i].style.display="contents";
         
-        employees.options[add[0]].selected = true;
+        var randomEmp = Math.floor(Math.random() * add.length);
+
+        employees.options[add[randomEmp]].selected = true;
         
        }
        
@@ -75,19 +77,20 @@ switch(true) {
 }
 
 console.log(h);
+var currentTimeSuggestion;
 
 if((h>9)&&(h<18)){
    hourSeg =  h - 8; 
+   currentTimeSuggestion = ((hourSeg *4) + minuteQuarterPos);
+   document.getElementById('time').getElementsByTagName('option')[currentTimeSuggestion].selected = true;
 }
-else{
-    hourSeg = 1;
-}
 
 
-var currentTimeSuggestion = ((hourSeg *4) + minuteQuarterPos);
 
 
-document.getElementById('time').getElementsByTagName('option')[currentTimeSuggestion].selected = true;
+
+
+
 
 
 }
