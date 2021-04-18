@@ -925,7 +925,9 @@ border-radius:15px;
 }
 
 .form-group .radio{
- 
+  width: 32%;
+  height: 100%;
+  font-size: .8rem;
   text-align: center;
 }
 

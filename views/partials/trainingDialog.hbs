@@ -1,0 +1,115 @@
+<head>
+    <link rel='stylesheet' href='/stylesheets/style-training.css' />
+    <script defer src="wsTraining.js"></script>
+</head>
+
+
+
+<div class="position-fixed top-0 right-0 p-3" style="z-index: 50; right: 0; top: 0;">
+  <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+    <div class="toast-header">
+      <img id="toastImg" src="worry128.png" class="rounded mr-2" alt="the jolly white giant is worried.">
+      <strong class="mr-auto">OWS: Error</strong>
+      <small>Now</small>
+      <button type="button" class="ml-2 mb-1 close" onclick="removeToast()" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      Whoops, looks like you havent read all the manditory updates &amp; training.
+    </div>
+  </div>
+</div>
+
+<button data-modal-target="#trainingModal">Open Modal</button>
+<div class="trainingModal" id="trainingModal">
+    <div class="trainingModal-header">
+        <div class="title">Updates &amp; Training</div>
+        <button data-close-button class="close-button">&times;</button>
+    </div>
+    <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-link active" id="nav-manditory-tab" data-toggle="tab" href="#nav-manditory" role="tab" aria-controls="nav-home" aria-selected="true">Manditory</a>
+    <a class="nav-link" id="nav-fyi-tab" data-toggle="tab" href="#nav-fyi" role="tab" aria-controls="nav-fyi" aria-selected="false">FYI</a>
+    <a class="nav-link" id="nav-other-tab" data-toggle="tab" href="#nav-other" role="tab" aria-controls="nav-mother" aria-selected="false">Other</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-manditory" role="tabpanel" aria-labelledby="nav-manditory-tab">
+    {{#if training}}
+    {{#each trainingMand}}
+    <div class="learningMod-Container">
+        <div class="learningMod-Title row">{{this.title}}</div>
+        <p class="learningMod-Blurb row">{{this.blurb}}</p>
+
+        <div class="row">
+        <div class="learningMod-LinkContainer col">
+            <a href="{{this.link}}" class="learningMod-Link" target="_blank">{{this.link}}</a>
+        </div>
+        </div>
+        <div class="row">
+        <div class="learningMod-Understood col align-items-end">
+            <label for="understood">I have read and understand this communication</label>
+            <input type="checkbox" value="understood" id="mandUnderstood" name="understood">
+        </div>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+  </div>
+
+  <div class="tab-pane fade" id="nav-fyi" role="tabpanel" aria-labelledby="nav-fyi-tab">
+    
+         {{#if training}}
+      {{#each trainingMand}}
+            <div class="learningMod-Container">
+        <div class="learningMod-Title row">{{this.title}}</div>
+        <p class="learningMod-Blurb row">{{this.blurb}}</p>
+
+        <div class="row">
+        <div class="learningMod-LinkContainer col">
+            <a href="{{this.link}}" class="learningMod-Link" target="_blank">{{this.link}}</a>
+        </div>
+        </div>
+        <div class="row">
+        <div class="learningMod-Understood col align-items-end">
+            <label for="understood">I have read and understand this communication</label>
+            <input type="checkbox" id="fyiUnderstood" name="understood">
+        </div>
+        </div>
+    </div>
+        {{/each}}
+        {{/if}}
+  </div>
+  <div class="tab-pane fade" id="nav-other" role="tabpanel" aria-labelledby="nav-other-tab">
+      
+         {{#if training}}
+      {{#each trainingMand}}
+            <div class="learningMod-Container">
+        <div class="learningMod-Title row">{{this.title}}</div>
+        <p class="learningMod-Blurb row">{{this.blurb}}</p>
+
+        <div class="row">
+        <div class="learningMod-LinkContainer col">
+            <a href="{{this.link}}" class="learningMod-Link" target="_blank">{{this.link}}</a>
+        </div>
+        </div>
+        <div class="row">
+        <div class="learningMod-Understood col align-items-end">
+            <label for="understood">I have read and understand this communication</label>
+            <input type="checkbox" id="otherUnderstood" name="understood">
+        </div>
+        </div>
+    </div>
+        {{/each}}
+        {{/if}}
+  </div>
+</div>
+</div>
+
+
+<div id="overlay">
+
+
+
+</div>

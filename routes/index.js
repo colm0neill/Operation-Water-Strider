@@ -15,12 +15,48 @@ const moment = MomentRange.extendMoment(Moment);
 
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
   let params = {
     active: { home: true }
   };
 
+  if (req.isAuthenticated()) {
+    params.training = true;
 
+    params.trainingMand = {
+      One:{
+      title: "Example 1",
+      blurb:"lorem ipsum this is a big ol' load of non sense and this little blurb is just to fill up some space.",
+      link: "http://www.imaduck.com",
+      },
+      Two:{
+      title: "Example 2",
+      blurb:"lorem ipsum this is a big ol' load of non sense and this little blurb is just to fill up some space.",
+      link: "http://www.stumbleupon.com",
+      },
+      three:{
+        title: "Example 3",
+        blurb:"lorem ipsum this is a big ol' load of non sense and this little blurb is just to fill up some space.",
+        link: "http://www.deezeCheese.com",
+        }
+    
+      
+    }
+
+var accessToken;
+      
+      try {
+        accessToken = await tokens.getAccessToken(req);
+      } catch (err) {
+        req.flash('error_msg', {
+          message: 'Could not get access token. Try signing out and signing in again.',
+          debug: JSON.stringify(err)
+        })
+      }
+
+
+
+  }
 
   res.render('index', params);
 });
@@ -28,17 +64,21 @@ router.get('/', function (req, res, next) {
 
 router.get('/',
   async function (req, res, next) {
+
+    console.log("hello world")
+
     if (!req.isAuthenticated()) {
       // Redirect unauthenticated requests to home page
       res.redirect('/')
     } else {
 
       params = {
-        active: { notes: true }
+        active: { home: true }
       };
 
+      //params.training:true;
       var accessToken;
-
+      
       try {
         accessToken = await tokens.getAccessToken(req);
       } catch (err) {
@@ -152,6 +192,7 @@ router.get('/calcGraphData', async (req, res) => {
         hourView: returnHourStats,
         hourViewTimes: returnHoursForStats
       }
+      params.training = true;
 
       res.json(params.graphValues);
     }

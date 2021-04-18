@@ -25,6 +25,9 @@ router.get('/',
       var accessToken;
       try {
         accessToken = await tokens.getAccessToken(req);
+
+        await fetchMembers(accessToken);
+        
       } catch (err) {
         req.flash('message-alert', {
           type: 'danger',
@@ -33,7 +36,7 @@ router.get('/',
         res.redirect('/appointments')
       }
     }
-    await fetchMembers(accessToken);
+   
 
     res.render('appointments', params);
   });

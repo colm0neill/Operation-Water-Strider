@@ -1,0 +1,88 @@
+<script>
+
+</script>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style-manager.css' />
+</head>
+
+
+{{#if manager}}
+<div class='row two manager'>
+    <h1 class="mgrTitle">Managers Portal</h1>
+
+    <div class="assignedView">
+        <h5>Active Assigned Training</h5>
+
+    </div>
+
+    <div class="assignNewView">
+        <h5>Assign New Training</h5>
+        <form action="./manager/createTrainingModule" method="POST">
+            <div class="form-group">
+                <div class="col">
+                <label for="trainingName">Title</label>
+                    <input class="form-control" id="trainingName" name="trainingName" type="text" required>
+               
+                <br>
+                <label for="blurb">Description</label>
+                    <textarea class="form-control" name="blurb" id="blurb" cols="20" rows="5"
+                        maxlength="200"></textarea>
+                
+                <br>
+                <label for="link">URL</label>
+                    <input class="form-control" id="link" name="link" type="text" placeholder="http://" required>
+                
+                <br>
+            </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col group1">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Select Employees
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                <span class="dropdown-item">
+                                    <label class="form-check-label" for="assignTo">All</label>
+                                    <input type="checkbox" name="assignTo" id="assignTo" value="All">
+                                </span>
+                                {{#each employees }}
+                                <span class="dropdown-item">
+                                    <label class="form-check-label" for="assignTo">{{this.displayName}}</label>
+                                    <input type="checkbox" name="assignTo" id="assignTo" value="{{this.displayName}}">
+                                </span>
+
+                                {{/each}}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7 group2">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="importance">Importance</label>
+                            </div>
+                            <select class="custom-select" name="importance" id="importance">
+                                <option selected>Choose...</option>
+                                <option value="Manditory">Manditory</option>
+                                <option value="FYI">FYI</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+             <button type="submit" class="btn btn-primary" id="trainingSubmit">Submit</button>
+    </div>
+   
+    </form>
+</div>
+</div>
+{{/if}}

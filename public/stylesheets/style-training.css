@@ -1,0 +1,149 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+  
+  .trainingModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border: 1px solid black;
+    border-radius: 10px;
+    z-index: 10;
+    background-color: white;
+    width: 83%;
+    max-width: 90%;
+    height:80%;
+    overflow-y: scroll;
+    }
+  
+  .trainingModal.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .trainingModal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid black;
+  }
+  
+  .trainingModal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .trainingModal-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .trainingModal-body {
+    padding: 10px 15px;
+  }
+  
+  #overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+  }
+  
+  #overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  #nav-tab a{
+      font-weight:bold;
+      color:rgb(75, 75, 75);
+  }
+  #nav-tab .active{
+      color:black;
+  }
+  a#nav-manditory-tab{
+      background-color: rgba(255, 60, 38, 0.678);
+  }
+
+  .tab-pane{
+      padding:0px;
+      height:100%;
+  }
+  #nav-tabContent{
+      
+  }
+
+  .learningMod-Container{
+    background-color: rgba(136, 136, 136, 0.685);
+    width:95%;
+    margin:15px auto 15px auto;
+    border-radius:10px;
+    height:100%;
+    }
+.learningMod-Title{
+    font-weight: bold;
+    font-size: 1.25rem;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color:#dc3545;
+    padding-left:10px;
+
+}
+
+#nav-fyi .learningMod-Title{
+    background-color:#dca235;
+}
+
+#nav-other .learningMod-Title{
+    background-color:#35c9dc;
+}
+
+.learningMod-Blurb{
+    padding:10px;
+}
+.learningMod-LinkContainer{
+    padding:15px 0px;
+}
+.learningMod-Link{
+    margin-left:10px;
+    padding:5px 7px;
+    background-color: white;
+    border-radius: 5px;
+    border:1px solid rgb(53, 173, 253);
+    font-size:1rem;
+    
+}
+.learningMod-Understood{
+    float:right;
+    padding: 15px 10px;
+}
+
+
+
+#toastImg{
+    width:64px;
+    height:64px;
+    border-radius:3px;
+
+}
+
+.toast{
+    background-color: rgba(255,255,255,1);
+    filter:drop-shadow(10px 10px 8px #252727)
+}

@@ -1,0 +1,38 @@
+.row.two.manager{
+    height:100%;
+    padding-bottom:1vw;
+    
+}
+
+.mgrTitle{
+    width:100%;
+    
+}
+
+.assignNewView,.assignedView{
+    background-color: rgba(129, 129, 129, 0.747);
+    border-radius:1.3vw;
+    padding:10px;
+}
+
+.assignedView{
+    width:32%;
+    height:100%;
+    margin-right:1%
+    
+}
+
+.assignNewView{
+    width:65%;
+    height:100%;
+    margin-left:1%;
+}
+
+.assignedView h5{
+    text-align: center;
+}
+
+#trainingSubmit{
+    margin-left:30px;
+    margin-bottom:30px;
+}

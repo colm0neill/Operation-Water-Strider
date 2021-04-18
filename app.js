@@ -1,4 +1,4 @@
-// Licensed under the MIT License.
+
 
 var createError = require('http-errors');
 var express = require('express');
@@ -46,6 +46,9 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
 
   try{
     const user = await graph.getUserDetails(accessToken);
+
+    // console.log('this is the users details: ')
+    // console.log(user);
    
     const storeGroup = await tgraph.getSortGroups(accessToken);
 
@@ -54,6 +57,7 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
     if (user) {
       // Add properties to profile
       profile['email'] = user.mail ? user.mail : user.userPrincipalName;
+      profile['jobTitle'] = user.jobTitle;
     }
     if (storeGroup) {
       // Add properties to profile
@@ -112,6 +116,7 @@ var graphTriggers = require('./graphTriggers');
 var calendarRouter = require('./routes/calendar');
 var notesRouter = require('./routes/notes');
 var appointmentsRouter = require('./routes/appointments');
+var managerRouter = require('./routes/manager');
 var graph = require('./graph');
 
 
@@ -152,7 +157,16 @@ app.use(function(req, res, next) {
 var exphbs = require('express-handlebars');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', exphbs());
+//app.engine('handlebars', exphbs());
+app.engine('hbs', exphbs({
+  extname: 'hbs', 
+  defaultLayout: 'main', 
+  layoutsDir: path.join(__dirname, 'views/layouts'),
+  partialsDir  : [
+      //  path to your partials
+      path.join(__dirname, 'views/partials'),
+  ]
+}));
 app.set('view engine', 'hbs');
 app.use(express.static('images'));
 
@@ -168,7 +182,7 @@ var hbs = exphbs.create({
     return moment(dateTime).format('h:mm A');
   }
 });
-//hbs.registerPartials(__dirname +'/views/partials');
+//hbs.getPartials(__dirname +'/views/partials');
 
 // </FormatDateSnippet>
 
@@ -196,10 +210,11 @@ app.use(function(req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/users', usersRouter);
 app.use('/calendar', calendarRouter);
 app.use('/notes', notesRouter);
 app.use('/appointments', appointmentsRouter);
-app.use('/users', usersRouter);
+app.use('/manager', managerRouter);
 
 
 

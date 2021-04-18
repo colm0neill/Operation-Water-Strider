@@ -11,15 +11,11 @@ const app = require('../app');
 const { param } = require('./index.js');
 const { response } = require('express');
 
-function duck(req, res, next){
-  console.log("the duck says");
-  console.log(app.profile);
-  next();
-}
+
 
 /* GET /calendar */
 // <GetRouteSnippet>
-router.get('/', duck, setDate,
+router.get('/', setDate,
   async function (req, res, next) {
     if (!req.isAuthenticated()) {
       // Redirect unauthenticated requests to home page

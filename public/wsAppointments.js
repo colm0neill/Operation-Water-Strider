@@ -67,8 +67,7 @@ switch(true) {
         minuteQuarterPos = 2;
       break;
       case (m < 46):
-        
-        minuteQuarterPos = 3;
+         minuteQuarterPos = 3;
       break;
     default:
         
