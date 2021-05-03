@@ -10,6 +10,7 @@ font-family:helvetica;
 height:100%;
 margin:0;
 
+
 }
 
 #logout{
@@ -883,6 +884,9 @@ padding-left:4vw;
   border-radius:.25rem;
 }
 
+.appointmentForm label{
+  width:100%;
+}
 
 #time{
   width:38%;
@@ -930,8 +934,15 @@ border-radius:15px;
 }
 
  .radio{
-  width:7em;
+   width:100%;
+  max-width:8vw;
+  font-size: 1.2vw;
+}
 
+.radioContainer{
+  display:flex;
+  align-content: center;
+  justify-content: center;
 }
 
 #retailSales {
@@ -1153,6 +1164,11 @@ width: calc(100% - 10vw);
 .navbar-nav .show{
   flex-direction: row;
 }
+
+.navbar-light .navbar-toggler {
+  border:none;
+}
+
 .two{
   height:100%;
 }
@@ -1442,6 +1458,11 @@ div.box2C{
 .appointmentView{
   width:100%;
 }
+
+.appointmentForm label{
+  width:auto;
+}
+
 .form-group input[type="radio"]{
   width:10.2vw;
   height:10.2vw;
@@ -1469,7 +1490,8 @@ div.box2C{
 }
 
 .radio{
-  width: 7.5em;
+  width:100%;
+  max-width: 8.5em;
   vertical-align: top;
   font-size: .7rem;
 
@@ -1489,9 +1511,27 @@ background-position:-17.7vw -20.1vw ;
   margin-top:10px;
 }
 
-
-element.style {
+#colleagues, #schBy, #times{
+  max-width:90%;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+#time{
+  max-width: 50%;
+  margin-left: 5%;
+  display: inline-block;
+  margin-right: 1%;
+}
+
+#dateTime{
+  max-width: 50%;
+  margin-right: auto;
+  display: inline-block;
+}
+
+
 .twoC.bookAtt {
     padding-left: 0px;
 }
@@ -1499,5 +1539,7 @@ element.style {
     width: 100% !Important;
     padding: 0 0vw 0 0vw;
 }
+
+
   /* -----------------------Appoinments Page End----------------------- */
 }

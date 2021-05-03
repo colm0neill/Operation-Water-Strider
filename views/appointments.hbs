@@ -1,4 +1,4 @@
-<script src="/wsAppointments.js"></script>
+<script src="/wsAppointments.js" defer></script>
 
 
 
@@ -136,7 +136,7 @@
         {{!-- <h3 id="bookCon">Booking Confirmation</h3> --}}
         {{#if this.availability}}
 
-        <form class="appointmentForm appForm2" action="./getAppointmentDet/createAppointment" method="post">
+        <form class="appointmentForm appForm2" id="appointmentForm" action="./getAppointmentDet/createAppointment" method="post">
 
             <span>
                 <h4>This Appointment is: <span class="true">Available</span></h4>

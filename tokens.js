@@ -1,5 +1,3 @@
-// Licensed under the MIT License.
-
 // <TokensSnippet>
 module.exports = {
   getAccessToken: async function(req) {

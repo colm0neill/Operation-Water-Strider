@@ -1,4 +1,16 @@
+if(window.innerWidth <= 600){
 
+  if(document.body.contains(document.getElementById('appointmentForm'))){
+    
+    document.getElementById("appointmentForm").scrollIntoView({behavior:"smooth"});
+
+    if(navigator.userAgent.indexOf("Safari") != -1)
+    {
+      location.href = '#appointmentForm';
+    }
+} 
+  
+}
 
 function showRelCollegues(type){
 
@@ -12,10 +24,8 @@ function showRelCollegues(type){
     for(var i = 0; i< employees.length; i++){
         var x = employees.options[i].text;
         var str = x.includes(type);
-       // console.log("compare "+x+" to "+type);
-       // console.log(str);
+      
         if(str == false){
-           // console.log("its false");
             rem += i;
         }
         else(add+=i);
@@ -76,7 +86,6 @@ switch(true) {
     break;      
 }
 
-console.log(h);
 var currentTimeSuggestion;
 
 if((h>9)&&(h<18)){
