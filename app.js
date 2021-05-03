@@ -1,5 +1,3 @@
-
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -8,6 +6,20 @@ var logger = require('morgan');
 var session = require('express-session');
 var flash = require('connect-flash');
 require('dotenv').config();
+
+//Database connection 
+// const mongoose =  require('mongoose');
+
+
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb',{
+//   useNewUrlParser:true,
+//   useUnifiedTopology:true
+// });
+
+// mongoose.connection.on('connected', () =>{
+//   console.log("Mongoose is connected");
+// })
+
 
 var passport = require('passport');
 var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
