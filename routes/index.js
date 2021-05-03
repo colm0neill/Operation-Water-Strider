@@ -1,5 +1,3 @@
-// Licensed under the MIT License.
-
 // <IndexRouterSnippet>
 var express = require('express');
 var router = express.Router();
