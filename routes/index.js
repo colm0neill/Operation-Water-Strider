@@ -69,12 +69,7 @@ router.get('/calcGraphData', async (req, res) => {
     let startOfWeek = today.startOf("isoWeek").format("YYYY-MM-DD");
     let endOfWeek = today.endOf("isoWeek").format("YYYY-MM-DD");;
 
-    //startOfWeek = moment(startOfWeek).add(1,"days").format("YYYY-MM-DD");
-    //endOfWeek = moment(endOfWeek).add(1,"days").format("YYYY-MM-DD");
-
-   // console.log("start and end of week");
-   // console.log(startOfWeek);
-   // console.log(endOfWeek);
+    
     const storeGroupID = await app.profile.storeID;
 
     const weekView = await graph.getStatsWeekView(storeGroupID, startOfWeek, endOfWeek, accessToken);
@@ -111,16 +106,11 @@ router.get('/calcGraphData', async (req, res) => {
       }
       returnHoursForStats[i] = h.toString() + ":00";
     }
-    //console.log(returnHoursForStats);
+    
 
     time = time + "00";
 
     time = parseInt(time, 10);
-
-
-    //console.log("today is: ")
-    //console.log(time);
-    //console.log(params.weekView.length);
 
     for (var i = 0; i < params.weekView.length; i++) {
       let eventTDate = params.weekView[i].start.dateTime;
@@ -137,7 +127,7 @@ router.get('/calcGraphData', async (req, res) => {
           let aTime = ((x * 100) + time);
           let bTime = (((x + 1) * 100) + time);
           if ((eventSTime >= aTime) && (eventSTime <= bTime)) {
-            //console.log(eventSTime);
+          
             returnHourStats[x]++;
           }
 

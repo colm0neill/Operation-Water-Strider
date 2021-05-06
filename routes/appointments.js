@@ -44,13 +44,13 @@ let members = '';
 
 async function fetchMembers(accessToken) {
   const storeID = await app.profile.storeID;
-  //console.log(storeID);
+  
 
   try {
 
     members = await graph.getMembersInGroup(accessToken, storeID);
     params.members = members.value;
-    //console.log(members);
+    
 
   } catch (error) {
     console.log(error);
@@ -197,7 +197,7 @@ router.post('/getAppointmentDet', async (req, res) => {
 
 
     checkedData = true;
-    console.log(availability);
+   
 
     params.availability = availability;
     params.busy = busy;
@@ -208,7 +208,7 @@ router.post('/getAppointmentDet', async (req, res) => {
     params.appointmentDetails = appointmentDetails;
 
 
-    // console.log(params);
+    
 
     res.render('appointments', params);
 
@@ -258,7 +258,7 @@ router.post('/getAppointmentDet/createAppointment', async (req, res) => {
 
 
     var correctPhNum = await checkPhoneNum(req.body.phone);
-    console.log(correctPhNum);
+   
     if (correctPhNum == false) {
       isDataValid = false;
       throw 'Phone Number must have a valid prefix of 08X'
@@ -275,7 +275,6 @@ router.post('/getAppointmentDet/createAppointment', async (req, res) => {
 
 
     if (isDataValid == true) {
-      console.log("i got here");
       await reqAddEvent(accessToken, appointmentDates, appointmentDetails);
       req.flash('message_alert', {
         type: "success",

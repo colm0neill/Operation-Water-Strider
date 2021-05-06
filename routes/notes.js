@@ -25,23 +25,7 @@ router.get('/',
           debug: JSON.stringify(err)
         });
       }
-
-
-
-
-      var noteBookID = '';
-
-      try {
-
-        noteBookID = await tgraph.getNoteId(accessToken);
-
-
-        console.log('The id of the note book is: ' + noteBookID);
-      }
-      catch (err) {
-        console.log(err);
-        console.log("ERROR: Couldnt get to getCalId()");
-      }
+      
 
 
       res.render('notes', params);
@@ -50,34 +34,34 @@ router.get('/',
 
 
 
-router.post('/getNote', async (req, res) => {
-  var note = req.body.note;
-  console.log(note);
+// router.post('/getNote', async (req, res) => {
+//   var note = req.body.note;
+//   console.log(note);
 
 
-  if (noteBookID !== " ") {
+//   if (noteBookID !== " ") {
 
-    try {
-      var noteAdded = await graph.addNote(accessToken, note, noteBookID);
-      params.noteAdded = noteAdded.value;
+//     try {
+//       var noteAdded = await graph.addNote(accessToken, note, noteBookID);
+//       params.noteAdded = noteAdded.value;
 
-      console.log(noteAdded.value);
+//       console.log(noteAdded.value);
 
-    }
-    catch (err) {
-      console.log(err);
-      console.log("ERROR: Couldnt get to getCalendarID()");
-    }
-  }
-  else {
-    console.log("there was an issue.")
-  }
-
-
+//     }
+//     catch (err) {
+//       console.log(err);
+//       console.log("ERROR: Couldnt get to getCalendarID()");
+//     }
+//   }
+//   else {
+//     console.log("there was an issue.")
+//   }
 
 
-  res.redirect('/notes');
-  //res.send('Your note was added sucessfully!');
-});
+
+
+//   res.redirect('/notes');
+//   //res.send('Your note was added sucessfully!');
+// });
 
 module.exports = router;
