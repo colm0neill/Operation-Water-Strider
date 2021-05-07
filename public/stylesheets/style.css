@@ -866,7 +866,7 @@ textarea {
 
 .notesAtt{
   max-width:33.33%;
-  padding:10px;
+  padding: 0 10px;
  
 }
 
@@ -880,6 +880,20 @@ textarea {
 }
 #note:focus{
   outline: -webkit-focus-ring-color auto 0px;
+}
+
+
+#tools {
+  display: inline-block;
+  vertical-align: bottom;
+  height: 48px;
+}
+
+div#timerContainer {
+  border: 3px solid #999;
+  border-radius: 10px;
+  padding: 10px;
+  height: 72.5%;
 }
 
 .timerLabel{
@@ -905,6 +919,11 @@ textarea {
 
   max-width:60px;
   padding:.375rem 5px;
+}
+
+
+input.pauseTimer.btn.btn-warning {
+  padding: 7px 6px;
 }
 
 

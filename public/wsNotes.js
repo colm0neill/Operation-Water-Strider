@@ -2,17 +2,49 @@ var x;
 var minutesG;
 var secondsG;
 
-
-var editor = new Quill('#editor', {
+var options = {
     modules: { 
         toolbar: [
-            [{ header: [1, 2, false] }],
+            [{ header: [1, 2, false] }, {'size':[]},{ 'color': [] }],
             ['bold', 'italic', 'underline'],
+            [{ 'align': [] },{ 'list': 'ordered'}, { 'list': 'bullet' }],
             ['image', 'code-block']
           ]
     },
+    placeholder: "Click to start typing",
     theme: 'snow'
+}
+
+
+var editor = new Quill('#editor', options);
+
+var preciousContent;
+
+
+editor.on('text-change', function() {
+    var delta = editor.getContents();
+    preciousContent = delta;
   });
+
+
+document.querySelector('#create').onclick = async function() { 
+ 
+
+
+    const options = {
+    method: 'POST',
+    headers:{
+        'Content-Type':'application/json'
+    },
+    body: JSON.stringify(preciousContent)
+    };
+
+    const response = await fetch('./notes/create', options);
+    const jsonData = await response.json();
+    console.log(jsonData);
+
+
+ }
 
 
 function startTimer() {
@@ -131,4 +163,12 @@ function pauseTimer() {
 
     document.querySelector(".pauseTimer").style.display = "none";
     document.querySelector(".startTimer").style.display = "initial";
+}
+
+
+
+function createPDF(){
+    var docBody = document.querySelector(".ql-editor").innerHTML;
+
+    
 }

@@ -6,6 +6,19 @@ var tgraph = require('../graphTriggers.js');
 const app = require('../app.js');
 
 
+
+function checkAuth (req, res, next) {
+  if (!req.isAuthenticated()) {
+    // Redirect unauthenticated requests to home page
+    res.redirect('/')
+    console.log("oops looks like you not authenticated.")
+  }else{
+  next()
+  }
+}
+
+
+
 router.get('/',
   async function (req, res, next) {
     if (!req.isAuthenticated()) {
@@ -33,6 +46,19 @@ router.get('/',
     });
 
 
+
+router.post('/create', async (req, res) => {
+
+  var theCode = req.body;
+  
+
+  
+  console.log(theCode)
+
+  
+res.json(theCode);
+
+})
 
 // router.post('/getNote', async (req, res) => {
 //   var note = req.body.note;
