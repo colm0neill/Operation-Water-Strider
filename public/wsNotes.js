@@ -42,7 +42,7 @@ document.querySelector('#create').onclick = async function() {
     const response = await fetch('./notes/create', options);
     const jsonData = await response.json();
     console.log(jsonData);
-
+    document.getElementById('myPrecious').innerHTML = (JSON.stringify(jsonData));
 
  }
 

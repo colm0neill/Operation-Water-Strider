@@ -4,7 +4,7 @@ var tokens = require('../tokens.js');
 var graph = require('../graph.js');
 var tgraph = require('../graphTriggers.js');
 const app = require('../app.js');
-
+const QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
 
 
 function checkAuth (req, res, next) {
@@ -51,14 +51,20 @@ router.post('/create', async (req, res) => {
 
   var theCode = req.body;
   
-
+  var cfg = {};
+ 
+  var converter = new QuillDeltaToHtmlConverter(theCode.ops, cfg);
+   
+  var html = converter.convert();
   
-  console.log(theCode)
+  console.log(html)
 
   
 res.json(theCode);
 
 })
+
+
 
 // router.post('/getNote', async (req, res) => {
 //   var note = req.body.note;
