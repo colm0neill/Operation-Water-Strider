@@ -154,10 +154,10 @@ align-items: center;
 background-color:black;
 }
 /* Temporary style to disable Notes link */
-.square #notes{
+/* .square #notes{
   filter: brightness(0) invert(0);
   filter:  grayscale(90%);
-}
+} */
 
 /* ----------------------ROW ONE END-----------------------*/
 

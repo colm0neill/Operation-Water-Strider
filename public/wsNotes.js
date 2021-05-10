@@ -8,7 +8,7 @@ var options = {
             [{ header: [1, 2, false] }, {'size':[]},{ 'color': [] }],
             ['bold', 'italic', 'underline'],
             [{ 'align': [] },{ 'list': 'ordered'}, { 'list': 'bullet' }],
-            ['image', 'code-block']
+            ['code-block']
           ]
     },
     placeholder: "Click to start typing",
@@ -40,9 +40,15 @@ document.querySelector('#create').onclick = async function() {
     };
 
     const response = await fetch('./notes/create', options);
-    const jsonData = await response.json();
-    console.log(jsonData);
-    document.getElementById('myPrecious').innerHTML = (JSON.stringify(jsonData));
+    const blob = await response.blob();
+
+    var file = window.URL.createObjectURL(blob);
+    
+   
+    window.open(file, '_blank');
+    //window.location.assign(file);
+    //console.log(jsonData);
+    //document.getElementById('myPrecious').innerHTML = (JSON.stringify(jsonData));
 
  }
 
