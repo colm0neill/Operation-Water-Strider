@@ -11,15 +11,11 @@ const app = require('../app');
 const { param } = require('./index.js');
 const { response } = require('express');
 
-function duck(req, res, next){
-  console.log("the duck says");
-  console.log(app.profile);
-  next();
-}
+
 
 /* GET /calendar */
 // <GetRouteSnippet>
-router.get('/', duck, setDate,
+router.get('/', setDate,
   async function (req, res, next) {
     if (!req.isAuthenticated()) {
       // Redirect unauthenticated requests to home page
@@ -31,7 +27,7 @@ router.get('/', duck, setDate,
       };
       let accessToken;
 
-      //console.log(app.profile)
+     
 
       try {
         accessToken = await tokens.getAccessToken(req);
@@ -52,7 +48,7 @@ router.get('/', duck, setDate,
       }
 
 
-      //console.log(params.eventsMonth);
+    
       res.render('calendar', params);
 
 
@@ -67,7 +63,7 @@ router.get('/', duck, setDate,
 
 router.put('/updateDate', setDate, async (req, res,next) => {
   const data = req.body;
-  //console.log("Server data = " + data.month + data.year);
+  
 
 
   currentMonthStr = moment().month(data.month).format('MMMM');
@@ -134,7 +130,7 @@ router.get('/getNxPrMonth', async (req, res) => {
 
 
 
-  //console.log(params.eventsMonth);
+
   res.render('calendar', params);
 
 
@@ -158,7 +154,7 @@ async function setDate(req, res, next) {
 
 
 if(!("calCurrentView" in app.profile)){
-  //console.log('there is not calCurrentView in app.profile.');
+  
   try {
     
      
@@ -211,7 +207,7 @@ async function getCalendarData(calCurrentView, accessToken, params) {
 
   const storeGroupID = app.profile.storeID;
 
-  //console.log("Start Of Month" + startOfMonth);
+  
   if (accessToken && accessToken.length > 0) {
 
     try {
@@ -220,7 +216,7 @@ async function getCalendarData(calCurrentView, accessToken, params) {
 
         const eventsMonth = await graph.getEventsMonthView(accessToken, startOfMonth, endOfMonth, storeGroupID);
         params.eventsMonth = eventsMonth.value;
-        //console.log(params.eventsMonth);
+        
       }
     } catch (err) {
       console.log(err)
@@ -232,13 +228,13 @@ async function getCalendarData(calCurrentView, accessToken, params) {
 
 
   //-----------Removing irrelevant events to user.----------------
-  //console.log(params.eventsMonth.length);
+  
   for (var i = 0; i < params.eventsMonth.length; i++) {
-    // console.log(params.eventsMonth[i].attendees[0].emailAddress.address);
+   
     try {
 
       if (params.eventsMonth[i].attendees[0].emailAddress.address !== app.profile.email) {
-        //console.log("------------ deleting -------------");
+        
         delete params.eventsMonth[i];
       }
       else {
@@ -254,8 +250,6 @@ async function getCalendarData(calCurrentView, accessToken, params) {
         params.eventsMonth[i].id = i;
         params.eventsMonth[i].displayBody = dBody;
         delete params.eventsMonth[i].body;
-
-        //console.log(params.eventsMonth[i]);
       }
     }
     catch (err) {

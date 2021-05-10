@@ -24,7 +24,7 @@ async function drawCalendar() {
 	var yearMonth = document.getElementsByClassName('yearMonth')[0].id;
 	month = yearMonth.slice(0, (yearMonth.length - 4));
 	year = yearMonth.slice((yearMonth.length - 4), yearMonth.length);
-	//console.log("month is :" + month + " Year is: " + year);
+	
 	month = parseInt(month, 10);
 	year = parseInt(year, 10);
 
@@ -97,7 +97,7 @@ async function drawCalendar() {
 async function assignTd(thisYear, thisMonth, thisMonth2, today, dayStart) {
 	
 
-	//console.log("today is: "+today);
+
 
 	if ((thisYear == year) && (thisMonth == month)) {
 		var y = document.getElementById("dayz");
@@ -168,7 +168,7 @@ async function getTodayView(date) {
 
 	var e = document.getElementById("todayList").children.length;
 
-	//console.log("Date Clicked"+date);
+
 
 
 	for (var i = 0; i < e; i++) {
@@ -207,8 +207,7 @@ async function getNewMonth(month, year) {
 	try {
 		const response = await fetch('calendar/updateDate', options);
 		const result = await response.json();
-		console.log("Information Update:" );
-		console.log(result.status);
+		
 		if(result.status=="success"){
 			getNewMonthData();
 		}
@@ -218,19 +217,6 @@ async function getNewMonth(month, year) {
 		console.log(err);
 		console.log("Error Occured: failed to get new events.")
 	}
-	// try {
-	// 	console.log("Reload is about to occur");
-	// 	location.reload();
-
-		
-	// }
-	// catch (err) {
-	// 	console.log(err);
-	// 	console.log("Error Occured: failed to reload page.");
-
-	// }
-
-
 }
 
 async function getNewMonthData() {

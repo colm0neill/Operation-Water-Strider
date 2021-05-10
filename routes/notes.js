@@ -4,6 +4,28 @@ var tokens = require('../tokens.js');
 var graph = require('../graph.js');
 var tgraph = require('../graphTriggers.js');
 const app = require('../app.js');
+const QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+var path = require('path');
+const hbs = require('handlebars');
+const { TIMEOUT } = require('dns');
+const { dirname } = require('path');
+const { set } = require('../app.js');
+
+
+
+
+function checkAuth(req, res, next) {
+  if (!req.isAuthenticated()) {
+    // Redirect unauthenticated requests to home page
+    res.redirect('/')
+    console.log("oops looks like you not authenticated.")
+  } else {
+    next()
+  }
+}
+
 
 
 router.get('/',
@@ -28,56 +50,106 @@ router.get('/',
 
 
 
-
-      var noteBookID = '';
-
-      try {
-
-        noteBookID = await tgraph.getNoteId(accessToken);
-
-
-        console.log('The id of the note book is: ' + noteBookID);
-      }
-      catch (err) {
-        console.log(err);
-        console.log("ERROR: Couldnt get to getCalId()");
-      }
-
-
       res.render('notes', params);
     }
+  });
+
+
+
+router.post('/create', checkAuth, async (req, res, next) => {
+
+  var theCode = req.body;
+
+  var cfg = {};
+
+  var converter = new QuillDeltaToHtmlConverter(theCode.ops, cfg);
+
+  var html = converter.convert();
+
+  var url = req.protocol + "://" + req.headers.host;
+  console.log(url);
+
+  var pdf = await createNewPDF(html, url);
+  console.log("PDF Status: ", pdf);
+
+
+  const src = fs.createReadStream('./resources/createdPDF/ONEXONE' + dateID + '.pdf');
+  var ok2del = false;
+  if (pdf == "done") {
+
+    res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename=ONEXONE.pdf',
+      'Content-Transfer-Encoding': 'Binary'
     });
+    ok2del = true;
+    src.pipe(res);
+    setTimeout(deletePDF, 1000, ok2del);
+  }
 
-
-
-router.post('/getNote', async (req, res) => {
-  var note = req.body.note;
-  console.log(note);
-
-
-  if (noteBookID !== " ") {
-
+  function deletePDF(ok2del) {
     try {
-      var noteAdded = await graph.addNote(accessToken, note, noteBookID);
-      params.noteAdded = noteAdded.value;
+      if (ok2del == true) {
+        fs.unlinkSync('./resources/createdPDF/ONEXONE' + dateID + '.pdf');
 
-      console.log(noteAdded.value);
-
-    }
-    catch (err) {
-      console.log(err);
-      console.log("ERROR: Couldnt get to getCalendarID()");
+        console.log("PDF: File sent & deleted.");
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
-  else {
-    console.log("there was an issue.")
-  }
 
-
-
-
-  res.redirect('/notes');
-  //res.send('Your note was added sucessfully!');
 });
+
+const compile = async function (quilldata) {
+  const html = fs.readFileSync('./resources/ONEXONEtemplate.hbs', 'utf-8');
+
+  return hbs.compile(html)(quilldata)
+}
+
+async function createNewPDF(htmlContentQuill, url) {
+
+  try {
+    const data = {
+      givenName: app.profile.givenName,
+      quillData: htmlContentQuill,
+      logo: url + '/images/tjwgHead.png'
+    }
+
+
+    const browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
+    const page = await browser.newPage();
+
+    const content = await compile(data);
+
+    await page.setContent(content);
+    await page.emulateMediaType('screen');
+    await page.pdf({
+      path: './resources/createdPDF/ONEXONE' + dateID + '.pdf',
+      format: 'A4',
+      margin: {
+        top: 120,
+        bottom: 80,
+        left: 90,
+        right: 90,
+      },
+
+      printBackground: true,
+      waitUntil: 'networkidle2'
+    });
+    await browser.close();
+
+    console.log("PDF Generation: compiled")
+    return 'done';
+  } catch (e) {
+    console.log('Error', e);
+    return e;
+  }
+}
+
+var newDate = new Date();
+
+const dateID = newDate.getTime();
+
 
 module.exports = router;

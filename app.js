@@ -1,5 +1,3 @@
-
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -54,6 +52,7 @@ async function signInComplete(iss, sub, profile, accessToken, refreshToken, para
     if (user) {
       // Add properties to profile
       profile['email'] = user.mail ? user.mail : user.userPrincipalName;
+      profile['givenName'] = user.givenName;
     }
     if (storeGroup) {
       // Add properties to profile

@@ -154,10 +154,10 @@ align-items: center;
 background-color:black;
 }
 /* Temporary style to disable Notes link */
-.square #notes{
+/* .square #notes{
   filter: brightness(0) invert(0);
   filter:  grayscale(90%);
-}
+} */
 
 /* ----------------------ROW ONE END-----------------------*/
 
@@ -854,20 +854,90 @@ textarea {
   max-height:100%;
 
 }
+.row.two.notesTwo{
+  height:auto;
+  max-height:100%;
+}
+
 .notesView{
   width:66.66% !Important;
   
   }
 
+.notesAtt{
+  max-width:33.33%;
+  padding: 0 10px;
+ 
+}
+
 #note{
   width:100%;
-  height:16vw;
+  height:100%;
   border:3px solid #999;
   border-radius:1vw;
   font-size: 28px;
+  margin-bottom:15px;
 }
 #note:focus{
   outline: -webkit-focus-ring-color auto 0px;
+}
+
+
+#tools {
+  display: inline-block;
+  vertical-align: bottom;
+  height: 48px;
+}
+
+div#timerContainer {
+  border: 3px solid #999;
+  border-radius: 10px;
+  padding: 10px;
+  height: 72.5%;
+}
+
+.timerLabel{
+  width:100%;
+  max-width:100%;
+}
+
+#timeSegment{
+  padding: .375rem .75rem;
+  border-radius: .25rem;
+  font-size:1rem;
+  line-height: 1.5;
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: middle;
+}
+#timeDigits{
+  font-family: 'Share Tech Mono', monospace;
+  font-size:1.8rem;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.5;
+
+  max-width:60px;
+  padding:.375rem 5px;
+}
+
+
+input.pauseTimer.btn.btn-warning {
+  padding: 7px 6px;
+}
+
+
+.ql-toolbar.ql-snow + .ql-container.ql-snow{
+  height:20vw;
+}
+
+.ql-container.ql-snow{
+  border:none!Important;
+}
+
+.ql-toolbar.ql-snow{
+  border:none!Important;
+  border-bottom:2px solid #999!Important;
 }
 
 
@@ -1495,6 +1565,10 @@ div.box2C{
   vertical-align: top;
   font-size: .7rem;
 
+}
+
+label.radio.rSales,label.radio.repairs,label.radio.bSales{
+  width:100%;
 }
 #retailSales{
 background-position:-17.7vw -20.1vw ;
