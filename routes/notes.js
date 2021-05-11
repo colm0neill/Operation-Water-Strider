@@ -72,8 +72,11 @@ router.post('/create', checkAuth, async (req, res, next) => {
   var pdf = await createNewPDF(html, url);
   console.log("PDF Status: ", pdf);
 
+  const srcPath = path.join(__dirname, '..','resources','createdPDF','ONEXONE' + dateID + '.pdf');
 
-  const src = fs.createReadStream('./resources/createdPDF/ONEXONE' + dateID + '.pdf');
+  const src = fs.createReadStream(srcPath);
+  
+  console.log('Source File Path: ', srcPath);
   var ok2del = false;
   if (pdf == "done") {
 
@@ -90,7 +93,7 @@ router.post('/create', checkAuth, async (req, res, next) => {
   function deletePDF(ok2del) {
     try {
       if (ok2del == true) {
-        fs.unlinkSync('./resources/createdPDF/ONEXONE' + dateID + '.pdf');
+        fs.unlinkSync(srcPath);
 
         console.log("PDF: File sent & deleted.");
       }
@@ -102,7 +105,10 @@ router.post('/create', checkAuth, async (req, res, next) => {
 });
 
 const compile = async function (quilldata) {
-  const html = fs.readFileSync('./resources/ONEXONEtemplate.hbs', 'utf-8');
+  const fileCompile = path.join(__dirname, '..', 'resources', 'ONEXONEtemplate.hbs');
+  const html = fs.readFileSync(fileCompile, 'utf-8');
+  
+  console.log('Compile File Path: ', fileCompile);
 
   return hbs.compile(html)(quilldata)
 }
