@@ -5,13 +5,11 @@ var graph = require('../graph.js');
 var tgraph = require('../graphTriggers.js');
 const app = require('../app.js');
 const QuillDeltaToHtmlConverter = require('quill-delta-to-html').QuillDeltaToHtmlConverter;
-const puppeteer = require('puppeteer');
+
 const fs = require('fs');
-var path = require('path');
+const path = require('path');
 const hbs = require('handlebars');
-const { TIMEOUT } = require('dns');
-const { dirname } = require('path');
-const { set } = require('../app.js');
+const pdf = require("pdf-creator-node");
 
 
 
@@ -69,8 +67,8 @@ router.post('/create', checkAuth, async (req, res, next) => {
   var url = req.protocol + "://" + req.headers.host;
   console.log(url);
 
-  var pdf = await createNewPDF(html, url);
-  console.log("PDF Status: ", pdf);
+  var pdfMake = await createNewPDF(html, url);
+  console.log("PDF Status: ", pdfMake);
 
   const srcPath = path.join(__dirname, '..','resources','createdPDF','ONEXONE' + dateID + '.pdf');
 
@@ -78,7 +76,7 @@ router.post('/create', checkAuth, async (req, res, next) => {
   
   console.log('Source File Path: ', srcPath);
   var ok2del = false;
-  if (pdf == "done") {
+  if (pdfMake == "done") {
 
     res.writeHead(200, {
       'Content-Type': 'application/pdf',
@@ -104,46 +102,89 @@ router.post('/create', checkAuth, async (req, res, next) => {
 
 });
 
+
+
+
 const compile = async function (quilldata) {
   const fileCompile = path.join(__dirname, '..', 'resources', 'ONEXONEtemplate.hbs');
   const html = fs.readFileSync(fileCompile, 'utf-8');
-  
   console.log('Compile File Path: ', fileCompile);
-
   return hbs.compile(html)(quilldata)
 }
+
+
 
 async function createNewPDF(htmlContentQuill, url) {
 
   try {
+
+    var options = {
+      format: "A4",
+      orientation: "portrait",
+      border: "20mm",
+      header: {
+          height: "5mm"
+      },
+      footer: {
+          height: "14mm",
+          contents: {
+              first: 'Page: 1',
+              default: '<span style="color: #444;">Page: {{page}}</span>', // fallback value
+          }
+      }
+  };
+
     const data = {
       givenName: app.profile.givenName,
       quillData: htmlContentQuill,
       logo: url + '/images/tjwgHead.png'
     }
 
-
-    const browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
-    const page = await browser.newPage();
-
     const content = await compile(data);
-
-    await page.setContent(content);
-    await page.emulateMediaType('screen');
-    await page.pdf({
-      path: './resources/createdPDF/ONEXONE' + dateID + '.pdf',
-      format: 'A4',
-      margin: {
-        top: 120,
-        bottom: 80,
-        left: 90,
-        right: 90,
+    const savePath = path.join(__dirname, '..','resources','createdPDF','ONEXONE'+dateID+'.pdf');
+    var document = {
+      html: content,
+      data: {
+       
       },
+      path: savePath,
+      type: "",
+    };
 
-      printBackground: true,
-      waitUntil: 'networkidle2'
-    });
-    await browser.close();
+    try{
+      await pdf.create(document, options)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    } 
+    catch(e){
+      console.log('Error Occured when generating pdf',e);
+    }
+
+    // const browser = await puppeteer.launch({ ignoreHTTPSErrors: true });
+    // const page = await browser.newPage();
+
+    
+
+    // await page.setContent(content);
+    // await page.emulateMediaType('screen');
+    // await page.pdf({
+    //   path: './resources/createdPDF/ONEXONE' + dateID + '.pdf',
+    //   format: 'A4',
+    //   margin: {
+    //     top: 120,
+    //     bottom: 80,
+    //     left: 90,
+    //     right: 90,
+    //   },
+
+    //   printBackground: true,
+    //   waitUntil: 'networkidle2'
+    // });
+    // await browser.close();
 
     console.log("PDF Generation: compiled")
     return 'done';
